@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -13,7 +14,7 @@ public class PlaceBodyMarker : MonoBehaviour
 
     // Our prefabs for the 3D bodies that will be placed
     public GameObject[] arPrefabs;
-    public Canvas message;
+    public GameObject light;
 
     // Our dictionary to keep track of the spawned bodies
     private readonly Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
@@ -22,7 +23,6 @@ public class PlaceBodyMarker : MonoBehaviour
     {
         // Cache referemce to our Image Manager
         arTrackedImageManager = GetComponent<ARTrackedImageManager>();
-        message = GetComponent<Canvas>();
     }
 
     void OnEnable()
@@ -35,6 +35,16 @@ public class PlaceBodyMarker : MonoBehaviour
     {
         // Unregister the appearance of our tracked images
         arTrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
+    }
+
+    public void ResetButton()
+    {
+        // foreach (var curPrefab in spawnedPrefabs)
+        // {
+        //     Destroy(curPrefab.Value);
+        // }
+        // spawnedPrefabs.Clear();
+        light.GetComponent<Image>().color = Color.red;
     }
 
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
@@ -68,14 +78,14 @@ public class PlaceBodyMarker : MonoBehaviour
             spawnedPrefabs.Remove(trackedImage.referenceImage.name);
         }
 
-        // if (spawnedPrefabs.Count == 0)
-        // {
-        //     message.enabled = true;
-        // }
-        // else
-        // {
-        //     message.enabled = false;
-        // }
+        if (spawnedPrefabs.Count == 0)
+        {
+            light.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            light.GetComponent<Image>().color = Color.green;
+        }
     }
 
     // Start is called before the first  frame update
