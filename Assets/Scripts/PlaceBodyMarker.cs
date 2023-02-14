@@ -15,6 +15,7 @@ public class PlaceBodyMarker : MonoBehaviour
     // Our prefabs for the 3D bodies that will be placed
     public GameObject[] arPrefabs;
     public GameObject light;
+    public GameObject logs;
 
     // Our dictionary to keep track of the spawned bodies
     private readonly Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
@@ -39,11 +40,6 @@ public class PlaceBodyMarker : MonoBehaviour
 
     public void ResetButton()
     {
-        // foreach (var curPrefab in spawnedPrefabs)
-        // {
-        //     Destroy(curPrefab.Value);
-        // }
-        // spawnedPrefabs.Clear();
         light.GetComponent<Image>().color = Color.red;
     }
 

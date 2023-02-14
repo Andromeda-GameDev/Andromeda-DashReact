@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EnergyBars : MonoBehaviour
 {
+    public GameObject prefab;
+    float scale;
     public float maxHeight, minHeight;
     public GameObject player;
     public bool potential;
@@ -20,6 +22,7 @@ public class EnergyBars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scale = prefab.transform.localScale.y;
         if(potential){
             // normalize(m * g * player.transform.position.y);
             slider.value = normalize(player.transform.position.y);
@@ -34,6 +37,6 @@ public class EnergyBars : MonoBehaviour
     float normalize(float y)
     {
         // to normalize with scaling if required
-        return (y - minHeight)/(maxHeight - minHeight);
+        return Mathf.Abs(y - minHeight)/(maxHeight * scale - minHeight);
     }
 }

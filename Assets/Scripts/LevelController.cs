@@ -4,68 +4,96 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    public GameObject mainObject;
+    GameObject mainObject;
     public GameObject controls;
     public GameObject resume;
 
     public void UpScale()
     {
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     public void DownScale()
     {
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     public void RotateLeft()
     {
+        
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.Rotate(0, 10, 0);
     }
 
     public void RotateRight()
     {
+        
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.Rotate(0, -10, 0);
     }
 
     public void RotateUp()
     {
+        
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.Rotate(10, 0, 0);
     }
 
     public void RotateDown()
     {
+        
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
         mainObject.transform.Rotate(-10, 0, 0);
     }
 
     public void MoveLeft()
     {
-        mainObject.transform.position += new Vector3(-0.1f, 0, 0);
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(-0.01f, 0, 0);
     }
 
     public void MoveRight()
     {
-        mainObject.transform.position += new Vector3(0.1f, 0, 0);
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(0.01f, 0, 0);
     }
 
     public void MoveUp()
     {
-        mainObject.transform.position += new Vector3(0, 0.1f, 0);
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(0, 0.01f, 0);
     }
 
     public void MoveDown()
     {
-        mainObject.transform.position += new Vector3(0, -0.1f, 0);
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(0, -0.01f, 0);
     }
 
     public void MoveForward()
-    {
-        mainObject.transform.position += new Vector3(0, 0, 0.1f);
+    {   
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(0, 0, 0.01f);
     }
 
     public void MoveBackward()
     {
-        mainObject.transform.position += new Vector3(0, 0, -0.1f);
+        mainObject = GameObject.FindGameObjectWithTag("Prefab");
+        if (mainObject)
+        mainObject.transform.position += new Vector3(0, 0, -0.01f);
     }
 
     public void Settings()
