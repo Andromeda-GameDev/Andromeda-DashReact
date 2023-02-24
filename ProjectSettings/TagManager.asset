@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cube
   - Prefab
+  - Astronaut2
   layers:
   - Default
   - TransparentFX
