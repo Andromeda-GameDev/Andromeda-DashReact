@@ -10,6 +10,14 @@ public class CreateProblem : MonoBehaviour
     public double h1 = 20.5, h2 = 10.5, l = 0.5;
     public GameObject gText, m1Text, m2Text, resultText;
     private double g, m1, m2;
+
+   //public FirebaseManager firebaseManager;
+
+    // Access the current user
+    Firebase.Auth.FirebaseUser myUser = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
+    Firebase.Database.FirebaseDatabase database = Firebase.Database.FirebaseDatabase.DefaultInstance;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +35,15 @@ public class CreateProblem : MonoBehaviour
         resultText.GetComponent<TextMeshProUGUI>().text = "Resultado = " + v0;
         
         Debug.Log("Result is " + v0);
+        // print current user
+        Debug.Log("Current user is " + myUser.Email);
+
+        // write to database
+        Firebase.Database.DatabaseReference reference = database.RootReference;
+        reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("score").SetValueAsync(88);
+        reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("time").SetValueAsync(34);
+        reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("added").SetValueAsync(67); 
+        
     }
 
     // Update is called once per frame
