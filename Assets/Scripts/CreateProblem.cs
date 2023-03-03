@@ -39,10 +39,33 @@ public class CreateProblem : MonoBehaviour
         Debug.Log("Current user is " + myUser.Email);
 
         // write to database
-        Firebase.Database.DatabaseReference reference = database.RootReference;
+        //Firebase.Database.DatabaseReference reference = database.RootReference;
+        
+        // Creating level data class to store and serialice the user progress
+        LevelDataFactory ldf = new LevelDataFactory();
+
+        /* LevelData levelData     = new LevelOneData(1, 2, 3);*/
+
+        // Using factory to get the LevelData class that corresponds to the level data.
+        LevelData levelData = ldf.getLevelData("problem1");
+        levelData.added = 10;
+        levelData.score = 10;
+        levelData.time  = 10;
+
+        // Serializing the data to Json
+        string levelDataJson    = JsonUtility.ToJson(levelData); 
+        
+        // Declaring DataSender of type LevelDataSender and sending
+        DataSender sendLevelData = new LevelDataSender("problem1", levelDataJson);
+        sendLevelData.sendData();
+
+        /*
+        reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").SetRawJsonValueAsync(levelDataJson);
+
         reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("score").SetValueAsync(88);
         reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("time").SetValueAsync(34);
         reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").Child("added").SetValueAsync(67); 
+        */
         
     }
 
