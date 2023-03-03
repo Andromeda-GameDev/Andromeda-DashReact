@@ -23,7 +23,7 @@
       }
     },
     "com.google.firebase.database": {
-      "version": "file:/Users/abrahamch/Downloads/com.google.firebase.database-10.5.0.tgz",
+      "version": "file:../Assets/Scripts/Firebase/com.google.firebase.database-10.5.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
