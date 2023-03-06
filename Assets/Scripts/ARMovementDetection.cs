@@ -44,7 +44,7 @@ public class ARMovementDetection : MonoBehaviour
             }
             else
             {
-                speed += Mathf.Abs(acceleration.z / 1.5f);
+                speed = Mathf.Abs(acceleration.z / 1f);
                 // speed += 1.0f;
             }
             speedInputText.text = $"Speed: {speed:#0.00}";
