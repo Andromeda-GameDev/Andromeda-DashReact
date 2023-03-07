@@ -7,6 +7,10 @@ TagManager:
   - Cube
   - Prefab
   - Astronaut2
+  - JumpTrigger
+  - DropTrigger
+  - Fail
+  - Astronaut1
   layers:
   - Default
   - TransparentFX
