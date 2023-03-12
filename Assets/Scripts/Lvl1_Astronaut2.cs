@@ -5,8 +5,8 @@ using UnityEngine;
 public class Lvl1_Astronaut2 : MonoBehaviour
 {
     // Simulations varaibles
-    public Animator anim;
     public GameObject astro1;
+    public Vector3 offset;
 
     // Flags
     bool moving = true;
@@ -24,7 +24,8 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     {
         if(follow)
         {
-            transform.position = Vector3.MoveTowards(transform.position, astro1.transform.position, 1f * Time.deltaTime);
+            transform.position = astro1.transform.position + offset;
+            transform.rotation = astro1.transform.rotation;
         }
     }
 
@@ -32,10 +33,7 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     {
         if(other.tag == "Astronaut1_W")
         {
-            //print("Can be grabbed");
-            //print(other.transform.position);
-            //transform.parent = other.transform;
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(24.13f, 0.47f, 0.00f), 1f);
+            GetComponent<BoxCollider>().enabled = false;
             follow = true;
         }
         else

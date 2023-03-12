@@ -290,12 +290,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 158382447}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &661686739 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3945194436697530223, guid: 3f7f90073c4598543ab9d1caf97c0531,
-    type: 3}
-  m_PrefabInstance: {fileID: 158382447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &661686741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,8 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75e09277a032b14aa1bde5075ddfe29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 661686739}
   astro1: {fileID: 918867389}
+  offset: {x: 0, y: -0.3, z: -0.5}
 --- !u!1 &746030531
 GameObject:
   m_ObjectHideFlags: 0
