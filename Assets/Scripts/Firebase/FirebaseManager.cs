@@ -50,9 +50,24 @@ public class FirebaseManager : MonoBehaviour
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    public bool IsValidEmail(string email_t)
+    {
+        // This is the regular expression for the email
+        string pattern = @"^[a-zA-Z0-9._%+-]+@test\.com$";
+        return System.Text.RegularExpressions.Regex.IsMatch(email_t, pattern);
+
+    }
+
     public void LoginButton()
     {
-        StartCoroutine(Login(emailInput.text, passwordInput.text));
+        if(IsValidEmail(emailInput.text)){
+            StartCoroutine(Login(emailInput.text, passwordInput.text));
+        } else{
+            Debug.LogFormat("Credentials don't follow the general expressión pattern: {0} ({1})", emailInput.text, passwordInput.text);
+            loginStatus.text = "Error al iniciar sesión";
+            loginStatus.color = Color.red;
+        }
+
     }
 
     IEnumerator Login(string email, string password)
@@ -63,8 +78,8 @@ public class FirebaseManager : MonoBehaviour
         if(loginTask.Exception != null)
         {    
             Debug.LogWarning(message: $"Error al iniciar sesión: {loginTask.Exception}");
-            loginStatus.text = "Error al iniciar sesión";
             loginStatus.color = Color.red;
+            loginStatus.text = "Error al iniciar sesión";
         }
         else
         {
