@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": "file:../GooglePackages/com.google.external-dependency-manager-1.2.175.tgz",
+    "com.google.firebase.app": "file:../GooglePackages/com.google.firebase.app-10.5.0.tgz",
+    "com.google.firebase.auth": "file:../GooglePackages/com.google.firebase.auth-10.5.0.tgz",
+    "com.google.firebase.database": "file:../Assets/Scripts/Firebase/com.google.firebase.database-10.5.0.tgz",
+    "com.google.firebase.storage": "file:../GooglePackages/com.google.firebase.storage-10.5.0.tgz",
     "com.unity.collab-proxy": "1.17.6",
     "com.unity.feature.ar": "1.0.0",
     "com.unity.feature.development": "1.0.1",
@@ -13,6 +18,8 @@
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.7.8",
     "com.unity.xr.arcore": "4.2.7",
+    "com.unity.xr.arfoundation": "4.2.7",
+    "com.unity.xr.arkit": "4.2.7",
     "com.unity.xr.management": "4.2.1",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -45,5 +52,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Game Package Registry by Google",
+      "url": "https://unityregistry-pa.googleapis.com",
+      "scopes": [
+        "com.google"
+      ]
+    }
+  ]
 }
