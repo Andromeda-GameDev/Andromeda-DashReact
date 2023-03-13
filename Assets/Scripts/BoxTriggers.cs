@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 
 public class BoxTriggers : MonoBehaviour
 {
