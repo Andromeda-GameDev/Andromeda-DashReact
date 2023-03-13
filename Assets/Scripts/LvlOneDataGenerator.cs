@@ -7,7 +7,7 @@ public class LvlOneDataGenerator : MonoBehaviour
 {
     public float gFrom = 8f, gTo = 10f, m1From = 90f, m1To = 110f, m2From = 70f, m2To = 80f;
     public double h1 = 20.5, h2 = 10.5, l = 0.5;
-    public double g, m1, m2, v0, maxV0, minV0, v1, v2;
+    public double g, m1, m2, v0, maxV0, minV0, meanV0, v1, v2;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,8 @@ public class LvlOneDataGenerator : MonoBehaviour
         temp = Math.Sqrt(2*gFrom*(h2 - l));
         temp = ((m1To + m2From)/m1From)*temp;
         minV0 = Math.Sqrt(temp*temp - 2*gFrom*(h1 - l));
+
+        meanV0 = (maxV0 + minV0)/2;
 
         Debug.Log("Result is " + v0);
     }

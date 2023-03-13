@@ -2,22 +2,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HoldButton : Button
+public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-     
-    public override void OnPointerDown(PointerEventData eventData)
+    public bool holding;
+    public Image buttonImage;
+    public Sprite pedal, pedalPressed;
+    
+    public void OnPointerDown(PointerEventData eventData)
     {
-        base.OnPointerDown(eventData);
-        
-        Debug.Log("Down");
-        //show text
+        holding = true;
+        buttonImage.sprite = pedalPressed;
+        Debug.Log("pointer down");
     }
 
-    public override void OnPointerUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        base.OnPointerUp(eventData);
-        Debug.Log("Up");
-        //hide text
+        holding = false;
+        buttonImage.sprite = pedal;
+        Debug.Log("pointer up");
     }
 }
 

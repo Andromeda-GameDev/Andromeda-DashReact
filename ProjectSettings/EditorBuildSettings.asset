@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ExampleAssets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MotionLogs.unity
     guid: 0593843cc8db6e6489b076b624a50dbe
+  - enabled: 1
+    path: Assets/Scenes/PedalInput.unity
+    guid: 704fcf8618f6f2f47bb270fe15370542
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
