@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>827019129718-lqi9lfrptavd668q8m6ftrof7vb5k8ev.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.827019129718-lqi9lfrptavd668q8m6ftrof7vb5k8ev</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA2_7vnbV3J56CI7Ee-SflwKem7qjevGXk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>827019129718</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.awesomeCompany.Andromeda</string>
+	<key>PROJECT_ID</key>
+	<string>andromeda-85fd3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>andromeda-85fd3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:827019129718:ios:91bd3ca15d560adc438057</string>
+	<key>DATABASE_URL</key>
+	<string>https://andromeda-85fd3-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

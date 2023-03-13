@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Cube
   - Prefab
+  - Astronaut2
+  - JumpTrigger
+  - DropTrigger
+  - Fail
+  - Astronaut1
+  - Astronaut1_W
+  - Astronaut1_F
   layers:
   - Default
   - TransparentFX
