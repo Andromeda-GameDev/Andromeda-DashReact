@@ -62,7 +62,7 @@ public class BoxTriggers : MonoBehaviour
         // Define collisions
         if (name == "Floor")
         {
-            moving = true; // ontinue moving forward (running)
+            moving = true; // continue moving forward (running)
             animator.SetBool("Land", true); print("Land");  // Land animation
         }
         else if (name == "Rope")
