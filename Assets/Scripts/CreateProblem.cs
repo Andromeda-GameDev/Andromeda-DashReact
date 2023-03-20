@@ -12,11 +12,15 @@ public class CreateProblem : MonoBehaviour
     private double g, m1, m2;
 
    //public FirebaseManager firebaseManager;
+    Firebase.Auth.FirebaseUser myUser;
+    Firebase.Database.FirebaseDatabase database;
 
-    // Access the current user
-    Firebase.Auth.FirebaseUser myUser = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
-    Firebase.Database.FirebaseDatabase database = Firebase.Database.FirebaseDatabase.DefaultInstance;
-
+    void Awake()
+    {
+        // Access the current user
+        myUser = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
+        database = Firebase.Database.FirebaseDatabase.DefaultInstance;
+    }
 
     // Start is called before the first frame update
     void Start()

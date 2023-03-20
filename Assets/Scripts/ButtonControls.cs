@@ -86,13 +86,13 @@ public class ButtonControls : MonoBehaviour
     // Button Effects Scale
     public void ScaleUp()
     {
-        prefab.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F);
+        prefab.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F) * 0.1F;
         print("Scale Up");
     }
 
     public void ScaleDown()
     {
-        prefab.transform.localScale -= new Vector3(0.1F, 0.1F, 0.1F);
+        prefab.transform.localScale -= new Vector3(0.1F, 0.1F, 0.1F) * 0.1F;
         print("Scale Down");
     }
 

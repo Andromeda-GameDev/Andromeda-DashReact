@@ -5,13 +5,13 @@ using UnityEngine.Animations;
 public class BoxTriggers : MonoBehaviour
 {
     // Script that handles trigger effects on Astronaut
-
     // Animations
     public Animator animator; // For animation parameters
 
     // Simulation Parameters
     public Rigidbody rb_astronaut; // For physics
     public float speed = 1.0f;
+    public float initial_pos;
     public float distance = 1.0f;
     public float jump_force = 1.0f;
 
@@ -31,11 +31,12 @@ public class BoxTriggers : MonoBehaviour
     {
         animator = gameObject.GetComponent<Animator>();
         rb_astronaut = gameObject.GetComponent<Rigidbody>();
+        initial_pos = transform.localPosition.x;
     }
 
     void Update()
     {
-        if (moving && transform.position.x < distance)
+        if (moving && transform.localPosition.x < initial_pos + distance)
         {
             //Speed is checked to activate the corresponding triggers
             if(speed < 10)
@@ -49,7 +50,8 @@ public class BoxTriggers : MonoBehaviour
                 gameObject.tag = "Astronaut1_F";
             }
 
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.localPosition += transform.forward * speed * Time.deltaTime;
+            // transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
     }
 
@@ -96,7 +98,8 @@ public class BoxTriggers : MonoBehaviour
         if (name == "Jump_TB")
         {
             animator.SetTrigger("Jump"); print("Jump");
-            rb_astronaut.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
+            rb_astronaut.AddRelativeForce(Vector3.up * jump_force, ForceMode.Impulse);
+            // rb_astronaut.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
             animator.SetBool("Land", false);
             winBox1.SetActive(false);
         }
