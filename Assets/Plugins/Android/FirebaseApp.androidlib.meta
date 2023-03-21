@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 515410b09de839745944e5fc106e50a7
+=======
+guid: 4b39df7a0f2b5f24e97cd6b8866ae060
+>>>>>>> levelOneIntegration_progressEduardo
 folderAsset: yes
 PluginImporter:
   externalObjects: {}

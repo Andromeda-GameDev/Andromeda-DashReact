@@ -9,7 +9,7 @@ public class LvlOneInput : MonoBehaviour
     public GyroscopeData gsData;
     public LvlOneDataGenerator dataGenerator;
     public HoldButton pedalHoldButton;
-    public GameObject pedalButton, redoButton, submitButton, canvas;
+    public GameObject pedalButton, redoButton, submitButton, canvas, astronaut;
     private bool pedalPressed;
     float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20;
     bool firstTouch = true;
@@ -80,6 +80,8 @@ public class LvlOneInput : MonoBehaviour
         {
             pedalSpeedInputText.color = Color.green;
         }
+        astronaut.GetComponent<BoxTriggers>().speed = pedalSpeedInput;
+        astronaut.GetComponent<BoxTriggers>().enabled = true;
     }
 
     public void Leave()
