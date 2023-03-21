@@ -15,6 +15,6 @@ public class TextUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.GetComponent<TextMeshProUGUI>().text = ARCamera.transform.position.y;
+        text.GetComponent<TextMeshProUGUI>().text = $"{ARCamera.transform.position.y}";
     }
 }

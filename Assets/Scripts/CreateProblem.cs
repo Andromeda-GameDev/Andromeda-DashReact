@@ -14,13 +14,16 @@ public class CreateProblem : MonoBehaviour
    //public FirebaseManager firebaseManager;
 
     // Access the current user
-    Firebase.Auth.FirebaseUser myUser = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
-    Firebase.Database.FirebaseDatabase database = Firebase.Database.FirebaseDatabase.DefaultInstance;
+    Firebase.Auth.FirebaseUser myUser;
+    Firebase.Database.FirebaseDatabase database;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        myUser = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
+        database = Firebase.Database.FirebaseDatabase.DefaultInstance;
+
         g = Math.Round(UnityEngine.Random.Range(gFrom, gTo), 2);
         m1 = Math.Round(UnityEngine.Random.Range(m1From, m1To), 2);
         m2 = Math.Round(UnityEngine.Random.Range(m2From, m2To), 2);
