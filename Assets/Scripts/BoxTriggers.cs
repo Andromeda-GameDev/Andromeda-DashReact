@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 
 public class BoxTriggers : MonoBehaviour
 {
@@ -18,6 +18,13 @@ public class BoxTriggers : MonoBehaviour
     // Flags
     bool moving = true;
     bool drop = false;
+    bool dropFail = false;
+
+    // Box Triggers
+    public GameObject winBox1; // Successful jump 
+    public GameObject winBox2; // Successful drop
+    public GameObject failBox1; // Failed jump
+    public GameObject failBox2; // Failed drop
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +37,18 @@ public class BoxTriggers : MonoBehaviour
     {
         if (moving && transform.position.x < distance)
         {
+            //Speed is checked to activate the corresponding triggers
+            if(speed < 10)
+            {
+                animator.speed = 0.5f;
+                gameObject.tag = "Astronaut1_F";
+            }
+            else if(speed > 10)
+            {
+                animator.speed = 2f;
+                gameObject.tag = "Astronaut1_F";
+            }
+
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
     }
@@ -79,10 +98,24 @@ public class BoxTriggers : MonoBehaviour
             animator.SetTrigger("Jump"); print("Jump");
             rb_astronaut.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
             animator.SetBool("Land", false);
+            winBox1.SetActive(false);
+        }
+        else if(name == "Jump_TB_Fail_Less")
+        {
+            print("Too slow");
+            moving = false;
+            animator.Play("LessSpeed"); // stop movement
+            failBox1.SetActive(false);
         }
         else if (name == "Drop_TB")
         {
             drop = true; // chage drop flag
+            winBox2.SetActive(false);
+        }
+        else if(name == "Drop_TB_Fail_Much")
+        {
+            dropFail = true; // confirm fail flag
+            failBox2.SetActive(false);
         }
     }
     
@@ -101,6 +134,16 @@ public class BoxTriggers : MonoBehaviour
             // Set Astronaut to face forward
             transform.rotation = Quaternion.Euler(0, 90, 0);
             rb_astronaut.freezeRotation = true;
+        }
+        else if(dropFail)
+        {
+            FixedJoint fixedJoint = other.gameObject.GetComponent<FixedJoint>();
+            fixedJoint.connectedBody = null; print("Rope Drop");
+            drop = false; // Reset drop flag
+
+            //tDrop astronaut as a ragdoll
+            moving = false;
+            animator.Play("LessSpeed");
         }
     }
 
