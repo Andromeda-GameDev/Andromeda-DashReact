@@ -22,6 +22,7 @@ It is the life flow of each level, it is compromised of the next key points:
 **/
 
 // Question template struct
+[System.Serializable]
 public struct Question
 {
     public string question;
@@ -29,6 +30,7 @@ public struct Question
     public Animator animator;
 }
 
+[System.Serializable]
 public struct Metrics
 {
 
@@ -41,24 +43,24 @@ public class LevelLife : MonoBehaviour
     // - Input method
     // - Animation of the answer
     public List<Question> questionsForm;
-    public List<string> questions;
+    Question currentQuestion;
 
     public GameObject questionUI;
-
     public GameObject clockUI;
     public float time = 90.0f;
     bool ticking = true;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Set first question in TextMeshPro of question UI
-        // questionUI.GetComponent<TextMeshPro>().text = questions[0];
+        NextQuestion();
+    }
 
-        // Set button of question UI to call the input method of the question
-        // questionUI.GetComponent<Button>().onClick.AddListener(
-        //     questions[0].levelGen.GetComponent<LevelGen>().InputMethod
-        //     );
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -118,30 +120,49 @@ public class LevelLife : MonoBehaviour
     }
 
     // Method to go to next question
-    void NextQuestion ()
+    public void NextQuestion ()
     {
-        if (questions.Count == 0)
+        print(questionsForm.Count);
+        // Check if there are more questions
+        if (questionsForm.Count == 0)
         {
             // Upload metrics to database
             StartCoroutine((IEnumerator)UploadMetrics());
+            return;
         }
-        // Remove question from list
-        questions.RemoveAt(0);
+
+        // Set current question
+        currentQuestion = questionsForm[0];
 
         // Set next question in TextMeshPro of question UI
-        // questionUI.GetComponent<TextMeshPro>().text = questions[0];
+        questionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.question;
+
+        // Get button of question UI
+        Button btn = questionUI.GetComponentInChildren<Button>();
+
+        // Set button visible
+        btn.interactable = true;
+
+        // Remove all listeners from button
+        btn.onClick.RemoveAllListeners();
 
         // Set button of question UI to call the input method of the question
-        // questionUI.GetComponent<Button>().onClick.AddListener(
-        //     questions[0].levelGen.GetComponent<LevelGen>().InputMethod
-        //     );
+        btn.onClick.AddListener(
+            ButtonClick // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
+            );
+
+        // Remove question from list
+        questionsForm.RemoveAt(0);
     }
 
     // Method to upload answer metrics to database
     IEnumerable UploadMetrics()
     {
         // Upload metrics to database
-
         yield return null;
+    }
+    void ButtonClick()
+    {
+        print("Button Clicked");
     }
 }
