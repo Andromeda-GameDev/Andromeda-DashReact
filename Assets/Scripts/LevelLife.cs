@@ -30,6 +30,7 @@ public struct Question
     public Animator animator;
 }
 
+// Metrics data format struct
 [System.Serializable]
 public struct Metrics
 {
@@ -149,6 +150,9 @@ public class LevelLife : MonoBehaviour
         // Set button of question UI to call the input method of the question
         btn.onClick.AddListener(
             ButtonClick // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
+            );
+        btn.onClick.AddListener(
+            NextQuestion // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
             );
 
         // Remove question from list
