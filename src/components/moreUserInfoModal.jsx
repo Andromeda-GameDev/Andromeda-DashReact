@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
 
-function Modal(props) {
-  const [inputValue, setInputValue] = useState('');
+// react imports
+import React, { useState } from "react";
 
-  const handleClose = () => {
-    props.onClose();
-  };
 
-  const handleSave = () => {
-    props.onSave(inputValue);
-    setInputValue('');
-  };
+function UserModalTable(props){
+    const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-    
+    const handleClose = () => {
+        props.onClose();
+    };
+
+    const handleSave = () => {
+        props.onSave();
+        setInputValue('');
+    };
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -31,17 +34,6 @@ function Modal(props) {
           </div>
 
           <div className="p-4">
-            <label htmlFor="input" className="block text-sm font-medium text-gray-700 mb-2">
-              Input Value
-            </label>
-            <input
-              type="text"
-              id="input"
-              className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm mb-4"
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-
             <div className="flex justify-end">
               <button
                 type="button"
@@ -64,5 +56,4 @@ function Modal(props) {
     </div>
   );
 }
-
-export default Modal;
+export default UserModalTable;
