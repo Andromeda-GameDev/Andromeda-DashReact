@@ -11,7 +11,7 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     // Flags
     bool moving = true;
     bool drop = false;
-    bool follow = false;
+    public bool follow = false;
 
     // Start is called before the first frame update
     void Start()
