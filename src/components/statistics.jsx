@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
-import Sidebar from "./sidebar";
+import Sidebar from "../components/sidebar";
 
-const Dashboard = () => {
+const Statistics = () => {
 
     // const {user, logout } = UserAuth();
     // const navigate = useNavigate();
@@ -30,12 +28,18 @@ const Dashboard = () => {
 
     // add sidebar component
     return (
-        <div className="flex">
+        <div className="flex bg-gray-100">
             <Sidebar />
+
+            <div className="flex flex-col w-full">
+                <h1> This is the statistics page  </h1>
+            </div>
+
         </div>
+
     )
     
 
 }
 
-export default Dashboard;
+export default Statistics;

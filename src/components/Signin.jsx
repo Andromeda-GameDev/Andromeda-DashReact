@@ -28,7 +28,7 @@ const Signin = () => {
             const profSnap = await get(profRef);
             if (profSnap.exists()) {
                 //console.log(profSnap.val());
-                navigate('/dashboard');
+                navigate('/professor');
             }else{
                 const studentRef = ref(db, `users/${uid}`);
                 const studentSnap = await get(studentRef);
