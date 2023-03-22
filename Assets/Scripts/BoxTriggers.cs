@@ -32,6 +32,21 @@ public class BoxTriggers : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         rb_astronaut = gameObject.GetComponent<Rigidbody>();
         initial_pos = transform.localPosition.x;
+
+        if(speed > 10)
+        {
+            winBox1.SetActive(true);
+            failBox1.SetActive(true);
+        }
+        else if(speed < 10)
+        {
+            failBox2.SetActive(true);
+        }
+        else
+        {
+            winBox1.SetActive(true);
+            winBox2.SetActive(true);
+        }
     }
 
     void Update()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,45 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &546605380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4720942599865903815, guid: 7e324853ff98c9f48a37d683119f12d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6739800672181893819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &546605384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546605380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4a09fd8703d9c499260b527bfe7b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light1: {fileID: 604759096}
+  light2: {fileID: 733566402}
+  light3: {fileID: 983365082}
+--- !u!1 &604759096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4720942599865903823, guid: 7e324853ff98c9f48a37d683119f12d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6739800672181893819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &733566402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4720942599865903808, guid: 7e324853ff98c9f48a37d683119f12d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6739800672181893819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &983365082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4720942599865903806, guid: 7e324853ff98c9f48a37d683119f12d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6739800672181893819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1114539587
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +347,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4720942599865903740, guid: 7e324853ff98c9f48a37d683119f12d5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 52.148617
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720942599865903740, guid: 7e324853ff98c9f48a37d683119f12d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.000000029802
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720942599865903740, guid: 7e324853ff98c9f48a37d683119f12d5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.067
+      objectReference: {fileID: 0}
     - target: {fileID: 4720942599865903741, guid: 7e324853ff98c9f48a37d683119f12d5,
         type: 3}
       propertyPath: m_RootOrder
