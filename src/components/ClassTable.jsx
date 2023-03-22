@@ -28,7 +28,7 @@ export default function ClassTable(props){
         const db = getDatabase();
  
         // Generating query
-        const q = query(ref(db, 'users/'), orderByChild('group'), equalTo(props.Id));
+        const q = query(ref(db, 'users/'), orderByChild('group'), equalTo(`${props.Id}`));
         
         // Getting the data
         get(q).then((snapshot) => {
