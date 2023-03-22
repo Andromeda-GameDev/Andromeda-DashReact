@@ -14,7 +14,9 @@ public class BoxTriggers : MonoBehaviour
     public float initial_pos;
     public float distance = 1.0f;
     public float jump_force = 1.0f;
-
+    public GameObject mesh;
+    public GameObject scenario;
+    double scale;
     // Flags
     bool moving = true;
     bool drop = false;
@@ -29,7 +31,9 @@ public class BoxTriggers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         animator = gameObject.GetComponent<Animator>();
+        animator.Play("Run");
         rb_astronaut = gameObject.GetComponent<Rigidbody>();
         initial_pos = transform.localPosition.x;
 
@@ -47,6 +51,8 @@ public class BoxTriggers : MonoBehaviour
             winBox1.SetActive(true);
             winBox2.SetActive(true);
         }
+        
+        Physics.gravity = new Vector3(0, -9.81f * mesh.transform.localScale.x, 0);
     }
 
     void Update()
@@ -113,7 +119,11 @@ public class BoxTriggers : MonoBehaviour
         if (name == "Jump_TB")
         {
             animator.SetTrigger("Jump"); print("Jump");
-            rb_astronaut.AddRelativeForce(Vector3.up * jump_force, ForceMode.Impulse);
+            float force_scaled = jump_force * mesh.transform.localScale.x;
+            print(Vector3.up * force_scaled);
+            print(Vector3.up * jump_force);
+            rb_astronaut.AddRelativeForce(Vector3.up * force_scaled, ForceMode.Impulse);
+            
             // rb_astronaut.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
             animator.SetBool("Land", false);
             winBox1.SetActive(false);

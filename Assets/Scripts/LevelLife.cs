@@ -27,6 +27,7 @@ public struct Question
 {
     public string question;
     public GameObject levelGen;
+    public GameObject levelGen2;
     public Animator animator;
 }
 
@@ -45,6 +46,7 @@ public class LevelLife : MonoBehaviour
     // - Animation of the answer
     public List<Question> questionsForm;
     Question currentQuestion;
+    int current_section = 1;
 
     public GameObject questionUI;
     public GameObject clockUI;
@@ -128,12 +130,19 @@ public class LevelLife : MonoBehaviour
         if (questionsForm.Count == 0)
         {
             // Upload metrics to database
-            StartCoroutine((IEnumerator)UploadMetrics());
+            ticking = false;
+            questionUI.SetActive(false);
             return;
         }
 
         // Set current question
         currentQuestion = questionsForm[0];
+
+        if (questionsForm.Count == 3) {
+            currentQuestion.levelGen.GetComponent<Rigidbody>().useGravity = true;
+            currentQuestion.levelGen.GetComponent<BoxTriggers>().enabled = true;
+            currentQuestion.levelGen2.GetComponent<Lvl1_Astronaut2>().enabled = true;
+        }
 
         // Set next question in TextMeshPro of question UI
         questionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.question;
@@ -154,16 +163,28 @@ public class LevelLife : MonoBehaviour
         btn.onClick.AddListener(
             NextQuestion // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
             );
+        btn.onClick.AddListener(
+            UploadMetrics // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
+            );        
 
         // Remove question from list
         questionsForm.RemoveAt(0);
     }
 
     // Method to upload answer metrics to database
-    IEnumerable UploadMetrics()
+    void UploadMetrics()
     {
         // Upload metrics to database
-        yield return null;
+        LevelOneData levelOneData = new LevelOneData(10, 450, 180.0d);
+        // Parse to json
+        string json = JsonUtility.ToJson(levelOneData);
+        // Upload to database
+        LevelDataSender dataSender = new LevelDataSender("exercise_1", json);
+        dataSender.SendData("level_1", string.Format("section_{0}", current_section));
+        // Increment section
+        current_section++;
+
+        print("Metrics uploaded");
     }
     void ButtonClick()
     {

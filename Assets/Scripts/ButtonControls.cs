@@ -85,50 +85,50 @@ public class ButtonControls : MonoBehaviour
     // Button Effects Scale
     public void ScaleUp()
     {
-        prefab.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F) * 0.1F;
+        prefab.transform.localScale += new Vector3(0.1F, 0.1F, 0.1F) * 0.01F;
         print("Scale Up");
     }
 
     public void ScaleDown()
     {
-        prefab.transform.localScale -= new Vector3(0.1F, 0.1F, 0.1F) * 0.1F;
+        prefab.transform.localScale -= new Vector3(0.1F, 0.1F, 0.1F) * 0.01F;
         print("Scale Down");
     }
 
     // Button Effects Position
     public void MoveUp()
     {
-        prefab.transform.position += new Vector3(0, 0.1F, 0);
+        prefab.transform.position += new Vector3(0, 1F, 0) * prefab.transform.localScale.x;
         print("Move Up");
     }
 
     public void MoveDown()
     {
-        prefab.transform.position -= new Vector3(0, 0.1F, 0);
+        prefab.transform.position -= new Vector3(0, 1F, 0) * prefab.transform.localScale.x;
         print("Move Down");
     }
 
     public void MoveLeft()
     {
-        prefab.transform.position -= new Vector3(0.1F, 0, 0);
+        prefab.transform.position -= new Vector3(1F, 0, 0) * prefab.transform.localScale.x;
         print("Move Left");
     }
 
     public void MoveRight()
     {
-        prefab.transform.position += new Vector3(0.1F, 0, 0);
+        prefab.transform.position += new Vector3(1F, 0, 0) * prefab.transform.localScale.x;
         print("Move Right");
     }
 
     public void MoveForward()
     {
-        prefab.transform.position += new Vector3(0, 0, 0.1F);
+        prefab.transform.position += new Vector3(0, 0, 1F) * prefab.transform.localScale.x;
         print("Move Forward");
     }
 
     public void MoveBackward()
     {
-        prefab.transform.position -= new Vector3(0, 0, 0.1F);
+        prefab.transform.position -= new Vector3(0, 0, 1F) * prefab.transform.localScale.x;
         print("Move Backward");
     }
 }

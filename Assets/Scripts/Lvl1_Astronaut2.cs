@@ -7,6 +7,7 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     // Simulations varaibles
     public GameObject astro1;
     public Vector3 offset;
+    public GameObject mesh;
 
     // Flags
     bool moving = true;
@@ -24,7 +25,7 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     {
         if(follow)
         {
-            transform.position = astro1.transform.position + offset;
+            transform.position = astro1.transform.position + offset * mesh.transform.localScale.x;
             transform.rotation = astro1.transform.rotation;
         }
     }
