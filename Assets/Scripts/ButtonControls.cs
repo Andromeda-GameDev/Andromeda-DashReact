@@ -7,8 +7,7 @@ public class ButtonControls : MonoBehaviour
 {
     // Object to transform
     GameObject prefab;
-    public GameObject resume;
-    public GameObject pasue;
+    public GameObject resume, pause;
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +36,13 @@ public class ButtonControls : MonoBehaviour
     public void Pause()
     {
         resume.SetActive(false);
-        pasue.SetActive(true);
+        pause.SetActive(true);
     }
 
     public void Resume()
     {
         resume.SetActive(true);
-        pasue.SetActive(false);
+        pause.SetActive(false);
     }
 
     // Button Effects Rotations
