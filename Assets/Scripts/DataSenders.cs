@@ -20,7 +20,7 @@ public abstract class DataSender
     protected Firebase.Database.DatabaseReference reference;
 
 
-    public abstract void sendData();   
+    public abstract void SendData(string level, string section);   
 }
 
 /*
@@ -52,7 +52,7 @@ class LevelDataSender : DataSender
      *
      * This method sends the data
      */
-    public override void sendData(){
-        this.reference.Child("users").Child(this.myUser.UserId).Child("levels").Child(this.problemType).SetRawJsonValueAsync(this.levelDataJson);
+    public override void SendData(string level, string section){
+        this.reference.Child("progress").Child(this.myUser.UserId).Child(level).Child(section).SetRawJsonValueAsync(this.levelDataJson);
     }
 }

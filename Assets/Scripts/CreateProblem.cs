@@ -64,7 +64,7 @@ public class CreateProblem : MonoBehaviour
         
         // Declaring DataSender of type LevelDataSender and sending
         DataSender sendLevelData = new LevelDataSender("problem1", levelDataJson);
-        sendLevelData.sendData();
+        sendLevelData.SendData("level_1", "section_2");
 
         /*
         reference.Child("users").Child(myUser.UserId).Child("levels").Child("problem1").SetRawJsonValueAsync(levelDataJson);
