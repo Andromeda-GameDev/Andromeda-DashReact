@@ -27,7 +27,6 @@ function Modal(props) {
         <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
           <div className="bg-gray-100 px-4 py-3 border-b border-gray-200">
             <h2 className="text-lg font-medium text-gray-900">{props.title}</h2>
- 
           </div>
 
           <div className="p-4">

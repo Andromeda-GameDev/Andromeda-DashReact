@@ -21,6 +21,7 @@ export default function ClassTable(props){
     // UseStates
     const [tableData, setTableData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [keySelectedUser, setKeySelectedUser] = useState('');
     
     // delete handlers
     const handleDeleteGroupButton = () => {
@@ -28,7 +29,8 @@ export default function ClassTable(props){
     };
 
     // handler is modal open
-    const handleOpenModal = () => {
+    const handleOpenModal = (theKey) => {
+        setKeySelectedUser(theKey);
         setIsModalOpen(true);
     };
 
@@ -56,6 +58,7 @@ export default function ClassTable(props){
                 name: dataObj[key].name,
                 last_name: dataObj[key].last_name,
                 email: dataObj[key].email, 
+                theK: String(key),
             }));
             console.log(dataArray);
             setTableData(dataArray);
@@ -85,7 +88,7 @@ export default function ClassTable(props){
                         content: (props) => {
                             if (props.column.key === 'viewInfo'){
                                 return(
-                                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-5 rounded" onClick={handleOpenModal}>
+                                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-5 rounded" onClick={() => handleOpenModal(props.rowData.theK)}>
                                        Info 
                                     </button>
                                 );
@@ -99,6 +102,7 @@ export default function ClassTable(props){
                     title="Usuario"
                     onClose={handleCloseModal}
                     onSave={handleSaveModal}
+                    userKey={keySelectedUser}
                 />
             )}
         </div>
