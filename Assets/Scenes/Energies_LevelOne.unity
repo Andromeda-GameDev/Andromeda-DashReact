@@ -698,32 +698,32 @@ PrefabInstance:
     - target: {fileID: 538247502561180340, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 538247502561180340, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510234550877289372, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510234550877289372, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.71
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510234551753136600, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510234551753136600, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.304
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2728724119803742606, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
@@ -788,17 +788,17 @@ PrefabInstance:
     - target: {fileID: 3030854587682547830, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746350847464496878, guid: b464adc3471e6f047a174da2561a2a56,
-        type: 3}
-      propertyPath: m_AnchorMax.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3746350847464496878, guid: b464adc3471e6f047a174da2561a2a56,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746350847464496878, guid: b464adc3471e6f047a174da2561a2a56,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.304
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b464adc3471e6f047a174da2561a2a56, type: 3}
@@ -2287,7 +2287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &742767682
 AudioListener:
   m_ObjectHideFlags: 0
