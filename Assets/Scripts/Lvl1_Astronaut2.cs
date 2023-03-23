@@ -36,6 +36,7 @@ public class Lvl1_Astronaut2 : MonoBehaviour
         {
             GetComponent<BoxCollider>().enabled = false;
             follow = true;
+            SFXManager.instance.selectSFX(3);
         }
         else
         {
