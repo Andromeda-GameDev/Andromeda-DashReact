@@ -134,6 +134,7 @@ public class BoxTriggers : MonoBehaviour
             moving = false;
             animator.Play("LessSpeed"); // stop movement
             failBox1.SetActive(false);
+            SFXManager.instance.selectSFX(1);
         }
         else if (name == "Drop_TB")
         {
@@ -162,6 +163,7 @@ public class BoxTriggers : MonoBehaviour
             // Set Astronaut to face forward
             transform.rotation = Quaternion.Euler(0, 90, 0);
             rb_astronaut.freezeRotation = true;
+            SFXManager.instance.selectSFX(2);
         }
         else if(dropFail)
         {
@@ -172,6 +174,7 @@ public class BoxTriggers : MonoBehaviour
             //tDrop astronaut as a ragdoll
             moving = false;
             animator.Play("LessSpeed");
+            SFXManager.instance.selectSFX(1);
         }
     }
 
