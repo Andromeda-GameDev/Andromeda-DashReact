@@ -173,11 +173,9 @@ public class BoxTriggers : MonoBehaviour
             rb_astronaut.freezeRotation = true;
 
             // Set companion to the same parameters
-            /*
-            astronautTwo.transform.rotation = Quaternion.Euler(0, 90, 0);
-            astronautTwo.GetComponent<Rigidbody>().freezeRotation = true;
-            astronautTwo.GetComponent<Lvl1_Astronaut2>().follow = false;
-            */
+            astronautTwo.GetComponent<Lvl1_Astronaut2>().offset = new Vector3(0f, 0f, -0.3f);
+
+            // Play SFX 
             SFXManager.instance.selectSFX(2);
         }
         else if(dropFail)
