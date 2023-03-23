@@ -5473,6 +5473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astro1: {fileID: 1990083340162114352}
   offset: {x: 0, y: -0.3, z: -0.5}
+  mesh: {fileID: 3172982796653477554}
   follow: 0
 --- !u!1001 &3172982795885573035
 PrefabInstance:

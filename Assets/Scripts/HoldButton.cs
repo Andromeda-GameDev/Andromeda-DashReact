@@ -12,14 +12,14 @@ public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         holding = true;
         buttonImage.sprite = pedalPressed;
-        Debug.Log("pointer down");
+        //Debug.Log("pointer down");
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         holding = false;
         buttonImage.sprite = pedal;
-        Debug.Log("pointer up");
+        //Debug.Log("pointer up");
     }
 }
 

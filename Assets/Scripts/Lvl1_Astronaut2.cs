@@ -34,8 +34,10 @@ public class Lvl1_Astronaut2 : MonoBehaviour
     {
         if(other.tag == "Astronaut1_W")
         {
+            Debug.Log("Me tocaste uwu");
             GetComponent<BoxCollider>().enabled = false;
             follow = true;
+            Debug.Log($"Follow actualizado = {follow}");
             SFXManager.instance.selectSFX(3);
         }
         else

@@ -14,8 +14,10 @@ public class BoxTriggers : MonoBehaviour
     public float initial_pos;
     public float distance = 1.0f;
     public float jump_force = 1.0f;
+    private float force_scaled;
     public GameObject mesh;
     public GameObject scenario;
+    public int input = -1;
     double scale;
     // Flags
     bool moving = true;
@@ -27,6 +29,7 @@ public class BoxTriggers : MonoBehaviour
     public GameObject winBox2; // Successful drop
     public GameObject failBox1; // Failed jump
     public GameObject failBox2; // Failed drop
+    public GameObject astronautTwo;
 
     // Start is called before the first frame update
     void Start()
@@ -37,19 +40,24 @@ public class BoxTriggers : MonoBehaviour
         rb_astronaut = gameObject.GetComponent<Rigidbody>();
         initial_pos = transform.localPosition.x;
 
-        if(speed > 10)
+        Debug.Log($"Input en start = {input}");
+        if(input == 2) // too fast 
         {
             winBox1.SetActive(true);
             failBox1.SetActive(true);
         }
-        else if(speed < 10)
+        else if(input == 1) // too slow
         {
             failBox2.SetActive(true);
         }
-        else
+        else if(input == 0) // correct
         {
             winBox1.SetActive(true);
             winBox2.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Input not recived in BoxTriggers");
         }
         
         Physics.gravity = new Vector3(0, -9.81f * mesh.transform.localScale.x, 0);
@@ -119,7 +127,7 @@ public class BoxTriggers : MonoBehaviour
         if (name == "Jump_TB")
         {
             animator.SetTrigger("Jump"); print("Jump");
-            float force_scaled = jump_force * mesh.transform.localScale.x;
+            force_scaled = jump_force * mesh.transform.localScale.x;
             print(Vector3.up * force_scaled);
             print(Vector3.up * jump_force);
             rb_astronaut.AddRelativeForce(Vector3.up * force_scaled, ForceMode.Impulse);
@@ -159,10 +167,17 @@ public class BoxTriggers : MonoBehaviour
             FixedJoint fixedJoint = other.gameObject.GetComponent<FixedJoint>();
             fixedJoint.connectedBody = null; print("Rope Drop");
             drop = false; // Reset drop flag
-
+        
             // Set Astronaut to face forward
             transform.rotation = Quaternion.Euler(0, 90, 0);
             rb_astronaut.freezeRotation = true;
+
+            // Set companion to the same parameters
+            /*
+            astronautTwo.transform.rotation = Quaternion.Euler(0, 90, 0);
+            astronautTwo.GetComponent<Rigidbody>().freezeRotation = true;
+            astronautTwo.GetComponent<Lvl1_Astronaut2>().follow = false;
+            */
             SFXManager.instance.selectSFX(2);
         }
         else if(dropFail)

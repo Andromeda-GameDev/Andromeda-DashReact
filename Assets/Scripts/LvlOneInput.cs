@@ -9,8 +9,8 @@ public class LvlOneInput : MonoBehaviour
     public GyroscopeData gsData;
     public LvlOneDataGenerator dataGenerator;
     public HoldButton pedalHoldButton;
-    public GameObject pedalButton, redoButton, submitButton, canvas, astronaut;
-    private bool pedalPressed;
+    public GameObject pedalButton, redoButton, submitButton, canvas, astronaut, astronautTwo;
+    public bool forceRightAnswer; // for debugging 
     float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20;
     bool firstTouch = true;
     // Start is called before the first frame update
@@ -37,11 +37,6 @@ public class LvlOneInput : MonoBehaviour
                 div = (float)(n / dataGenerator.meanV0);
                 pow = (float)Math.Pow((double)(div - 1), 3.0);
                 pedalSpeedInput = (pow + 1) * (float)dataGenerator.meanV0;
-
-                // Math.Pow((double)((((startingYAttitude - gsData.attitude.y) / 4) / dataGenerator.maxV0) - 1), 3.0)
-
-                // speed += Mathf.Abs(acceleration.z / 1.5f);
-                // speed += 1.0f;
             }
             if(pedalSpeedInput < 0)
             {
@@ -76,12 +71,30 @@ public class LvlOneInput : MonoBehaviour
 
     public void CheckResults()
     {
-        if(pedalSpeedInput > (dataGenerator.v0 - 0.1f) && pedalSpeedInput < (dataGenerator.v0 + 0.1f))
+        int input = -1;
+        if(pedalSpeedInput > (dataGenerator.v0 + 0.1f))
         {
+            input = 2;
+        }
+        else if(pedalSpeedInput < (dataGenerator.v0 - 0.1f))
+        {
+            input = 1;
+        }
+        else
+        {
+            input = 0;
             pedalSpeedInputText.color = Color.green;
         }
-        astronaut.GetComponent<BoxTriggers>().speed = pedalSpeedInput;
+
+        if(forceRightAnswer)
+        {
+            input = 0;
+        }
+
+        astronaut.GetComponent<BoxTriggers>().input = input;
         astronaut.GetComponent<BoxTriggers>().enabled = true;
+        astronautTwo.GetComponent<Lvl1_Astronaut2>().enabled = true;
+        canvas.SetActive(false);
     }
 
     public void Leave()

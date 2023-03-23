@@ -24,6 +24,10 @@ public class EnergyBarsController : MonoBehaviour
         minHeight = bottomTransform.localPosition.y;
         endHeight = endTransform.localPosition.y;
 
+        Debug.Log($"Starting height (local) = {startingHeight}");
+        Debug.Log($"Minimum height (box) (local) = {minHeight}");
+        Debug.Log($"End height (local) = {endHeight}");
+
         pPrevSlider = potentialBarPrev.GetComponent<Slider>();
         kPrevSlider = kineticBarPrev.GetComponent<Slider>();
         pPostSlider = potentialBarPost.GetComponent<Slider>();
@@ -33,6 +37,8 @@ public class EnergyBarsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log($"Player position (local) = {player.transform.localPosition.y}");
+
         if(!astronautTwo.follow)
         {
             if(!firstStep)
