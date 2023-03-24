@@ -26,9 +26,7 @@ It is the life flow of each level, it is compromised of the next key points:
 public struct Question
 {
     public string question;
-    public GameObject levelGen;
-    public GameObject levelGen2;
-    public Animator animator;
+    public GameObject inputGameObject;
 }
 
 // Metrics data format struct
@@ -120,6 +118,18 @@ public class LevelLife : MonoBehaviour
         // {
         //     NextQuestion();
         // }
+
+        // Print results
+        print("CheckAnswer() called");
+
+        // Deactivate input
+        currentQuestion.inputGameObject.SetActive(false);
+
+        // Upload metrics to database
+        UploadMetrics();
+
+        // Go to next question
+        NextQuestion();
     }
 
     // Method to go to next question
@@ -138,11 +148,11 @@ public class LevelLife : MonoBehaviour
         // Set current question
         currentQuestion = questionsForm[0];
 
-        if (questionsForm.Count == 3) {
-            currentQuestion.levelGen.GetComponent<Rigidbody>().useGravity = true;
-            currentQuestion.levelGen.GetComponent<BoxTriggers>().enabled = true;
-            currentQuestion.levelGen2.GetComponent<Lvl1_Astronaut2>().enabled = true;
-        }
+        // if (questionsForm.Count == 3) {
+        //     currentQuestion.levelGen.GetComponent<Rigidbody>().useGravity = true;
+        //     currentQuestion.levelGen.GetComponent<BoxTriggers>().enabled = true;
+        //     currentQuestion.levelGen2.GetComponent<Lvl1_Astronaut2>().enabled = true;
+        // }
 
         // Set next question in TextMeshPro of question UI
         questionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.question;
@@ -158,14 +168,8 @@ public class LevelLife : MonoBehaviour
 
         // Set button of question UI to call the input method of the question
         btn.onClick.AddListener(
-            ButtonClick // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
-            );
-        btn.onClick.AddListener(
-            NextQuestion // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
-            );
-        btn.onClick.AddListener(
-            UploadMetrics // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
-            );        
+            ActivateInput // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
+            );     
 
         // Remove question from list
         questionsForm.RemoveAt(0);
@@ -189,5 +193,10 @@ public class LevelLife : MonoBehaviour
     void ButtonClick()
     {
         print("Button Clicked");
+    }
+
+    void ActivateInput()
+    {
+        currentQuestion.inputGameObject.SetActive(true);
     }
 }

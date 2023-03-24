@@ -18,7 +18,7 @@ public class BoxTriggers : MonoBehaviour
     public GameObject mesh;
     public GameObject scenario;
     public int input = -1;
-    double scale;
+    float scale;
     // Flags
     bool moving = true;
     bool drop = false;
@@ -59,8 +59,10 @@ public class BoxTriggers : MonoBehaviour
         {
             Debug.Log("Input not recived in BoxTriggers");
         }
+
+        scale = scenario.transform.localScale.x * mesh.transform.localScale.x;
         
-        Physics.gravity = new Vector3(0, -9.81f * mesh.transform.localScale.x, 0);
+        Physics.gravity = new Vector3(0, -9.81f * scale , 0);
     }
 
     void Update()
@@ -80,7 +82,7 @@ public class BoxTriggers : MonoBehaviour
             }
 
             transform.localPosition += transform.forward * speed * Time.deltaTime;
-            // transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            // transform.Translate(Vector3.forward * speed * scale * Time.deltaTime);
         }
     }
 
@@ -127,7 +129,7 @@ public class BoxTriggers : MonoBehaviour
         if (name == "Jump_TB")
         {
             animator.SetTrigger("Jump"); print("Jump");
-            force_scaled = jump_force * mesh.transform.localScale.x;
+            force_scaled = jump_force * scale;
             print(Vector3.up * force_scaled);
             print(Vector3.up * jump_force);
             rb_astronaut.AddRelativeForce(Vector3.up * force_scaled, ForceMode.Impulse);
