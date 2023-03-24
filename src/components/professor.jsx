@@ -80,7 +80,7 @@ const Professor = () => {
                     <Card 
                         title="Usuarios activos"
                         amount="12"
-                    percentage="10% conectado"
+                        percentage="19% conectado"
                         icon="bx bx-user"
                         roundedColor="bg-green-500"
                     />

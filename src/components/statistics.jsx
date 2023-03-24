@@ -4,8 +4,7 @@ import BarChartAvgTime from "./BarChartAvgTime";
 import BarChartAvgScore from "./BarChartAvgScore";
 import GeneralStatsRow from "./GeneralStatsRow";
 import { CSVLink } from "react-csv";
-
-
+import DropdownComponent from "./DropdownComponent";
 
 const Statistics = () => {
 
@@ -30,9 +29,12 @@ const Statistics = () => {
                     </div>
                 </div>
             </header>
+
+            { /* Add button to the top left */}
             
             <div className="flex pt-5 pr-9">
-             <CSVLink data={table3} filename={"estadisticas_generales.csv"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full ml-auto"> Descargar CSV </CSVLink>
+                <div className="ml-8"> <DropdownComponent /> </div>
+                <CSVLink data={table3} filename={"estadisticas_generales.csv"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full ml-auto"> Descargar CSV </CSVLink>
             </div>
 
 
