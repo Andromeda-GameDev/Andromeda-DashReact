@@ -13,15 +13,36 @@ import { async } from "@firebase/util";
 import { UserAuth } from "../context/AuthContext";
 import { data } from "autoprefixer";
 
+// import ModalRegisterGroup
+import UserModalTable from "../components/moreUserInfoModal";
+
 export default function ClassTable(props){
 
     // UseStates
     const [tableData, setTableData] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [keySelectedUser, setKeySelectedUser] = useState('');
     
     // delete handlers
     const handleDeleteGroupButton = () => {
         props.delHandler(props.gKey);
     };
+
+    // handler is modal open
+    const handleOpenModal = (theKey) => {
+        setKeySelectedUser(theKey);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSaveModal = () => {
+        setIsModalOpen(false);
+    };
+
+
 
     useEffect(() => {
         // Connect to database
@@ -37,6 +58,7 @@ export default function ClassTable(props){
                 name: dataObj[key].name,
                 last_name: dataObj[key].last_name,
                 email: dataObj[key].email, 
+                theK: String(key),
             }));
             console.log(dataArray);
             setTableData(dataArray);
@@ -56,11 +78,33 @@ export default function ClassTable(props){
                 columns={[
                     {key: 'name', title: 'Name', dataType: DataType.String},
                     {key: 'last_name', title: 'Last Name', dataType: DataType.String},
-                    {key: 'email', title: 'Email', dataType: DataType.String}
+                    {key: 'email', title: 'Email', dataType: DataType.String},
+                    {key: 'viewInfo', title: 'Info', width: 200},
                 ]}
                 data={tableData}
                 rowKeyField={'name'}
+                childComponents={{
+                    cell: {
+                        content: (props) => {
+                            if (props.column.key === 'viewInfo'){
+                                return(
+                                    <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-5 rounded" onClick={() => handleOpenModal(props.rowData.theK)}>
+                                       Info 
+                                    </button>
+                                );
+                            }
+                        }
+                    },
+                }}
             />
+            {isModalOpen && (
+                <UserModalTable
+                    title="Usuario"
+                    onClose={handleCloseModal}
+                    onSave={handleSaveModal}
+                    userKey={keySelectedUser}
+                />
+            )}
         </div>
     );
 
