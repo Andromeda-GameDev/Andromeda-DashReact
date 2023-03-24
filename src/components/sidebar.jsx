@@ -28,7 +28,7 @@ export default function Sidebar() {
             <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
             <div className="min-h-screen flex flex-row bg-gray-100">
-            <div className="flex flex-col w-56 bg-white rounded-r-3xl overflow-hidden">
+            <div className="flex flex-col w-56 bg-white overflow-hidden">
                 <div className="flex items-center justify-center h-20 shadow-md">
                     <img src={logo} alt="Andromeda-logo" className="w-10 h-10 mr-2" />
                     <h1 className="text-2xl text-indigo-500">Andromeda</h1>
