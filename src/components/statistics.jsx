@@ -5,6 +5,7 @@ import BarChartAvgScore from "../components/BarChartAvgScore";
 import GeneralStatsRow from "../components/GeneralStatsRow";
 import { CSVLink } from "react-csv";
 import DropdownComponent from "../components/DropdownComponent";
+import HeaderPanel from "../components/headerPanel";
 
 const Statistics = () => {
 
@@ -14,27 +15,22 @@ const Statistics = () => {
 
     return (
         <div className="flex bg-gray-100">
+
             <Sidebar />
 
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full ml-56">
 
-            <header className="sticky top-0 bg-white border-b border-slate-200 z-30">
-                <div className="flex items-center justify-between h-20 px-6">
-                    <div className="flex items-center">
-                        <h1 className="text-1xl font-semibold"> Panel de administración </h1>
-                    </div>
-
-                    <div className="ml-auto flex-shrink-0">
-                        <span className="inline-flex text-1xl"> Viernes 23 de marzo, 2023 </span>
-                    </div>
-                </div>
-            </header>
+            <HeaderPanel />
 
             { /* Add button to the top left */}
             
             <div className="flex pt-5 pr-9">
-                <div className="ml-8"> <DropdownComponent /> </div>
-                <CSVLink data={table3} filename={"estadisticas_generales.csv"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full ml-auto"> Descargar CSV </CSVLink>
+                <div className="ml-8"> 
+                    <DropdownComponent /> 
+                </div>
+                <CSVLink data={table3} filename={"estadisticas_generales.csv"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full ml-auto"> 
+                    Descargar CSV 
+                </CSVLink>
             </div>
 
 

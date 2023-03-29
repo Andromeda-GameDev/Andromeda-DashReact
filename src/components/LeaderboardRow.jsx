@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {ref, getDatabase, onValue} from "firebase/database";
+import { UserAuth } from "../context/AuthContext";
 
 const data = [
     {place: "🥇", name: "Juan", date: "2021-05-01", email: "juan@tec.mx", score: 100, matricula: "A01234567"},
@@ -14,9 +16,57 @@ const data = [
 ];
 
 const LeaderboardRow = () => {
+
+    const [LeaderboardData, setLeaderboardData] = useState([]);
+
+    useEffect(() => {
+        const database = getDatabase();
+        const usersRef = ref(database, 'users/');
+        onValue(usersRef, (snapshot) => {
+            const leaderboard = snapshot.val();
+            const leaderboardArray = [];
+            for (let userId in leaderboard) {
+                const userScore = calculateUserScore(userId)
+                leaderboardArray.push(
+                    {
+                        place: 0,
+                        name: leaderboard[userId].name,
+                        date: '2021-05-01',
+                        email: leaderboard[userId].email,
+                        score: userScore,
+                    });
+            }
+
+            leaderboardArray.sort((a, b) => b.score - a.score);
+            for (let i = 0; i < leaderboardArray.length; i++) {
+                leaderboardArray[i].place = i + 1;
+            }
+
+            setLeaderboardData(leaderboardArray);
+            console.log(leaderboardArray);
+        });
+    }, []);
+
+    const calculateUserScore = (user) => {
+        let score = 0;
+        const database = getDatabase();
+        const userRef = ref(database, 'progress/' + user);
+        onValue(userRef, (snapshot) => {
+            const progress = snapshot.val();
+            for (let chapter in progress) {
+                for (let level in progress[chapter]) {
+                    score += progress[chapter][level].score;
+                }
+            }
+        });
+
+        return score/4;
+    }
+
+
     return (
         <tbody className="text-sm divide-y divide-slate-200">
-            {data.map((item, index) => (
+            {LeaderboardData.map((item, index) => (
                 <tr key={index}>
                 <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
@@ -59,7 +109,7 @@ const LeaderboardRow = () => {
                 <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
                         <div className="w-10 h-10 shrink-0 mr-2 sm:mr-3">
-                            <div className="font-medium text-slate-800"> {item.matricula} </div>
+                            <div className="font-medium text-slate-800"> {item.email} </div>
                         </div>
                     </div>
                 </td>

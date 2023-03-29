@@ -65,7 +65,7 @@ export default function Sidebar() {
 
     return (
 
-        <div className="flex">
+        <div className="fixed">
             <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
             <div className="min-h-screen flex flex-row bg-gray-100">
@@ -75,16 +75,15 @@ export default function Sidebar() {
                     <h1 className="text-2xl text-indigo-500">Andromeda</h1>
                 </div>
                 <ul className="flex flex-col py-4">
-
-                <SidebarLink to="/professor" label="Inicio" />
-                <SidebarLink to="/professor/groups" label="Grupos" />
-                <SidebarLink to="/professor/statistics" label="Estadísticas" />
-                <li>
-                    <button onClick={handleLogout} className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                    <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i className="bx bx-log-out"></i></span>
-                    <span className="text-sm font-medium">Logout</span>
-                    </button>
-                </li>
+                  <SidebarLink to="/professor" label="Inicio" />
+                  <SidebarLink to="/professor/groups" label="Grupos" />
+                  <SidebarLink to="/professor/statistics" label="Estadísticas" />
+                  <li>
+                      <button onClick={handleLogout} className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                      <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i className="bx bx-log-out"></i></span>
+                      <span className="text-sm font-medium">Logout</span>
+                      </button>
+                  </li>
                 </ul>
             </div>
             </div>
