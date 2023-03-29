@@ -16,6 +16,9 @@ import { data } from "autoprefixer";
 // import ModalRegisterGroup
 import UserModalTable from "../components/moreUserInfoModal";
 
+// import DownloadGroupDataButton
+import DownloadGroupDataButton from "../components/DownloadGroupDataButton";
+
 export default function ClassTable(props){
 
     // UseStates
@@ -69,10 +72,10 @@ export default function ClassTable(props){
 
     return(
         <div>
-            <div><p>sdf</p></div>
             <div className="flex flex-row justify-between items-center h-14">
                 <p className="text-base font-bold pl-2">{props.nm}</p>
                 <p className="text-base font-medium pl-2"> {`ID: ${props.Id}`} </p>
+                <DownloadGroupDataButton dataArray_t={tableData}/>
                 <div className="pr-2"><button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400" onClick={handleDeleteGroupButton}>Delete</button></div>
             </div>
             <Table
