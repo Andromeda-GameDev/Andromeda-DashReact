@@ -69,6 +69,7 @@ export default function ClassTable(props){
 
     return(
         <div>
+            <div><p>sdf</p></div>
             <div className="flex flex-row justify-between items-center h-14">
                 <p className="text-base font-bold pl-2">{props.nm}</p>
                 <p className="text-base font-medium pl-2"> {`ID: ${props.Id}`} </p>
