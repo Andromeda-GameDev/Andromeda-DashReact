@@ -1,10 +1,10 @@
 import React from "react";
 import Sidebar from "../components/sidebar";
-import BarChartAvgTime from "./BarChartAvgTime";
-import BarChartAvgScore from "./BarChartAvgScore";
-import GeneralStatsRow from "./GeneralStatsRow";
+import BarChartAvgTime from "../components/BarChartAvgTime";
+import BarChartAvgScore from "../components/BarChartAvgScore";
+import GeneralStatsRow from "../components/GeneralStatsRow";
 import { CSVLink } from "react-csv";
-import DropdownComponent from "./DropdownComponent";
+import DropdownComponent from "../components/DropdownComponent";
 
 const Statistics = () => {
 
