@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import StudentSideBar from "../components/StudentSideBar";
-import CardStudentGroup from "../components/CardStudentGroup";
+import { CardStudentGroup, CardStudentNoGroup } from "../components/CardStudentGroup";
 import { getDatabase,ref, get} from "firebase/database";
 import { async } from "@firebase/util";
 
@@ -51,7 +51,14 @@ const Student = () => {
             setStudentInfo(dataObj);
             getNameOfGroup(dataObj.group);
         });
-    }, [user]);
+    }, [user, theGroupName]);
+
+    const getIntoNewGroup = (newGroup) => {
+        setGroupName(newGroup);
+    }
+    const deletedAGroup = () => {
+        setGroupName("");
+    }
     
 
     const handleLogout = async () => {
@@ -76,7 +83,11 @@ const Student = () => {
                     <h1 className = 'pl-8 text-2xl font-bold'> Bienvenido {studentInfo.name} ! </h1>
                 </div>
                 <div className="pl-8">
-                    <CardStudentGroup name_group={theGroupName} id_group={studentInfo.group}/>
+                    {theGroupName === "" ? (
+                        <CardStudentNoGroup methodGetIntoGroup={getIntoNewGroup} the_user_id={user.uid}/>
+                    ) : (
+                        <CardStudentGroup name_group={theGroupName} id_group={studentInfo.group} the_user_id={user.uid} methodDeleteGroup={deletedAGroup}/>
+                    )}
                 </div>
             </div>
 
