@@ -68,18 +68,20 @@ public class BoxTriggers : MonoBehaviour
         if (moving && transform.localPosition.x < initial_pos + distance)
         {
             //Speed is checked to activate the corresponding triggers
-            if(speed < 10)
+            if(input == 1)
             {
                 animator.speed = 0.5f;
                 gameObject.tag = "Astronaut1_F";
             }
-            else if(speed > 10)
+            else if(input == 2)
             {
                 animator.speed = 2f;
                 gameObject.tag = "Astronaut1_F";
             }
 
-            transform.localPosition += transform.forward * speed * Time.deltaTime;
+            // transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime;
+            // transform.localPosition += transform.forward * speed * Time.deltaTime;
+            transform.localPosition += transform.localRotation * (Vector3.forward * speed * Time.deltaTime);
             // transform.Translate(Vector3.forward * speed * scale * Time.deltaTime);
         }
     }
