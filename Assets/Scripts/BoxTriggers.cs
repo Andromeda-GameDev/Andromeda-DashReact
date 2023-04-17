@@ -61,8 +61,6 @@ public class BoxTriggers : MonoBehaviour
         }
 
         scale = scenario.transform.localScale.x * mesh.transform.localScale.x;
-        
-        Physics.gravity = new Vector3(0, -9.81f * scale , 0);
     }
 
     void Update()
@@ -171,7 +169,7 @@ public class BoxTriggers : MonoBehaviour
             drop = false; // Reset drop flag
         
             // Set Astronaut to face forward
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+            transform.localRotation = Quaternion.Euler(0, 90, 0);
             rb_astronaut.freezeRotation = true;
 
             // Set companion to the same parameters

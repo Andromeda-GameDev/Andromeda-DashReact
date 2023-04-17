@@ -44,12 +44,14 @@ public class LevelLife : MonoBehaviour
     // - Animation of the answer
     public List<Question> questionsForm;
     Question currentQuestion;
-    int current_section = 1;
-
+    public int current_section = 0;
+    public int attempts;
     public GameObject questionUI;
     public GameObject clockUI;
+    public LvlOneDataGenerator levelGen;
     public float time = 90.0f;
     bool ticking = true;
+    public bool correct;
 
     // Start is called before the first frame update
     void Awake()
@@ -97,6 +99,51 @@ public class LevelLife : MonoBehaviour
     // Method to check the answer of the player
     public void CheckAnswer()
     {
+        if (correct)
+        {
+            // Show canvas for correct answer
+            print("Correct answer");
+
+            // Deactivate input
+            currentQuestion.inputGameObject.SetActive(false);
+
+            // Upload metrics to database
+            UploadMetrics();
+
+            // Go to next question
+            NextQuestion();
+        }
+        else
+        {
+            // Show canvas for wrong answer
+            print("Wrong answer");
+
+            // Add continue button with event listener as follows
+            if (attempts == 0)
+            {
+                // Show correct answer for question
+
+                // Upload metrics to database
+                UploadMetrics();
+
+                // Go to next question
+                NextQuestion();
+            }
+            else
+            {
+                // Reduce attempt
+                attempts--;
+
+                // Increase acid level
+
+                // Reactivate input
+                currentQuestion.inputGameObject.SetActive(true);
+
+                // Print attempts left
+                print($"Attempts left: {attempts}");
+            }
+        }
+
         // // Get the case of the answer
         // int caseAnswer = questions[0].levelGen.GetComponent<LevelGen>().CheckAnswer();
 
@@ -117,25 +164,18 @@ public class LevelLife : MonoBehaviour
         // else if(caseAnswer == 0)
         // {
         //     NextQuestion();
-        // }
+        // }        
+    }
 
-        // Print results
-        print("CheckAnswer() called");
-
-        // Deactivate input
-        currentQuestion.inputGameObject.SetActive(false);
-
-        // Upload metrics to database
-        UploadMetrics();
-
-        // Go to next question
-        NextQuestion();
+    public void SaveAnswer(bool answer)
+    {
+        correct = answer;
     }
 
     // Method to go to next question
     public void NextQuestion ()
     {
-        print(questionsForm.Count);
+        // print(questionsForm.Count);
         // Check if there are more questions
         if (questionsForm.Count == 0)
         {
@@ -145,8 +185,12 @@ public class LevelLife : MonoBehaviour
             return;
         }
 
+        // Send current stage to input manager
+        // levelManager.GetComponent<LvlOneInput>().stage = 4 - questionsForm.Count;
+
         // Set current question
         currentQuestion = questionsForm[0];
+        attempts = 3;
 
         // if (questionsForm.Count == 3) {
         //     currentQuestion.levelGen.GetComponent<Rigidbody>().useGravity = true;
@@ -169,7 +213,7 @@ public class LevelLife : MonoBehaviour
         // Set button of question UI to call the input method of the question
         btn.onClick.AddListener(
             ActivateInput // Substitute for currentQuestion.levelGen.GetComponent<LevelGen>().InputMethod
-            );     
+            );
 
         // Remove question from list
         questionsForm.RemoveAt(0);
@@ -179,7 +223,7 @@ public class LevelLife : MonoBehaviour
     void UploadMetrics()
     {
         // Upload metrics to database
-        LevelOneData levelOneData = new LevelOneData(10, 450, 180.0d);
+        LevelOneData levelOneData = new LevelOneData(10, 450, 180.0d, attempts);
         // Parse to json
         string json = JsonUtility.ToJson(levelOneData);
         // Upload to database
@@ -188,7 +232,7 @@ public class LevelLife : MonoBehaviour
         // Increment section
         current_section++;
 
-        print("Metrics uploaded");
+        // print("Metrics uploaded");
     }
     void ButtonClick()
     {

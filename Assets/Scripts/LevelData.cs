@@ -49,6 +49,7 @@ public abstract class LevelData
     public int added;
     public int score;
     public double time;
+    public int attempts;
 
     /*
      * @brief basic construct of LevelData class
@@ -58,10 +59,11 @@ public abstract class LevelData
      * @param   time_t
      *
      */
-    public LevelData(int added_t, int score_t, double time_t){
+    public LevelData(int added_t, int score_t, double time_t, int attempt_t){
         this.added = added_t;
         this.score = score_t;
         this.time = time_t;
+        this.attempts = attempt_t;
     }
     public LevelData(){}
 
@@ -88,7 +90,7 @@ public class LevelOneData : LevelData
      * @param score_t
      * @param time_t
      */
-    public LevelOneData (int added_t, int score_t, double time_t) : base(added_t, score_t, time_t){}
+    public LevelOneData (int added_t, int score_t, double time_t, int attempt_t) : base(added_t, score_t, time_t, attempt_t){}
     public LevelOneData(){}
 
 }
