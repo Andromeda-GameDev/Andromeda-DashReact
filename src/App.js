@@ -7,10 +7,12 @@ import Student from './components/student';
 import Groups from './components/groups';
 import Statistics from './components/statistics';
 import StatisticsStudent from './components/statisticsStudent';
+import SignSuperAdmin from './components/SignSuperAdmin';
 //import Settings from './components/settings';
 import { Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Admin from './components/admin';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path='/professor' element={ <ProtectedRoute> <Professor /> </ProtectedRoute>}/>
           <Route path='/professor/groups' element={ <ProtectedRoute> <Groups /> </ProtectedRoute>}/>
           <Route path='/professor/statistics' element={ <ProtectedRoute> <Statistics /> </ProtectedRoute>}/>
+          <Route path='/signin/admin' element={<ProtectedRoute> <SignSuperAdmin /> </ProtectedRoute>}/>
+          <Route path='/admin' element={ <ProtectedRoute> <Admin /> </ProtectedRoute>}/>
         </Routes>
       </AuthContextProvider>
     </div>
