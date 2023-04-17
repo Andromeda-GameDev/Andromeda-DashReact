@@ -86,7 +86,7 @@ const Groups = () => {
             <div className="flex">
                 <Sidebar />
             </div>
-            <div>
+            <div className="ml-56">
                 <div className="flex flex-row justify-between items-center">
                     <p className="pl-5">Grupos</p>
                     <div className="pr-5">

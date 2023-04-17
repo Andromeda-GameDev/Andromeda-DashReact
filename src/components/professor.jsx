@@ -4,11 +4,14 @@ import { UserAuth } from "../context/AuthContext";
 import Sidebar from "./sidebar";
 import Card from "./card";
 import LeaderboardRow from "./LeaderboardRow";
+import HeaderPanel from "../components/headerPanel";
 
 const Professor = () => {
 
     const {user} = UserAuth();
     const [professorName, setProfessorName] = useState("");
+    const [numberOfUsers, setNumberOfUsers] = useState(0);
+    const [numberOfMatches, setNumberOfMatches] = useState(0);
 
     
     const getProfessorName = async (professorId) => {
@@ -28,8 +31,26 @@ const Professor = () => {
         })
     }
 
+    const getNumberOfUsers = async () => {
+        const database = getDatabase()
+        const usersRef = ref(database, 'users/')
+        onValue(usersRef, (snapshot) => {
+            setNumberOfUsers(Object.keys(snapshot.val()).length)
+        })
+    }
+
+    const getNumberOfMatches = async () => {
+        const database = getDatabase()
+        const usersRef = ref(database, 'progress/')
+        onValue(usersRef, (snapshot) => {
+            setNumberOfMatches(Object.keys(snapshot.val()).length)
+        })
+    }
+
     useEffect(() => {
         getProfessorName(user.uid);
+        getNumberOfUsers();
+        getNumberOfMatches();
     }, [user.uid])
 
 
@@ -38,19 +59,9 @@ const Professor = () => {
 
             <Sidebar />
 
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full ml-56">
 
-            <header className="sticky top-0 bg-white border-b border-slate-200 z-30">
-                <div className="flex items-center justify-between h-20 px-6">
-                    <div className="flex items-center">
-                        <h1 className="text-1xl font-semibold"> Panel de administración </h1>
-                    </div>
-
-                    <div className="ml-auto flex-shrink-0">
-                        <span className="inline-flex text-1xl"> Viernes 23 de marzo, 2023 </span>
-                    </div>
-                </div>
-            </header>
+            <HeaderPanel />
 
             <div className='w-full px-6 py-6 mx-auto'>
                 <div className="w-full bg-indigo-200 shadow-md rounded-lg">
@@ -62,8 +73,8 @@ const Professor = () => {
                 <div className= "flex flex-wrap -mx-3 pt-10">
 
                     <Card 
-                        title="Estudiantes Act."
-                        amount="63"
+                        title="REGISTROS."
+                        amount= {numberOfUsers}
                         percentage="+7.8%"
                         icon="bx bx-user"
                         roundedColor="bg-orange-500"
@@ -71,7 +82,7 @@ const Professor = () => {
 
                     <Card 
                         title="Partidas jugadas"
-                        amount="128"
+                        amount={numberOfMatches}
                         percentage="+3.48%"
                         icon="bx bx-user"
                         roundedColor="bg-blue-500"
@@ -79,8 +90,8 @@ const Professor = () => {
 
                     <Card 
                         title="Usuarios activos"
-                        amount="12"
-                        percentage="19% conectado"
+                        amount="2"
+                        percentage="4% conectado"
                         icon="bx bx-user"
                         roundedColor="bg-green-500"
                     />

@@ -1,22 +1,68 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {ref, getDatabase, onValue, get} from "firebase/database";
+import { UserAuth } from "../context/AuthContext";
 
-const data = [
-    {place: "🥇", name: "Juan", date: "2021-05-01", email: "juan@tec.mx", score: 100, matricula: "A01234567"},
-    {place: "🥈", name: "Pedro", date: "2021-05-01", email: "pedro@tec.mx", score: 90, matricula: "A01234567"},
-    {place: "🥉", name: "Maria", date: "2021-05-01", email: "maria@tec.mx", score: 80, matricula: "A01234567"},
-    {place: 4, name: "Jose", date: "2021-05-01", email: "jose@tec.mx", score: 70, matricula: "A01234567"},
-    {place: 5, name: "Luis", date: "2021-05-01", email: "luis@tec.mx", score: 60, matricula: "A01234567"},
-    {place: 6, name: "Ana", date: "2021-05-01", email: "ana@tec.mx", score: 50, matricula: "A01234567"},
-    {place: 7, name: "Luisa", date: "2021-05-01", email: "luisa@tec.mx", score: 40, matricula: "A01234567"},
-    {place: 8, name: "Rosa", date: "2021-05-01", email: "rosa@tec.mx", score: 30, matricula: "A01234567"},
-    {place: 9, name: "Ricardo", date: "2021-05-01", email: "ricardo@tec.mx", score: 20, matricula: "A01234567"},
-    {place: 10, name: "Lorena", date: "2021-05-01", email: "lorena@tec.mx", score: 10, matricula: "A01234567"},
-];
 
 const LeaderboardRow = () => {
+
+    const [LeaderboardData, setLeaderboardData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const database = getDatabase();
+            const usersRef = ref(database, 'users/');
+            const snapshot = await get(usersRef);
+            const leaderboard = snapshot.val();
+            const leaderboardArray = [];
+            for (let userId in leaderboard) {
+                const userScore = await calculateUserScore(userId);
+                leaderboardArray.push(
+                    {
+                        place: 0,
+                        name: leaderboard[userId].name,
+                        date: '2021-05-01',
+                        email: leaderboard[userId].email,
+                        score: userScore,
+                        student_id: leaderboard[userId].email.split('@')[0],
+                    });
+            }
+
+            leaderboardArray.sort((a, b) => b.score - a.score);
+
+            for (let i = 0; i < leaderboardArray.length; i++) {
+                leaderboardArray[i].place = i + 1;
+            }
+
+            setLeaderboardData(leaderboardArray);
+        }
+
+        fetchData();
+    }, []);
+
+    const calculateUserScore = (user) => {
+        let totalScore = 0;
+        let sectionCount = 0;
+        const database = getDatabase();
+        const userRef = ref(database, 'progress/' + user);
+        
+        onValue(userRef, (snapshot) => {
+          const progress = snapshot.val();
+          for(let level in progress) {
+            for(let section in progress[level]) {
+              totalScore += progress[level][section].score;
+              sectionCount++;
+            }
+          }
+        });
+        
+        console.log("Scores: " + totalScore + " Sections: " + sectionCount + " Average: " + totalScore/sectionCount + "")
+        return totalScore;
+    }
+      
+
     return (
         <tbody className="text-sm divide-y divide-slate-200">
-            {data.map((item, index) => (
+            {LeaderboardData.map((item, index) => (
                 <tr key={index}>
                 <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
@@ -59,7 +105,7 @@ const LeaderboardRow = () => {
                 <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
                         <div className="w-10 h-10 shrink-0 mr-2 sm:mr-3">
-                            <div className="font-medium text-slate-800"> {item.matricula} </div>
+                            <div className="font-medium text-slate-800"> {item.student_id} </div>
                         </div>
                     </div>
                 </td>
