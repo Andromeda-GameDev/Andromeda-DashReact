@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../resources/openai-logo.png";
+import logo from "../resources/planet_andromeda_logo.png";
 
 function SidebarLink({ to, label }) {
     const location = useLocation();
