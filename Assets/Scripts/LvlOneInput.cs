@@ -23,6 +23,8 @@ public class LvlOneInput : MonoBehaviour
 
     void OnEnable()
     {
+        Redo();
+        pedalSpeedInputText.color = Color.white;
         stage = 3 - lvlLife.questionsForm.Count;
         print($"Stage: {stage}");
         print($"Questions left: {lvlLife.questionsForm.Count}");

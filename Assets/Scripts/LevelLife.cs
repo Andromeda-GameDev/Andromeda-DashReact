@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
@@ -52,6 +53,8 @@ public class LevelLife : MonoBehaviour
     public float time = 90.0f;
     bool ticking = true;
     public bool correct;
+    public UnityEvent attemptsReduced = new UnityEvent();
+    public UnityEvent newQuestion = new UnityEvent();
 
     // Start is called before the first frame update
     void Awake()
@@ -133,8 +136,9 @@ public class LevelLife : MonoBehaviour
             {
                 // Reduce attempt
                 attempts--;
-
-                // Increase acid level
+                
+                // Invoke attemptsReduced event
+                attemptsReduced.Invoke();
 
                 // Reactivate input
                 currentQuestion.inputGameObject.SetActive(true);
@@ -191,6 +195,9 @@ public class LevelLife : MonoBehaviour
         // Set current question
         currentQuestion = questionsForm[0];
         attempts = 3;
+
+        // Invoke newQuestion event
+        newQuestion.Invoke();
 
         // if (questionsForm.Count == 3) {
         //     currentQuestion.levelGen.GetComponent<Rigidbody>().useGravity = true;
