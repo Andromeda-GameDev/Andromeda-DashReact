@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import React from "react";
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ const Signup = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [groupId, setGroupId] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const Signup = () => {
         e.preventDefault()
         setError('')
         try {
-            await createUser({email: email, password: password, name: name, last_name: lastName, group: 'X'});
+            await createUser({email: email, password: password, name: name, last_name: lastName, group: groupId});
             navigate('/student');
         } catch (e) {
             setError(e.message);
@@ -38,20 +40,24 @@ const Signup = () => {
                     <Link to = '/' className = 'text-blue-500'> Inicia sesión </Link>
                 </p>
             </div>
-            <form onSubmit = {handleSubmit}> 
-                <div className = 'flex flex-col py-2'>
+            <form className="flex flex-col justify-between" onSubmit = {handleSubmit}> 
+                <div className = 'flex flex-col'>
                     <label className='py-2 font-medium'> Nombre </label>
                     <input onChange={(e) => setName(e.target.value)} className='border p-3' type="text" />
                 </div>
-                <div className = 'flex flex-col py-2'>
+                <div className = 'flex flex-col'>
                     <label className='py-2 font-medium'> Apellido </label>
                     <input onChange={(e) => setLastName(e.target.value)} className='border p-3' type="text" />
                 </div>
-                <div className = 'flex flex-col py-2'>
+                <div className = 'flex flex-col'>
                     <label className='py-2 font-medium'> Correo Electrónico </label>
                     <input onChange={(e) => setEmail(e.target.value)} className='border p-3' type="email" />
                 </div>
-                <div className = 'flex flex-col py-2'>
+                <div className="flex flex-col">
+                    <label className="py-2 font-medium">ID de tu Grupo</label>
+                    <input onChange={(e) => setGroupId(e.target.value)} className="border p-3" type="text"></input>
+                </div>
+                <div className = 'flex flex-col'>
                     <label className='py-2 font-medium'> Contraseña </label>
                     <input onChange={(e) => setPassword(e.target.value)} className='border p-3' type="password" />
                 </div>
