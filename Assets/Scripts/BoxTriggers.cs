@@ -65,7 +65,7 @@ public class BoxTriggers : MonoBehaviour
 
     void Update()
     {
-        if (moving && transform.localPosition.x < initial_pos + distance)
+        if (moving)
         {
             //Speed is checked to activate the corresponding triggers
             if(input == 1)
@@ -79,10 +79,7 @@ public class BoxTriggers : MonoBehaviour
                 gameObject.tag = "Astronaut1_F";
             }
 
-            // transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime;
-            // transform.localPosition += transform.forward * speed * Time.deltaTime;
             transform.localPosition += transform.localRotation * (Vector3.forward * speed * Time.deltaTime);
-            // transform.Translate(Vector3.forward * speed * scale * Time.deltaTime);
         }
     }
 
@@ -106,6 +103,12 @@ public class BoxTriggers : MonoBehaviour
             moving = false; // Stop moving forward (running)
             other.gameObject.GetComponent<CapsuleCollider>().isTrigger = true; // Make rope a trigger
         }
+        else if (name == "Stop")
+        {
+            moving = false; // Stop moving forward (running)
+            print("Stop");
+        }
+
     }
 
     void OnCollisionStay(Collision other)
