@@ -3,6 +3,7 @@ import {ref, getDatabase, onValue} from "firebase/database";
 import { UserAuth } from "../context/AuthContext";
 import AdminSidebar from "./AdminSidebar";
 import HeaderPanel from "../components/headerPanel";
+import AdminMainPanel from "../components/AdminMainPanel";
 
 const Admin= () => {
 
@@ -14,13 +15,14 @@ const Admin= () => {
 
             <div className="flex flex-col w-full ml-56">
 
-            <HeaderPanel />
+
+                <HeaderPanel />
+                <AdminMainPanel></AdminMainPanel>
 
             
-    </div>
-</div>
-      
-    )
+            </div>
+        </div>
+    );
 }
 
 export default Admin;

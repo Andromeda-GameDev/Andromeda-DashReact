@@ -51,14 +51,12 @@ const ErrorLogCard = () => {
 const AdminMainPanel = () => {
 
     return(
-        <div className="w-screen flex">
                 <div className="flex-grow flex flex-wrap">
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4"><EnableDBCard/></div>
-                    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4"><InformativeCard cardTitle="Registerd Users" cardDescription="14 Registered Users"/></div>
+                    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4"><InformativeCard cardTitle="Registerd Users" cardDescription="8 Registered Users"/></div>
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4"><ErrorLogCard/></div>
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4"><InformativeCard cardTitle="Registered Groups" cardDescription="6 Registered Groups"/></div>
                 </div>
-        </div>
     );
 
 };

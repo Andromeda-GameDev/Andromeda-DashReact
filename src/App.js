@@ -17,6 +17,8 @@ import Settings from './components/settings';
 import Admin from './components/admin';
 import ProfessorSettings from './components/professorSettings';
 import StudentSettings from './components/studentSettings';
+import AdminUsersCRUD from './components/AdminUsersCRUD';
+import AdminProfessorsCRUD from './components/AdminProfessorsCRUD';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path='/professor/statistics' element={ <ProtectedRoute> <Statistics /> </ProtectedRoute>}/>
           <Route path='/signin/admin' element= {<SignSuperAdmin /> }/>
           <Route path='/admin' element={ <ProtectedRoute> <Admin /> </ProtectedRoute>}/>
+          <Route path='/admin/users' element={ <ProtectedRoute> <AdminUsersCRUD/> </ProtectedRoute>}/>
+          <Route path='/admin/professors' element={ <ProtectedRoute> <AdminProfessorsCRUD/> </ProtectedRoute>}/>
           <Route path='/forgot-password' element={<Forgot />} />
           <Route path='/admin/settings' element={ <ProtectedRoute> <Settings /> </ProtectedRoute>}/>
           <Route path='/professor/settings' element={ <ProtectedRoute> <ProfessorSettings /> </ProtectedRoute>}/>
