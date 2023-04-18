@@ -48,13 +48,14 @@ public class LevelLife : MonoBehaviour
     public int current_section = 0;
     public int attempts;
     public GameObject questionUI;
-    public GameObject clockUI;
+    // public GameObject clockUI;
     public LvlOneDataGenerator levelGen;
-    public float time = 90.0f;
-    bool ticking = true;
+    public float time = 0.0f;
+    bool ticking = false;
     public bool correct;
     public UnityEvent attemptsReduced = new UnityEvent();
     public UnityEvent newQuestion = new UnityEvent();
+    private int scoreToGive;
 
     // Start is called before the first frame update
     void Awake()
@@ -74,13 +75,14 @@ public class LevelLife : MonoBehaviour
     {
         if (ticking)
         {
-            CountdownClock();
+            time += Time.deltaTime;
         }
     }
 
     // Method for a countdown clock with a 2 floating point second values
-    void CountdownClock()
+    void CountClock()
     {
+        time += Time.deltaTime;
         // If time out, call CheckAnswer()
         if (time <= 0)
         {
@@ -90,12 +92,12 @@ public class LevelLife : MonoBehaviour
         else
         {
             // Start a countdown clock
-            time -= Time.deltaTime;
+            time += Time.deltaTime;
         }
         // format time in seconds to minutes and seconds
         string timeString = string.Format("{0:00}:{1:00}", Mathf.Floor(this.time / 60), Mathf.Floor(this.time % 60));
         // Set the clock UI text to the time string
-        clockUI.GetComponent<TextMeshProUGUI>().text = timeString;
+        // clockUI.GetComponent<TextMeshProUGUI>().text = timeString;
     }
     
 
@@ -125,6 +127,8 @@ public class LevelLife : MonoBehaviour
             if (attempts == 0)
             {
                 // Show correct answer for question
+                scoreToGive = 0;
+                time = 300.0f;
 
                 // Upload metrics to database
                 UploadMetrics();
@@ -136,6 +140,9 @@ public class LevelLife : MonoBehaviour
             {
                 // Reduce attempt
                 attempts--;
+
+                // Reduce scoreToGive
+                scoreToGive = scoreToGive - 25;
                 
                 // Invoke attemptsReduced event
                 attemptsReduced.Invoke();
@@ -195,6 +202,9 @@ public class LevelLife : MonoBehaviour
         // Set current question
         currentQuestion = questionsForm[0];
         attempts = 3;
+        time = 0.0f;
+        scoreToGive = 100;
+        ticking = true;
 
         // Invoke newQuestion event
         newQuestion.Invoke();
@@ -229,8 +239,14 @@ public class LevelLife : MonoBehaviour
     // Method to upload answer metrics to database
     void UploadMetrics()
     {
+        float score = 300.0f - time > 0 ? 300.0f - time : 0;
+        print("Score by time: " + score);
+        score += scoreToGive;
+        Score.instance.UpdateScore((int)score);
+        print("Score to give: " + scoreToGive);
+
         // Upload metrics to database
-        LevelOneData levelOneData = new LevelOneData(10, 450, 180.0d, attempts);
+        LevelOneData levelOneData = new LevelOneData(10, (int)score, time, attempts);
         // Parse to json
         string json = JsonUtility.ToJson(levelOneData);
         // Upload to database

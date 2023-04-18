@@ -21,6 +21,7 @@ public class BoxTriggers : MonoBehaviour
     float scale;
     // Flags
     bool moving = true;
+    bool despacito = true;
     bool drop = false;
     bool dropFail = false;
 
@@ -65,7 +66,7 @@ public class BoxTriggers : MonoBehaviour
 
     void Update()
     {
-        if (moving)
+        if (moving && despacito)
         {
             //Speed is checked to activate the corresponding triggers
             if(input == 1)
@@ -106,6 +107,7 @@ public class BoxTriggers : MonoBehaviour
         else if (name == "Stop")
         {
             moving = false; // Stop moving forward (running)
+            despacito = false; // Stop moving forward (running)
             print("Stop");
         }
 
