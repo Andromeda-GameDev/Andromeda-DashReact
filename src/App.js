@@ -12,7 +12,11 @@ import SignSuperAdmin from './components/SignSuperAdmin';
 import { Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Forgot from './components/Forgot';
+import Settings from './components/settings';
 import Admin from './components/admin';
+import ProfessorSettings from './components/professorSettings';
+import StudentSettings from './components/studentSettings';
 
 function App() {
   return (
@@ -26,8 +30,12 @@ function App() {
           <Route path='/professor' element={ <ProtectedRoute> <Professor /> </ProtectedRoute>}/>
           <Route path='/professor/groups' element={ <ProtectedRoute> <Groups /> </ProtectedRoute>}/>
           <Route path='/professor/statistics' element={ <ProtectedRoute> <Statistics /> </ProtectedRoute>}/>
-          <Route path='/signin/admin' element={<ProtectedRoute> <SignSuperAdmin /> </ProtectedRoute>}/>
+          <Route path='/signin/admin' element= {<SignSuperAdmin /> }/>
           <Route path='/admin' element={ <ProtectedRoute> <Admin /> </ProtectedRoute>}/>
+          <Route path='/forgot-password' element={<Forgot />} />
+          <Route path='/admin/settings' element={ <ProtectedRoute> <Settings /> </ProtectedRoute>}/>
+          <Route path='/professor/settings' element={ <ProtectedRoute> <ProfessorSettings /> </ProtectedRoute>}/>
+          <Route path='/student/settings' element={ <ProtectedRoute> <StudentSettings /> </ProtectedRoute>}/>
         </Routes>
       </AuthContextProvider>
     </div>

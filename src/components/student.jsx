@@ -4,7 +4,7 @@ import { UserAuth } from "../context/AuthContext";
 import StudentSideBar from "../components/StudentSideBar";
 import { CardStudentGroup, CardStudentNoGroup } from "../components/CardStudentGroup";
 import { getDatabase,ref, get} from "firebase/database";
-import { async } from "@firebase/util";
+//import { async } from "@firebase/util";
 
 const Student = () => {
 

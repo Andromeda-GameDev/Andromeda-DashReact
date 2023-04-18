@@ -88,6 +88,7 @@ export default function AdminSidebar() {
                       <span className="text-sm font-medium">Logout</span>
                       </button>
                   </li>
+                  
                 </ul>
             </div>
             </div>

@@ -72,6 +72,11 @@ const Signin = () => {
                     </div>
                     <button className='border border-blue-500 bg-blue-500 text-white px-6 py-2 my-4'> Iniciar sesión </button>
                 </form>
+
+                <div className = 'text-center'>
+                    <Link to = '/forgot-password' className = 'text-blue-500'> ¿Olvidaste tu contraseña? </Link>
+                </div>
+
             </div>
         </div>
     )

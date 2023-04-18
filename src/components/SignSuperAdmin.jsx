@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-const Signin = () => {
+const SignSuperAdmin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,4 +62,4 @@ const Signin = () => {
     )
 }
 
-export default Signin;
+export default SignSuperAdmin;
