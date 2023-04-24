@@ -6,7 +6,7 @@ import {
   deleteUser,
 } from "firebase/auth";
 import HeaderPanel from "../components/headerPanel";
-import Sidebar from "./sidebar";
+import StudentSideBar from "../components/StudentSideBar";
 import { useNavigate } from "react-router-dom";
 
 const StudentSettings = () => {
@@ -65,10 +65,9 @@ const StudentSettings = () => {
   return (
     
     <div className="flex bg-gray-100">
-      <Sidebar />
+      <StudentSideBar />
 
       <div className="flex flex-col w-full ml-56">
-        <HeaderPanel />
 
         <div className="container mx-auto py-12">
           <h2 className="text-2xl font-semibold mb-8 px-14">
