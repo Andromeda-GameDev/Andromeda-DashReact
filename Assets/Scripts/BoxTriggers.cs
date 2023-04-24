@@ -44,12 +44,12 @@ public class BoxTriggers : MonoBehaviour
         Debug.Log($"Input en start = {input}");
         if(input == 2) // too fast 
         {
+            failBox2.SetActive(true);
             winBox1.SetActive(true);
-            failBox1.SetActive(true);
         }
         else if(input == 1) // too slow
         {
-            failBox2.SetActive(true);
+            failBox1.SetActive(true);
         }
         else if(input == 0) // correct
         {
@@ -150,6 +150,7 @@ public class BoxTriggers : MonoBehaviour
             animator.Play("LessSpeed"); // stop movement
             failBox1.SetActive(false);
             SFXManager.instance.selectSFX(1);
+            SFXManager.instance.selectSFX(4);
         }
         else if (name == "Drop_TB")
         {
@@ -160,6 +161,7 @@ public class BoxTriggers : MonoBehaviour
         {
             dropFail = true; // confirm fail flag
             failBox2.SetActive(false);
+            SFXManager.instance.selectSFX(4);
         }
     }
     
@@ -193,8 +195,9 @@ public class BoxTriggers : MonoBehaviour
 
             //tDrop astronaut as a ragdoll
             moving = false;
+            GetComponent<Gravity>().enabled = false;
+            rb_astronaut.useGravity = true;
             animator.Play("LessSpeed");
-            SFXManager.instance.selectSFX(1);
         }
     }
 
