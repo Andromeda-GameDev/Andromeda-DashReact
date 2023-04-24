@@ -195,6 +195,8 @@ public class BoxTriggers : MonoBehaviour
 
             //tDrop astronaut as a ragdoll
             moving = false;
+            GetComponent<Gravity>().enabled = false;
+            rb_astronaut.useGravity = true;
             animator.Play("LessSpeed");
         }
     }
