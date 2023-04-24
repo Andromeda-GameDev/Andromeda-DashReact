@@ -149,7 +149,8 @@ public class BoxTriggers : MonoBehaviour
             moving = false;
             animator.Play("LessSpeed"); // stop movement
             failBox1.SetActive(false);
-            SFXManager.instance.selectSFX(1);
+            SFXManager.instance.selectSFX(4);
+            //SFXManager.instance.selectSFX(1);
         }
         else if (name == "Drop_TB")
         {
@@ -194,6 +195,7 @@ public class BoxTriggers : MonoBehaviour
             //tDrop astronaut as a ragdoll
             moving = false;
             animator.Play("LessSpeed");
+            SFXManager.instance.selectSFX(4);
             SFXManager.instance.selectSFX(1);
         }
     }
