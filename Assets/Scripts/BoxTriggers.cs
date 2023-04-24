@@ -150,6 +150,7 @@ public class BoxTriggers : MonoBehaviour
             animator.Play("LessSpeed"); // stop movement
             failBox1.SetActive(false);
             SFXManager.instance.selectSFX(1);
+            SFXManager.instance.selectSFX(4);
         }
         else if (name == "Drop_TB")
         {
