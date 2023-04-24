@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "./static/css/main.fd43abb0.css",
-    "main.js": "./static/js/main.d3e9efac.js",
-    "static/media/loginImage.jpg": "./static/media/loginImage.d5b0b659c61f31cc3237.jpg",
-    "index.html": "./index.html",
-    "static/media/index.cjs": "./static/media/index.cd351d7c31d0d3fccf96.cjs",
-    "main.fd43abb0.css.map": "./static/css/main.fd43abb0.css.map",
-    "main.d3e9efac.js.map": "./static/js/main.d3e9efac.js.map"
+    "main.css": "/Andromeda-DashReact/static/css/main.fd43abb0.css",
+    "main.js": "/Andromeda-DashReact/static/js/main.74e5c3ec.js",
+    "static/media/loginImage.jpg": "/Andromeda-DashReact/static/media/loginImage.d5b0b659c61f31cc3237.jpg",
+    "index.html": "/Andromeda-DashReact/index.html",
+    "static/media/index.cjs": "/Andromeda-DashReact/static/media/index.cd351d7c31d0d3fccf96.cjs",
+    "main.fd43abb0.css.map": "/Andromeda-DashReact/static/css/main.fd43abb0.css.map",
+    "main.74e5c3ec.js.map": "/Andromeda-DashReact/static/js/main.74e5c3ec.js.map"
   },
   "entrypoints": [
     "static/css/main.fd43abb0.css",
-    "static/js/main.d3e9efac.js"
+    "static/js/main.74e5c3ec.js"
   ]
 }
