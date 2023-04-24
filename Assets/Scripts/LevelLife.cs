@@ -49,7 +49,6 @@ public class LevelLife : MonoBehaviour
     public int attempts;
     public GameObject questionUI;
     // public GameObject clockUI;
-    public LvlOneDataGenerator levelGen;
     public float time = 0.0f;
     bool ticking = false;
     public bool correct;
@@ -104,6 +103,7 @@ public class LevelLife : MonoBehaviour
     // Method to check the answer of the player
     public void CheckAnswer()
     {
+        Debug.Log($"Correct: {correct}");
         if (correct)
         {
             // Show canvas for correct answer
@@ -129,6 +129,9 @@ public class LevelLife : MonoBehaviour
                 // Show correct answer for question
                 scoreToGive = 0;
                 time = 300.0f;
+
+                // Deactivate input
+                currentQuestion.inputGameObject.SetActive(false);
 
                 // Upload metrics to database
                 UploadMetrics();
