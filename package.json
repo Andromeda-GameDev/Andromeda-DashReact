@@ -1,8 +1,8 @@
 {
   "name": "andromeda-webapp",
   "version": "0.1.0",
-  "homepage": "https://andromeda-gamedev.github.io/Andromeda-DashReact/",
-  "private": true,
+  "homepage": "https://andromeda-gamedev.github.io/",
+  "private": false,
   "dependencies": {
     "@material-tailwind/react": "^1.4.2",
     "@testing-library/jest-dom": "^5.14.1",
