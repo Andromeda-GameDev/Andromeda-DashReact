@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Andromeda-DashReact/static/css/main.fd43abb0.css",
+    "main.js": "/Andromeda-DashReact/static/js/main.1c0b6842.js",
+    "static/media/loginImage.jpg": "/Andromeda-DashReact/static/media/loginImage.d5b0b659c61f31cc3237.jpg",
+    "index.html": "/Andromeda-DashReact/index.html",
+    "static/media/index.cjs": "/Andromeda-DashReact/static/media/index.cd351d7c31d0d3fccf96.cjs",
+    "main.fd43abb0.css.map": "/Andromeda-DashReact/static/css/main.fd43abb0.css.map",
+    "main.1c0b6842.js.map": "/Andromeda-DashReact/static/js/main.1c0b6842.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fd43abb0.css",
+    "static/js/main.1c0b6842.js"
+  ]
+}
