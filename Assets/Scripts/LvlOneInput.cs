@@ -53,6 +53,7 @@ public class LvlOneInput : MonoBehaviour
         // Check if touched
         float n = 0, pow = 0, div = 0;
         if (pedalHoldButton.holding) {
+            Handheld.Vibrate(); // Function to make the device vibrate
             if (firstTouch) {
                 pedalSpeedInput = 0.0f;
                 startingYAttitude = gsData.attitude.y;
