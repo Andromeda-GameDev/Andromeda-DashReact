@@ -10314,7 +10314,7 @@ GameObject:
   - component: {fileID: 3197784621616262429}
   - component: {fileID: 3197784621616262459}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Floor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13463,7 +13463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3276872685868778380}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.71, y: 3.91, z: 0.020105928}
+  m_LocalPosition: {x: 38.6, y: 3.91, z: 0.020105928}
   m_LocalScale: {x: 2, y: 5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13478,7 +13478,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3276872685868778380}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.93, y: 4.38, z: 4.75}
@@ -13776,17 +13776,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionsForm:
-  - question: "Obten los datos correspondientes de la escena.  \xBFCu\xE1nto tiempo
-      tienes para salvar a tu compa\xF1era?"
+  - question: "1.- Considerando la raz\xF3n media de vaciado del \xE1cido y el \xE1rea
+      de la superficie del tanque, \xBFCu\xE1nto tiempo tiene el astronauta para
+      salvar a tu compa\xF1era? "
     inputGameObject: {fileID: 1269023936131781710}
-  - question: "Obten los datos correspondientes de la escena.  \xBFCu\xE1l es la
-      velocidad que el astronauta necesita llevar para salvar a su compa\xF1era?"
+  - question: "2.- \xBFCu\xE1l ser\xEDa la velocidad final de los astronautas al
+      llegar a la plataforma? "
     inputGameObject: {fileID: 3197784621616262532}
-  - question: "Obten los datos correspondientes de la escena.  \xBFCu\xE1l es la
-      velocidad que el astronauta necesita llevar para salvar a su compa\xF1era?"
+  - question: "3.- \xBFCu\xE1l ser\xEDa la velocidad del astronauta al momento de
+      recoger a su compa\xF1era? "
     inputGameObject: {fileID: 3197784621616262532}
-  - question: "Obten los datos correspondientes de la escena.  \xBFCu\xE1l es la
-      velocidad que el astronauta necesita llevar para salvar a su compa\xF1era?"
+  - question: "4.- \xBFCon qu\xE9 velocidad inicial podr\xE1 el astronauta rescatar
+      a su compa\xF1era con \xE9xito?"
     inputGameObject: {fileID: 3197784621616262532}
   current_section: 1
   attempts: 0

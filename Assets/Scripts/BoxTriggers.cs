@@ -96,6 +96,12 @@ public class BoxTriggers : MonoBehaviour
             moving = true; // continue moving forward (running)
             animator.SetBool("Land", true); print("Land");  // Land animation
         }
+        else if(name == "Floor 2")
+        {
+            moving = false;
+            animator.SetBool("Land", true);
+            print("Failed landing");
+        }
         else if (name == "Rope")
         {
             // Attach to rope
@@ -104,13 +110,6 @@ public class BoxTriggers : MonoBehaviour
             moving = false; // Stop moving forward (running)
             other.gameObject.GetComponent<CapsuleCollider>().isTrigger = true; // Make rope a trigger
         }
-        else if (name == "Stop")
-        {
-            moving = false; // Stop moving forward (running)
-            despacito = false; // Stop moving forward (running)
-            print("Stop");
-        }
-
     }
 
     void OnCollisionStay(Collision other)
@@ -162,6 +161,12 @@ public class BoxTriggers : MonoBehaviour
             dropFail = true; // confirm fail flag
             failBox2.SetActive(false);
             SFXManager.instance.selectSFX(4);
+        }
+        else if (name == "Stop")
+        {
+            moving = false; // Stop moving forward (running)
+            despacito = false; // Stop moving forward (running)
+            print("Stop");
         }
     }
     
