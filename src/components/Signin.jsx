@@ -41,9 +41,19 @@ const Signin = () => {
                 }
             }
         } catch (e) {
-            setError(e.message);
+            console.log(e.code);
+            if (e.code === "auth/wrong-password") {
+                setError("Contraseña incorrecta. Por favor, inténtalo de nuevo.");
+            } else if (e.code === "auth/user-not-found") {
+                setError("No se encuentra ningún usuario con ese correo electrónico. Por favor, verifica el correo electrónico e inténtalo de nuevo.");
+            } else if (e.code === "auth/invalid-email") {
+                setError("Correo electrónico no válido. Por favor, verifica el correo electrónico e inténtalo de nuevo.");
+            } else {
+                setError("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
+            }
             console.log(e.message);
         }
+
     }
 
     return (
@@ -75,6 +85,14 @@ const Signin = () => {
 
                 <div className = 'text-center'>
                     <Link to = '/forgot-password' className = 'text-blue-500'> ¿Olvidaste tu contraseña? </Link>
+                </div>
+
+                <div
+                    className={`bg-red-200 text-red-700 border-red-400 border p-3 mt-4 rounded w-full h-20 overflow-auto word-wrap ${
+                        error ? 'visible' : 'invisible'
+                    }`}
+                >
+                    {error}
                 </div>
 
             </div>

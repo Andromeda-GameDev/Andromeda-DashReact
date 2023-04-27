@@ -3,19 +3,19 @@ import React from 'react';
 
 const dummyAnnouncements = [
     {
-        title: 'Intentos de nivel 1 - 20/02/2023',
+        title: 'Intentos de nivel 1',
         content:
             'Hola chavos, buen día. Recuerden que tienen hasta el viernes para completar por lo menos un intento del nivel 1. ¡Ánimo!',
         date: '20/02/2023',
     },
     {
-        title: 'Adelanto de inicio de nivel 2 - 17/02/2023',
+        title: 'Adelanto de inicio de nivel 2',
         content:
             'Hola!, Recuerden que los que quieran, pueden ir familizandose con los problemas del nivel 2, solo que no se registrará nada y los datos cambiarán.',
         date: '17/02/2023',
     },
     {
-        title: 'Bienvenida a la materia - 13/02/2023',
+        title: 'Bienvenida a la materia',
         content:
             'Hola a todos! Bienvenidos al curso TC10067, prepárense para una aventura!',
         date: '13/02/2023',
