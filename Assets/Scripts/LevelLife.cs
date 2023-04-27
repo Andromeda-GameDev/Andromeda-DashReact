@@ -108,6 +108,7 @@ public class LevelLife : MonoBehaviour
         {
             // Player feedback
             SFXManager.instance.selectSFX(5);
+            AstronautJump.instance.Jump();
             // Show canvas for correct answer
             print("Correct answer");
 

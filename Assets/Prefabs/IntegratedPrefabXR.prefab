@@ -11327,6 +11327,7 @@ GameObject:
   - component: {fileID: 3197784621616262456}
   - component: {fileID: 3197784621616262398}
   - component: {fileID: 3197784621616262746}
+  - component: {fileID: 2266279158128484343}
   m_Layer: 0
   m_Name: Astronaut
   m_TagString: Astronaut1_W
@@ -11439,6 +11440,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 9.81
+--- !u!114 &2266279158128484343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197784621616262566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36815288426e50d4589f51a40f0b6a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+  rb: {fileID: 3197784621616262447}
 --- !u!1 &3197784621616262567
 GameObject:
   m_ObjectHideFlags: 0
