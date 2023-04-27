@@ -19,12 +19,12 @@ export default function DropdownComponent({ assignedGroups, onSelectedOption }) 
   
     return (
       <div className="inline-flex bg-white border rounded-md">
-        <a
+        <button
           href="#"
           className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"
         >
           {selectedGroup}
-        </a>
+        </button>
   
         <div className="relative">
           <button
@@ -47,14 +47,14 @@ export default function DropdownComponent({ assignedGroups, onSelectedOption }) 
           {isMenuOpen && (
             <div className="absolute z-10 right-0 w-40 py-1 mt-2 bg-white border rounded-md shadow-lg">
               {filteredGroups.map((group) => (
-                <a
+                <button
                   key={group}
                   href="#"
                   className="block px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50"
                   onClick={() => handleOptionClick(group)}
                 >
                   {group}
-                </a>
+                </button>
               ))}
             </div>
           )}
