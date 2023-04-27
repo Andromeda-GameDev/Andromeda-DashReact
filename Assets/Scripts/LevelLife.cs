@@ -106,6 +106,8 @@ public class LevelLife : MonoBehaviour
         Debug.Log($"Correct: {correct}");
         if (correct)
         {
+            // Player feedback
+            SFXManager.instance.selectSFX(5);
             // Show canvas for correct answer
             print("Correct answer");
 
@@ -122,6 +124,8 @@ public class LevelLife : MonoBehaviour
         {
             // Show canvas for wrong answer
             print("Wrong answer");
+            // Player feedback
+            SFXManager.instance.selectSFX(6);
 
             // Add continue button with event listener as follows
             if (attempts == 0)
