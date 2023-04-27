@@ -2364,6 +2364,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 38.18
       objectReference: {fileID: 0}
+    - target: {fileID: 2266279158128484343, guid: 7ae670497e3307e4a8a4f682f331fb8c,
+        type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3197784621616262376, guid: 7ae670497e3307e4a8a4f682f331fb8c,
         type: 3}
       propertyPath: dataGenerator
@@ -2437,7 +2442,7 @@ PrefabInstance:
     - target: {fileID: 3197784621616262641, guid: 7ae670497e3307e4a8a4f682f331fb8c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3489284084138693259, guid: 7ae670497e3307e4a8a4f682f331fb8c,
         type: 3}
