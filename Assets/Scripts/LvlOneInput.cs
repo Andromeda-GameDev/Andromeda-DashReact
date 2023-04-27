@@ -15,6 +15,8 @@ public class LvlOneInput : MonoBehaviour
     float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20, answer;
     bool firstTouch = true;
     public int stage = -1; 
+    int lastInteger = 0; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +55,8 @@ public class LvlOneInput : MonoBehaviour
         // Check if touched
         float n = 0, pow = 0, div = 0;
         if (pedalHoldButton.holding) {
-            Handheld.Vibrate(); // Function to make the device vibrate
             if (firstTouch) {
+                lastInteger = 0;
                 pedalSpeedInput = 0.0f;
                 startingYAttitude = gsData.attitude.y;
                 startingZAttitude = gsData.attitude.z;
@@ -77,6 +79,15 @@ public class LvlOneInput : MonoBehaviour
                 pedalSpeedInputText.color = Color.white;
             }
             pedalSpeedInputText.text = $"{pedalSpeedInput:#0.00}";
+
+            // We check if the divice will vibrate 
+            if(Math.Floor(pedalSpeedInput) > lastInteger || Math.Floor(pedalSpeedInput) < lastInteger)
+            {
+                lastInteger = (int)Math.Floor(pedalSpeedInput);
+                Handheld.Vibrate();
+            }
+
+
         }
         else
         {
