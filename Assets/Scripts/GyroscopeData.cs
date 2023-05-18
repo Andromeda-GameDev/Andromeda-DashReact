@@ -8,6 +8,7 @@ using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 public class GyroscopeData : MonoBehaviour
 {
     public Vector3 angularVelocity, attitude;
+    private int sign = 1;
 
     void Start()
     {
@@ -21,6 +22,12 @@ public class GyroscopeData : MonoBehaviour
     void Update()
     {
         angularVelocity = Gyroscope.current.angularVelocity.ReadValue();
-        attitude = AttitudeSensor.current.attitude.ReadValue().eulerAngles; // ReadValue() returns a Quaternion
+        attitude = (AttitudeSensor.current.attitude.ReadValue().eulerAngles);
+        attitude*= sign; // ReadValue() returns a Quaternion
+    }
+
+    public void ToggleInverse()
+    {
+        sign = sign * -1;
     }
 }
