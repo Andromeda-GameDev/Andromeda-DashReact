@@ -284,6 +284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntegratedPrefabXR
       objectReference: {fileID: 0}
+    - target: {fileID: 4229174673009483051, guid: 7ae670497e3307e4a8a4f682f331fb8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9028463796108608643, guid: 7ae670497e3307e4a8a4f682f331fb8c,
         type: 3}
       propertyPath: m_IsActive
