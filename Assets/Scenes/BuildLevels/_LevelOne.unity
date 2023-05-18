@@ -1632,7 +1632,8 @@ MonoBehaviour:
   m_text: "Mientras presionas el pedal, mueve la c\xE1mara hacia abajo para aumentar
     el valor en pantalla. Para disminuir el valor solo tienes que presionar el pedal
     y mover la c\xE1mara hacia arriba.\r\nSi logras responder la \xFAltima pregunta
-    sabremos de que estas hecho.\r\nNo olvides tu entrenamiento.\r\n\xA1Suerte, novato!\r\n\n"
+    sabremos de qu\xE9 est\xE1s hecho.\r\nNo olvides tu entrenamiento.\r\n\xA1Suerte,
+    novato!\r\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6c847ba329c2d474d89bc2fc7a1934c0, type: 2}
   m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
