@@ -6,8 +6,10 @@
 */
 
 using System;
+using System.Collections.Generic;
 
-public class FormulaParser {
+class FunctionParser
+{
     // Fundamental operations for parsing
     static Func<double, double, double> add = (x,y) => x + y;
     static Func<double, double, double> subtract = (x,y) => x - y;
@@ -15,118 +17,243 @@ public class FormulaParser {
     static Func<double, double, double> divide = (x,y) => x / y;
     static Func<double, double, double> pow = (x,n) => Math.Pow(x,n);
     static Func<double, double, double> log = (x,n) => Math.Log(x,n);
-
+    static Func<double, double> exp = (x) => Math.Exp(x);
+    
     // Trigonometric functions
     static Func<double, double> sin = (x) => Math.Sin(x);
     static Func<double, double> cos = (x) => Math.Cos(x);
     static Func<double, double> tan = (x) => Math.Tan(x);
-
+    
     // Inverse trigonometric functions
     static Func<double, double> asin = (x) => Math.Asin(x);
     static Func<double, double> acos = (x) => Math.Acos(x);
     static Func<double, double> atan = (x) => Math.Atan(x);
-
+    
     // Hyperbolic functions
     static Func<double, double> sinh = (x) => Math.Sinh(x);
     static Func<double, double> cosh = (x) => Math.Cosh(x);
     static Func<double, double> tanh = (x) => Math.Tanh(x);
-
-    // Parser
-    public static double ParseExpression(string expression)
+    private static readonly Dictionary<string, Func<double, double>> functions = new Dictionary<string, Func<double, double>>
     {
-        // Remove whitespace from the expression
-        expression = expression.Replace(" ", "");
+        {"sin", sin},
+        {"cos", cos},
+        {"tan", tan},
+        {"asin", asin},
+        {"acos", acos},
+        {"atan", atan},
+        {"sinh", sinh},
+        {"cosh", cosh},
+        {"tanh", tanh},
+        {"exp", exp},
+    };
 
-        // Evaluate the expression recursively
-        return Evaluate(expression);
-    }
-
-    private static double Evaluate(string expression)
+    private static readonly Dictionary<string, Func<double, double, double>> operators = new Dictionary<string, Func<double, double, double>>
     {
-        // Base case: if the expression is a number, parse and return it
-        if (double.TryParse(expression, out double number))
-            return number;
+        {"^", pow},
+        {"*", multiply},
+        {"/", divide},
+        {"+", add},
+        {"-", subtract},
+    };
 
-        // Look for the operators in the expression and split it into left and right operands
-        int operatorIndex = FindLowestPrecedenceOperator(expression);
-        string leftOperand = expression.Substring(0, operatorIndex);
-        string rightOperand = expression.Substring(operatorIndex + 1);
-
-        // Parse and evaluate the operands
-        double leftValue = Evaluate(leftOperand);
-        double rightValue = Evaluate(rightOperand);
-
-        // Apply the operator and return the result
-        char @operator = expression[operatorIndex];
-        return ApplyOperator(@operator, leftValue, rightValue);
-    }
-
-    private static int FindLowestPrecedenceOperator(string expression)
+    public static Func<double, double> Parse(string expression)
     {
-        int lowestPrecedence = int.MaxValue;
-        int operatorIndex = -1;
-        int parenthesesCount = 0;
+        List<string> tokens = Tokenize(expression);
+        Queue<string> outputQueue = new Queue<string>();
+        Stack<string> operatorStack = new Stack<string>();
 
-        for (int i = 0; i < expression.Length; i++)
+        foreach (string token in tokens)
         {
-            char currentChar = expression[i];
-
-            if (currentChar == '(')
-                parenthesesCount++;
-            else if (currentChar == ')')
-                parenthesesCount--;
-            else if (parenthesesCount == 0)
+            if (double.TryParse(token, out _))
             {
-                int precedence = GetOperatorPrecedence(currentChar);
-                if (precedence <= lowestPrecedence)
+                outputQueue.Enqueue(token);
+            }
+            else if (functions.ContainsKey(token))
+            {
+                operatorStack.Push(token);
+            }
+            else if (operators.ContainsKey(token))
+            {
+                while (operatorStack.Count > 0 && operators.ContainsKey(operatorStack.Peek()) &&
+                       operators[token].Precedence() <= operators[operatorStack.Peek()].Precedence())
                 {
-                    lowestPrecedence = precedence;
-                    operatorIndex = i;
+                    outputQueue.Enqueue(operatorStack.Pop());
+                }
+
+                operatorStack.Push(token);
+            }
+            else if (token == "(")
+            {
+                operatorStack.Push(token);
+            }
+            else if (token == ")")
+            {
+                while (operatorStack.Count > 0 && operatorStack.Peek() != "(")
+                {
+                    outputQueue.Enqueue(operatorStack.Pop());
+                }
+
+                if (operatorStack.Count > 0 && operatorStack.Peek() == "(")
+                {
+                    operatorStack.Pop(); // Discard the opening parenthesis
+                }
+                else
+                {
+                    throw new ArgumentException("Mismatched parentheses in expression.");
                 }
             }
         }
 
-        if (parenthesesCount != 0)
-            throw new ArgumentException("Invalid expression: unbalanced parentheses.");
+        while (operatorStack.Count > 0)
+        {
+            string op = operatorStack.Pop();
+            if (op == "(" || op == ")")
+            {
+                throw new ArgumentException("Mismatched parentheses in expression.");
+            }
 
-        return operatorIndex;
+            outputQueue.Enqueue(op);
+        }
+
+        Stack<Func<double, double>> evalStack = new Stack<Func<double, double>>();
+
+        while (outputQueue.Count > 0)
+        {
+            string token = outputQueue.Dequeue();
+
+            if (double.TryParse(token, out double constant))
+            {
+                evalStack.Push((x) => constant);
+            }
+            else if (functions.ContainsKey(token))
+            {
+                Func<double, double> arg = evalStack.Pop();
+                evalStack.Push((x) => functions[token](arg(x)));
+            }
+            else if (operators.ContainsKey(token))
+            {
+                Func<double, double> right = evalStack.Pop();
+                Func<double, double> left = evalStack.Pop();
+                evalStack.Push((x) => operators[token](left(x), right(x)));
+            }
+        }
+
+        if (evalStack.Count != 1)
+        {
+            throw new ArgumentException("Invalid expression.");
+        }
+
+        return evalStack.Pop();
     }
 
-    private static int GetOperatorPrecedence(char @operator)
+    private static List<string> Tokenize(string expression)
     {
-        switch (@operator)
+        List<string> tokens = new List<string>();
+        string currentToken = string.Empty;
+
+        for (int i = 0; i < expression.Length; i++)
         {
-            case '+':
-            case '-':
-                return 1;
-            case '*':
-            case '/':
-                return 2;
-            case '^':
-                return 3;
-            default:
-                return 4;
+            char c = expression[i];
+
+            if (char.IsWhiteSpace(c))
+            {
+                continue;
+            }
+            else if (char.IsDigit(c) || c == '.')
+            {
+                currentToken += c;
+
+                if (i == expression.Length - 1)
+                {
+                    tokens.Add(currentToken);
+                }
+            }
+            else if (char.IsLetter(c))
+            {
+                if (currentToken.Length > 0 && (char.IsDigit(currentToken[0]) || currentToken[0] == '.'))
+                {
+                    throw new ArgumentException("Invalid function or constant name in expression.");
+                }
+
+                currentToken += c;
+
+                if (i == expression.Length - 1)
+                {
+                    tokens.Add(currentToken);
+                }
+            }
+            else if (operators.ContainsKey(c.ToString()))
+            {
+                if (currentToken.Length > 0)
+                {
+                    tokens.Add(currentToken);
+                    currentToken = string.Empty;
+                }
+
+                tokens.Add(c.ToString());
+            }
+            else if (c == '(' || c == ')')
+            {
+                if (currentToken.Length > 0)
+                {
+                    tokens.Add(currentToken);
+                    currentToken = string.Empty;
+                }
+
+                tokens.Add(c.ToString());
+            }
+            else
+            {
+                throw new ArgumentException("Invalid character in expression.");
+            }
+        }
+
+        return tokens;
+    }
+}
+
+public static class FunctionExtensions
+{
+    // Fundamental operations for parsing
+    static Func<double, double, double> add = (x,y) => x + y;
+    static Func<double, double, double> subtract = (x,y) => x - y;
+    static Func<double, double, double> multiply = (x,y) => x * y;
+    static Func<double, double, double> divide = (x,y) => x / y;
+    static Func<double, double, double> pow = (x,n) => Math.Pow(x,n);
+    static Func<double, double, double> log = (x,n) => Math.Log(x,n);
+    static Func<double, double> exp = (x) => Math.Exp(x);
+    
+    // Trigonometric functions
+    static Func<double, double> sin = (x) => Math.Sin(x);
+    static Func<double, double> cos = (x) => Math.Cos(x);
+    static Func<double, double> tan = (x) => Math.Tan(x);
+    
+    // Inverse trigonometric functions
+    static Func<double, double> asin = (x) => Math.Asin(x);
+    static Func<double, double> acos = (x) => Math.Acos(x);
+    static Func<double, double> atan = (x) => Math.Atan(x);
+    
+    // Hyperbolic functions
+    static Func<double, double> sinh = (x) => Math.Sinh(x);
+    static Func<double, double> cosh = (x) => Math.Cosh(x);
+    static Func<double, double> tanh = (x) => Math.Tanh(x);
+    public static int Precedence(this Func<double, double, double> op)
+    {
+        if (op == pow)
+        {
+            return 3;
+        }
+        else if (op == multiply || op == divide)
+        {
+            return 2;
+        }
+        else if (op == add || op == subtract)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
         }
     }
-
-    private static double ApplyOperator(char @operator, double leftValue, double rightValue)
-    {
-        switch (@operator)
-        {
-            case '+':
-                return add(leftValue, rightValue);
-            case '-':
-                return subtract(leftValue, rightValue);
-            case '*':
-                return multiply(leftValue, rightValue);
-            case '/':
-                return divide(leftValue, rightValue);
-            case '^':
-                return pow(leftValue, rightValue);
-            default:
-                throw new ArgumentException("Invalid operator.");
-        }
-    }
-
-
 }
