@@ -12,7 +12,7 @@ public class SpaceShipMovement : MonoBehaviour
 
     void Start()
     {
-        
+        transform.LookAt(endPoint);
     }
 
     void Update()
@@ -31,6 +31,7 @@ public class SpaceShipMovement : MonoBehaviour
             if(transform.position == endPoint.position)
             {
                 control = 1;
+                transform.LookAt(startPoint);
             }
         }
         if(control == 1)
@@ -40,14 +41,11 @@ public class SpaceShipMovement : MonoBehaviour
             if(transform.position == startPoint.position)
             {
                 control = 0;
+                transform.LookAt(endPoint);
             }
         }
-
-
-
     }
 
-
-
+    
 
 }
