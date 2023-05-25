@@ -20,6 +20,7 @@ public class SolidOfRevolution : MonoBehaviour
             meshFilter = gameObject.AddComponent<MeshFilter>();
         }
 
+
         // Create a new Mesh object.
         Mesh mesh = new Mesh();
         meshFilter.mesh = mesh;
@@ -115,5 +116,7 @@ public class SolidOfRevolution : MonoBehaviour
 
         // Set the UV coordinates of the mesh.
         mesh.uv = uvs;
+
+
     }
 }
