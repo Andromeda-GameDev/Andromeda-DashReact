@@ -10,6 +10,7 @@ public class SolidOfRevolution : MonoBehaviour
     public float height = 2f;
     public float lineSlope = 1f;
     public float lineIntercept = 0f;
+    public bool isOuter = false;
 
     void Start()
     {
@@ -98,7 +99,12 @@ public class SolidOfRevolution : MonoBehaviour
         }
 
         // Set the vertices and triangles of the mesh.
-        mesh.vertices = vertices.ToArray();
+        
+        if(isOuter){
+            triangles.Reverse();
+        }
+    
+        mesh.vertices = vertices.ToArray(); 
         mesh.triangles = triangles.ToArray();
 
         // Recalculate the normals of the mesh.
