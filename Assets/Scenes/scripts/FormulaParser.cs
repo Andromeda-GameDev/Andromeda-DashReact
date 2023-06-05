@@ -7,253 +7,288 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using UnityEngine;
 
-class FunctionParser
+public class FormulaParser
 {
-    // Fundamental operations for parsing
-    static Func<double, double, double> add = (x,y) => x + y;
-    static Func<double, double, double> subtract = (x,y) => x - y;
-    static Func<double, double, double> multiply = (x,y) => x * y;
-    static Func<double, double, double> divide = (x,y) => x / y;
-    static Func<double, double, double> pow = (x,n) => Math.Pow(x,n);
-    static Func<double, double, double> log = (x,n) => Math.Log(x,n);
-    static Func<double, double> exp = (x) => Math.Exp(x);
-    
-    // Trigonometric functions
-    static Func<double, double> sin = (x) => Math.Sin(x);
-    static Func<double, double> cos = (x) => Math.Cos(x);
-    static Func<double, double> tan = (x) => Math.Tan(x);
-    
-    // Inverse trigonometric functions
-    static Func<double, double> asin = (x) => Math.Asin(x);
-    static Func<double, double> acos = (x) => Math.Acos(x);
-    static Func<double, double> atan = (x) => Math.Atan(x);
-    
-    // Hyperbolic functions
-    static Func<double, double> sinh = (x) => Math.Sinh(x);
-    static Func<double, double> cosh = (x) => Math.Cosh(x);
-    static Func<double, double> tanh = (x) => Math.Tanh(x);
-    private static readonly Dictionary<string, Func<double, double>> functions = new Dictionary<string, Func<double, double>>
+    private Dictionary<string, Func<Expression, Expression, BinaryExpression>> binaryOperators;
+    private Dictionary<string, Func<Expression, MethodCallExpression>> unaryFunctions;
+
+    public FormulaParser()
     {
-        {"sin", sin},
-        {"cos", cos},
-        {"tan", tan},
-        {"asin", asin},
-        {"acos", acos},
-        {"atan", atan},
-        {"sinh", sinh},
-        {"cosh", cosh},
-        {"tanh", tanh},
-        {"exp", exp},
-    };
-
-    private static readonly Dictionary<string, Func<double, double, double>> operators = new Dictionary<string, Func<double, double, double>>
-    {
-        {"^", pow},
-        {"*", multiply},
-        {"/", divide},
-        {"+", add},
-        {"-", subtract},
-    };
-
-    public static Func<double, double> Parse(string expression)
-    {
-        List<string> tokens = Tokenize(expression);
-        Queue<string> outputQueue = new Queue<string>();
-        Stack<string> operatorStack = new Stack<string>();
-
-        foreach (string token in tokens)
-        {
-            if (double.TryParse(token, out _))
-            {
-                outputQueue.Enqueue(token);
-            }
-            else if (functions.ContainsKey(token))
-            {
-                operatorStack.Push(token);
-            }
-            else if (operators.ContainsKey(token))
-            {
-                while (operatorStack.Count > 0 && operators.ContainsKey(operatorStack.Peek()) &&
-                       operators[token].Precedence() <= operators[operatorStack.Peek()].Precedence())
-                {
-                    outputQueue.Enqueue(operatorStack.Pop());
-                }
-
-                operatorStack.Push(token);
-            }
-            else if (token == "(")
-            {
-                operatorStack.Push(token);
-            }
-            else if (token == ")")
-            {
-                while (operatorStack.Count > 0 && operatorStack.Peek() != "(")
-                {
-                    outputQueue.Enqueue(operatorStack.Pop());
-                }
-
-                if (operatorStack.Count > 0 && operatorStack.Peek() == "(")
-                {
-                    operatorStack.Pop(); // Discard the opening parenthesis
-                }
-                else
-                {
-                    throw new ArgumentException("Mismatched parentheses in expression.");
-                }
-            }
-        }
-
-        while (operatorStack.Count > 0)
-        {
-            string op = operatorStack.Pop();
-            if (op == "(" || op == ")")
-            {
-                throw new ArgumentException("Mismatched parentheses in expression.");
-            }
-
-            outputQueue.Enqueue(op);
-        }
-
-        Stack<Func<double, double>> evalStack = new Stack<Func<double, double>>();
-
-        while (outputQueue.Count > 0)
-        {
-            string token = outputQueue.Dequeue();
-
-            if (double.TryParse(token, out double constant))
-            {
-                evalStack.Push((x) => constant);
-            }
-            else if (functions.ContainsKey(token))
-            {
-                Func<double, double> arg = evalStack.Pop();
-                evalStack.Push((x) => functions[token](arg(x)));
-            }
-            else if (operators.ContainsKey(token))
-            {
-                Func<double, double> right = evalStack.Pop();
-                Func<double, double> left = evalStack.Pop();
-                evalStack.Push((x) => operators[token](left(x), right(x)));
-            }
-        }
-
-        if (evalStack.Count != 1)
-        {
-            throw new ArgumentException("Invalid expression.");
-        }
-
-        return evalStack.Pop();
+        InitializeBinaryOperators();
+        InitializeUnaryFunctions();
     }
 
-    private static List<string> Tokenize(string expression)
+    public Func<double, double> Parse(string formula)
     {
-        List<string> tokens = new List<string>();
-        string currentToken = string.Empty;
+        var parameter = Expression.Parameter(typeof(double), "x");
+        var expression = ParseExpression(formula, parameter);
+        var lambda = Expression.Lambda<Func<double, double>>(expression, parameter);
+        return lambda.Compile();
+    }
 
-        for (int i = 0; i < expression.Length; i++)
+    private Expression ParseExpression(string formula, ParameterExpression parameter)
+    {
+        var tokens = Tokenize(formula);
+        
+        Debug.Log("Tokens:");
+        foreach (var token in tokens)
         {
-            char c = expression[i];
+            Debug.Log(token);
+        }
 
-            if (char.IsWhiteSpace(c))
+        var queue = new Queue<string>(tokens);
+        var expression = ParseTerm(queue, parameter);
+
+        while (queue.Any())
+        {
+            var op = queue.Peek();
+
+            if (binaryOperators.ContainsKey(op))
             {
-                continue;
-            }
-            else if (char.IsDigit(c) || c == '.')
-            {
-                currentToken += c;
-
-                if (i == expression.Length - 1)
-                {
-                    tokens.Add(currentToken);
-                }
-            }
-            else if (char.IsLetter(c))
-            {
-                if (currentToken.Length > 0 && (char.IsDigit(currentToken[0]) || currentToken[0] == '.'))
-                {
-                    throw new ArgumentException("Invalid function or constant name in expression.");
-                }
-
-                currentToken += c;
-
-                if (i == expression.Length - 1)
-                {
-                    tokens.Add(currentToken);
-                }
-            }
-            else if (operators.ContainsKey(c.ToString()))
-            {
-                if (currentToken.Length > 0)
-                {
-                    tokens.Add(currentToken);
-                    currentToken = string.Empty;
-                }
-
-                tokens.Add(c.ToString());
-            }
-            else if (c == '(' || c == ')')
-            {
-                if (currentToken.Length > 0)
-                {
-                    tokens.Add(currentToken);
-                    currentToken = string.Empty;
-                }
-
-                tokens.Add(c.ToString());
+                queue.Dequeue();
+                var right = ParseTerm(queue, parameter);
+                expression = binaryOperators[op](expression, right);
             }
             else
             {
-                throw new ArgumentException("Invalid character in expression.");
+                throw new Exception("Invalid formula. Unexpected operator: " + op);
             }
         }
 
-        return tokens;
+        return expression;
     }
-}
 
-public static class FunctionExtensions
-{
-    // Fundamental operations for parsing
-    static Func<double, double, double> add = (x,y) => x + y;
-    static Func<double, double, double> subtract = (x,y) => x - y;
-    static Func<double, double, double> multiply = (x,y) => x * y;
-    static Func<double, double, double> divide = (x,y) => x / y;
-    static Func<double, double, double> pow = (x,n) => Math.Pow(x,n);
-    static Func<double, double, double> log = (x,n) => Math.Log(x,n);
-    static Func<double, double> exp = (x) => Math.Exp(x);
-    
-    // Trigonometric functions
-    static Func<double, double> sin = (x) => Math.Sin(x);
-    static Func<double, double> cos = (x) => Math.Cos(x);
-    static Func<double, double> tan = (x) => Math.Tan(x);
-    
-    // Inverse trigonometric functions
-    static Func<double, double> asin = (x) => Math.Asin(x);
-    static Func<double, double> acos = (x) => Math.Acos(x);
-    static Func<double, double> atan = (x) => Math.Atan(x);
-    
-    // Hyperbolic functions
-    static Func<double, double> sinh = (x) => Math.Sinh(x);
-    static Func<double, double> cosh = (x) => Math.Cosh(x);
-    static Func<double, double> tanh = (x) => Math.Tanh(x);
-    public static int Precedence(this Func<double, double, double> op)
+    private Expression ParseTerm(Queue<string> tokens, ParameterExpression parameter)
     {
-        if (op == pow)
+        var left = ParseFactor(tokens, parameter);
+
+        while (tokens.Any() && tokens.Peek() == "*")
         {
-            return 3;
+            tokens.Dequeue();
+            var right = ParseFactor(tokens, parameter);
+            left = Expression.Multiply(left, right);
         }
-        else if (op == multiply || op == divide)
+
+        return left;
+    }
+
+    private Expression ParseFactor(Queue<string> tokens, ParameterExpression parameter)
+    {
+        var token = tokens.Dequeue();
+
+        if (double.TryParse(token, out double number))
         {
-            return 2;
+            return Expression.Constant(number);
         }
-        else if (op == add || op == subtract)
+        else if (unaryFunctions.ContainsKey(token))
         {
-            return 1;
+            if (tokens.Count == 0 || tokens.Peek() != "(")
+            {
+                throw new Exception("Invalid formula. Expected opening parenthesis.");
+            }
+
+            tokens.Dequeue();
+            var argument = ParseExpression(tokens, parameter);
+            var function = unaryFunctions[token](argument);
+
+            if (tokens.Count == 0 || tokens.Dequeue() != ")")
+            {
+                throw new Exception("Invalid formula. Expected closing parenthesis.");
+            }
+
+            return function;
+        }
+        else if (token == "(")
+        {
+            var expression = ParseExpression(tokens, parameter);
+
+            if (tokens.Count == 0 || tokens.Dequeue() != ")")
+            {
+                throw new Exception("Invalid formula. Expected closing parenthesis.");
+            }
+
+            return expression;
         }
         else
         {
-            return 0;
+            throw new Exception("Invalid formula. Unexpected token: " + token);
         }
     }
+
+    private Expression ParseExpression(Queue<string> tokens, ParameterExpression parameter)
+    {
+        throw new NotImplementedException();
+    }
+
+
+    // private Expression ParseFactor(Queue<string> tokens, ParameterExpression parameter)
+    // {
+    //     var token = tokens.Dequeue();
+
+    //     if (double.TryParse(token, out double number))
+    //     {
+    //         return Expression.Constant(number);
+    //     }
+    //     else if (unaryFunctions.ContainsKey(token))
+    //     {
+    //         if (tokens.Dequeue() != "(")
+    //         {
+    //             throw new Exception("Invalid formula. Expected opening parenthesis.");
+    //         }
+
+    //         var argument = ParseExpression(tokens, parameter);
+    //         var function = unaryFunctions[token](argument);
+
+    //         if (tokens.Dequeue() != ")")
+    //         {
+    //             throw new Exception("Invalid formula. Expected closing parenthesis.");
+    //         }
+
+    //         return function;
+    //     }
+    //     else if (token == "(")
+    //     {
+    //         var expression = ParseExpression(tokens, parameter);
+
+    //         if (tokens.Dequeue() != ")")
+    //         {
+    //             throw new Exception("Invalid formula. Expected closing parenthesis.");
+    //         }
+
+    //         return expression;
+    //     }
+    //     else
+    //     {
+    //         throw new Exception("Invalid formula. Unexpected token: " + token);
+    //     }
+    // }
+
+    // private Expression ParseExpression(Queue<string> tokens, ParameterExpression parameter)
+    // {
+    //     throw new NotImplementedException();
+    // }
+
+    // private string[] Tokenize(string formula)
+    // {
+    //     var separators = new[] { "+", "-", "*", "/", "(", ")" };
+    //     var tokens = formula.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+    //                        .Select(token => token.Trim())
+    //                        .ToArray();
+    //     var operators = separators.Where(op => !string.IsNullOrWhiteSpace(op))
+    //                               .Select(op => op.Trim())
+    //                               .ToArray();
+    //     var mergedTokens = new List<string>();
+
+    //     foreach (var token in tokens)
+    //     {
+    //         if (mergedTokens.Any() && !operators.Contains(mergedTokens.Last()))
+    //         {
+    //             mergedTokens[mergedTokens.Count - 1] += token;
+    //         }
+    //         else
+    //         {
+    //             mergedTokens.Add(token);
+    //         }
+    //     }
+
+    //     return mergedTokens.ToArray();
+    // }
+
+    private void InitializeBinaryOperators()
+    {
+        binaryOperators = new Dictionary<string, Func<Expression, Expression, BinaryExpression>>
+        {
+            { "+", Expression.Add },
+            { "-", Expression.Subtract },
+            { "*", Expression.Multiply },
+            { "/", Expression.Divide },
+            { "^", Expression.Power }
+        };
+    }
+
+    private void InitializeUnaryFunctions()
+    {
+        unaryFunctions = new Dictionary<string, Func<Expression, MethodCallExpression>>
+        {
+            { "sin", arg => Expression.Call(typeof(Math), "Sin", null, arg) },
+            { "cos", arg => Expression.Call(typeof(Math), "Cos", null, arg) },
+            { "tan", arg => Expression.Call(typeof(Math), "Tan", null, arg) },
+            { "exp", arg => Expression.Call(typeof(Math), "Exp", null, arg) },
+            { "log", arg => Expression.Call(typeof(Math), "Log", null, arg) }
+        };
+    }
+
+    private string[] Tokenize(string formula)
+    {
+        var separators = new[] { " " };
+        var tokens = formula.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(token => token.Trim())
+                        .ToArray();
+        return tokens;
+        // var operators = separators.Where(op => !string.IsNullOrWhiteSpace(op))
+        //                         .Select(op => op.Trim())
+        //                         .ToArray();
+        // var mergedTokens = new List<string>();
+
+        // foreach (var token in tokens)
+        // {
+        //     if (mergedTokens.Any() && !operators.Contains(mergedTokens.Last()))
+        //     {
+        //         mergedTokens[mergedTokens.Count - 1] += token;
+        //     }
+        //     else
+        //     {
+        //         mergedTokens.Add(token);
+        //     }
+        // }
+
+        // var spacedTokens = new List<string>();
+        // foreach (var token in mergedTokens)
+        // {
+        //     var subTokens = SeparateFunctions(token);
+        //     spacedTokens.AddRange(subTokens);
+        // }
+
+        // return spacedTokens.ToArray();
+    }
+
+    private List<string> SeparateFunctions(string token)
+    {
+        var functions = new[] { "sin", "cos", "tan", "exp", "log" };
+        var separatedTokens = new List<string>();
+
+        var currentToken = string.Empty;
+        var i = 0;
+
+        while (i < token.Length)
+        {
+            if (i < token.Length - 2 && functions.Contains(token.Substring(i, 3)))
+            {
+                if (!string.IsNullOrWhiteSpace(currentToken))
+                {
+                    separatedTokens.Add(currentToken.Trim());
+                    currentToken = string.Empty;
+                }
+                separatedTokens.Add(token.Substring(i, 3));
+                i += 3;
+            }
+            else
+            {
+                currentToken += token[i];
+                i++;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(currentToken))
+        {
+            separatedTokens.Add(currentToken.Trim());
+        }
+
+        return separatedTokens;
+    }
+
 }

@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 351639072}
   - component: {fileID: 351639071}
   - component: {fileID: 351639073}
-  - component: {fileID: 351639074}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -192,20 +191,7 @@ MonoBehaviour:
   cylinderHeight: 0.05
   solidLength: 3
   lineColor: {r: 1, g: 0.7783019, b: 0.7783019, a: 1}
---- !u!114 &351639074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351639070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f339a04be872cb46b8260605d10cabf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: exp(x) / log10(x)
-  x: 2
+  test: log ( x )
 --- !u!1 &459768028
 GameObject:
   m_ObjectHideFlags: 0
