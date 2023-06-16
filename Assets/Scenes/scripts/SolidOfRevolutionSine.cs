@@ -10,6 +10,7 @@ public class SolidOfRevolutionSine : MonoBehaviour
     public float cylinderHeight = 0.1f;
     public float solidLength = 2f; // length of the solid
     public Color lineColor = Color.red; // color of the line
+    public string test = "sin ( x ) + cos ( x )";
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +32,13 @@ public class SolidOfRevolutionSine : MonoBehaviour
             float y = (i + 0.5f) * height / numDisks;
             float angle = 360f / numDisks;
 
+            float h = Parser.Parse(test, y);
+
             for (int j = 0; j < numDisks; j++)
             {
                 float theta = j * angle;
-                float x = radius * Mathf.Sin(y) * Mathf.Cos(Mathf.Deg2Rad * theta);
-                float z = radius * Mathf.Sin(y) * Mathf.Sin(Mathf.Deg2Rad * theta);
+                float x = radius * h * Mathf.Cos(Mathf.Deg2Rad * theta);
+                float z = radius * h * Mathf.Sin(Mathf.Deg2Rad * theta);
 
                 vertices.Add(new Vector3(x, y - cylinderHeight / 2f, z));
                 vertices.Add(new Vector3(x, y + cylinderHeight / 2f, z));
