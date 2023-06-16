@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SolidOfRevolutionSine : MonoBehaviour
+public class SolidOfRevolutionSineY : MonoBehaviour
 {
     public float radius = 1f;
     public int numDisks = 20;
@@ -11,7 +11,6 @@ public class SolidOfRevolutionSine : MonoBehaviour
     public float solidLength = 2f; // length of the solid
     public Color lineColor = Color.red; // color of the line
     public string test = "sin ( x ) + cos ( x )";
-    public Material selectedMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +42,8 @@ public class SolidOfRevolutionSine : MonoBehaviour
 
                 // vertices.Add(new Vector3(x, y - cylinderHeight / 2f, z));
                 // vertices.Add(new Vector3(x, y + cylinderHeight / 2f, z));
-                vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
-                vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
+                vertices.Add(new Vector3(x, y - cylinderHeight / 2f, z));
+                vertices.Add(new Vector3(x, y + cylinderHeight / 2f, z));
 
                 int v1 = j * 2;
                 int v2 = j * 2 + 1;
@@ -84,7 +83,7 @@ public class SolidOfRevolutionSine : MonoBehaviour
             mesh.uv = uvs;
 
             Material material = new Material(Shader.Find("Standard"));
-            meshRenderer.material = selectedMaterial;
+            meshRenderer.material = material;
 
             // Rotate cylinders to the y-axis
             cylinder.transform.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward);
@@ -102,9 +101,9 @@ public class SolidOfRevolutionSine : MonoBehaviour
     cube.transform.localPosition = new Vector3(5, height / 2f, 0f);
 
     // Set cube material
-    // Material cubeMaterial = new Material(Shader.Find("NewOne"));
-    // cubeMaterial.color = Color.red;
-    cube.GetComponent<MeshRenderer>().material = selectedMaterial;
+    Material cubeMaterial = new Material(Shader.Find("Standard"));
+    cubeMaterial.color = Color.red;
+    cube.GetComponent<MeshRenderer>().material = cubeMaterial;
     
     }
 

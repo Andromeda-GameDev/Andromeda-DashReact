@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SolidOfRevolution : MonoBehaviour
+public class SolidOfRevolutionY : MonoBehaviour
 {
     public float radius = 1f;
     public int numDisks = 20;
@@ -61,7 +61,7 @@ public class SolidOfRevolution : MonoBehaviour
                 float z = radius * (i * diskHeight) * Mathf.Sin(Mathf.Deg2Rad * theta);
 
                 // Add the vertex to the List of vertices.
-                vertices.Add(new Vector3(x, y, z));
+                vertices.Add(new Vector3(x, z, y));
             }
         }
 
