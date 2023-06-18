@@ -15,8 +15,13 @@ const StudentRouter = () => {
     }, [auth.role]);
 
     React.useEffect(() => {
-        if (role !== "student" && role !== null) {
-            navigate(-1);
+
+        if(role === null){
+            //navigate("/")
+        }
+
+        if (role !== "student") {
+            //navigate(-1);
         }
     }, [role, navigate]);
 

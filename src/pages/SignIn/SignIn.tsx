@@ -107,9 +107,10 @@ const Signin: FC = () => {
                             type="password"
                         />
                         <Box sx={{ textAlign: 'center', mt: 2 }}>
-                            <Button variant="contained" type="submit" onClick={handleSubmit}>
+                            <Button variant="contained" type="submit" onClick={handleSubmit} disabled={isLoading}>
                                 {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
                             </Button>
+
                         </Box>
                     </Box>
                     <Box mt={2} sx={{ textAlign: 'center' }}>

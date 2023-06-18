@@ -5,7 +5,7 @@ import StudentRouter from './StudentRouter';
 import AdminRouter from './AdminRouter';
 import { ROUTES } from './constants';
 import { SignIn } from '../pages/SignIn';
-import {ProfessorGroups, ProfessorHome, ProfessorStatistics, ProfessorSettings} from "../pages";
+import {ProfessorGroups, ProfessorHome, ProfessorStatistics, ProfessorSettings, StudentHome, StudentStatistics, StudentSettings} from "../pages";
 
 
 const routes: RouteObject[] = [
@@ -28,9 +28,9 @@ const routes: RouteObject[] = [
     {
         path: ROUTES.STUDENT, element: <StudentRouter/>,
         children: [
-            { index: true, element: <div> Student Home </div> },
-            { path: "statistics", element: <div> Student Statistics </div>},
-            { path: "settings", element: <div> Student Settings </div>},
+            { index: true, element: <StudentHome/> },
+            { path: "statistics", element: <StudentStatistics/>},
+            { path: "settings", element:  <StudentSettings/>},
         ]
     },
     {

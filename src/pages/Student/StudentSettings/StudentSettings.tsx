@@ -13,7 +13,7 @@ export interface State extends SnackbarOrigin {
     open: boolean;
 }
 
-const ProfessorSettings: React.FC = () => {
+const StudentSettings: React.FC = () => {
     //const { user } = useAuth();
     const auth = getAuth();
     const [email, setEmail] = useState("");
@@ -186,4 +186,4 @@ const ProfessorSettings: React.FC = () => {
     );
 };
 
-export default ProfessorSettings;
+export default StudentSettings;
