@@ -3,17 +3,51 @@ import {FC, useState, ChangeEvent, FormEvent, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import loginImage from '../../resources/loginImage.jpg';
-import { Grid, Box, Typography, TextField, Button, Link, Container, Alert } from "@mui/material";
+import {Grid, Box, Typography, TextField, Button, Link, Container, Alert, Modal, AlertColor} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 const Signin: FC = () => {
 
+    const {forgotPassword} = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { login, role } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [recoverEmail, setRecoverEmail] = useState('');
+
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [severity, setSeverity] = useState<AlertColor>('success');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [errMessageEmail, setErrMessageEmail] = useState<string>("");
+
+    // regex for email validation
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    const handleAlertOpen = (severity: AlertColor, message: string) => {
+        setSeverity(severity);
+        setAlertMessage(message);
+        setIsAlertOpen(true);
+    }
+
+    const handleRecoverPassword = async () => {
+        setError('');
+        try {
+            await forgotPassword(recoverEmail);
+            handleAlertOpen('success', 'Se ha enviado un correo electrónico para restablecer la contraseña.');
+        } catch (error) {
+            const e = error as { code?: string; message?: string };
+            if (e.code === "auth/user-not-found") {
+                handleAlertOpen('error', 'No se encuentra ningún usuario con ese correo electrónico. Por favor, verifica el correo electrónico e inténtalo de nuevo.');
+            } else if (e.code === "auth/invalid-email") {
+                handleAlertOpen('error', 'Correo electrónico no válido. Por favor, verifica el correo electrónico e inténtalo de nuevo.');
+            } else {
+                handleAlertOpen('error', 'Error al enviar el correo electrónico. Por favor, inténtalo de nuevo.');
+            }
+        }
+    }
 
     const handleSubmit = async (e: FormEvent) => {
         setIsLoading(true)
@@ -86,7 +120,7 @@ const Signin: FC = () => {
                         </Typography>
                         <Typography variant="body1" gutterBottom>
                             ¿No tienes una cuenta? 
-                            <Link to='/signup' component={RouterLink}> Regístrate </Link>
+                            <Link to='/register' component={RouterLink}> Regístrate </Link>
                         </Typography>
                     </Box>
                     <Box component="form" onSubmit={handleSubmit}>
@@ -114,7 +148,7 @@ const Signin: FC = () => {
                         </Box>
                     </Box>
                     <Box mt={2} sx={{ textAlign: 'center' }}>
-                        <Link to='/forgot-password' component={RouterLink}>
+                        <Link onClick={() => setIsModalOpen(true)}>
                             ¿Olvidaste tu contraseña?
                         </Link>
                     </Box>
@@ -125,6 +159,72 @@ const Signin: FC = () => {
                     )}
                 </Container>
             </Grid>
+            <Modal open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    backgroundColor: '#FFFFFF',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    border: '2px solid #000',
+                    boxShadow: 24,
+                    p: 4,
+                    textAlign: 'center',
+
+                }}
+                >
+                    <Typography
+                        sx={{ fontWeight: 'bold', fontFamily: 'Trebuchet MS', fontStyle: 'normal', fontSize: '1.5rem', lineHeight: '47px', letterSpacing: '0.25px', color: '#000000' }}
+                    >
+                        Recuperación de contraseña
+                    </Typography>
+                    <TextField
+                        id="outlined-basic"
+                        label="Correo electrónico"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        //onChange={(e: ChangeEvent<HTMLInputElement>) => setRecoverEmail(e.target.value)}
+                        type="email"
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            setRecoverEmail(e.target.value);
+                            if(!emailRegex.test(e.target.value)) {
+                                setErrMessageEmail("Please enter a valid email.");
+                            } else{
+                                setErrMessageEmail("");
+                        }}}
+                        error={errMessageEmail !== ""}
+                        helperText={errMessageEmail}
+                    />
+                    {isAlertOpen && (
+                        <Alert severity={severity}
+                               sx={{ mt: 2 }}
+                               onClose={() => setIsAlertOpen(false)}
+                        >
+                            {alertMessage}
+                        </Alert>
+                    )
+                    }
+                    <Button
+                        variant="outlined"
+                        sx={{ mt: 2 , mr: 2, color: '#FF0000', borderColor: '#FF0000'}}
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        Cancelar
+                    </Button>
+                    <Button variant="contained" type="submit" onClick={handleRecoverPassword}
+                        sx={{ mt: 2, ml: 2}}
+                    >
+                        Enviar
+                    </Button>
+
+                </Box>
+            </Modal>
         </Grid>
     );
 };

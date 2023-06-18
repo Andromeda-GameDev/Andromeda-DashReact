@@ -5,7 +5,16 @@ import StudentRouter from './StudentRouter';
 import AdminRouter from './AdminRouter';
 import { ROUTES } from './constants';
 import { SignIn } from '../pages/SignIn';
-import {ProfessorGroups, ProfessorHome, ProfessorStatistics, ProfessorSettings, StudentHome, StudentStatistics, StudentSettings} from "../pages";
+import {
+    ProfessorGroups,
+    ProfessorHome,
+    ProfessorStatistics,
+    ProfessorSettings,
+    StudentHome,
+    StudentStatistics,
+    StudentSettings,
+    Register
+} from "../pages";
 
 
 const routes: RouteObject[] = [
@@ -13,7 +22,7 @@ const routes: RouteObject[] = [
         path: '/', element: <PublicRouter/>,
         children: [
             { index: true, element: <SignIn/>},
-            { path: ROUTES.LOGIN, element: <div> Login </div> },
+            { path: "register", element: <Register/> },
         ]
     },
     {

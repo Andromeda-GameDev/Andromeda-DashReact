@@ -1,5 +1,5 @@
 export { default as SignIn } from './SignIn/SignIn';
-
+export { default as Register } from './Register/Register';
 
 // professor
 export { default as ProfessorHome } from './Professor/ProfessorHome/ProfessorHome';
