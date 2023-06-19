@@ -215,7 +215,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &21533451
 GameObject:
@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: 6088847888338570360, guid: 02c99498010cf1d4e8ec42d0e4140e6b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6088847888338570360, guid: 02c99498010cf1d4e8ec42d0e4140e6b,
         type: 3}
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 2604695071140863854, guid: 158ea225d7a2bc3418209786d2dcf932,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2604695071140863854, guid: 158ea225d7a2bc3418209786d2dcf932,
         type: 3}
@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4874934499113314, guid: 347040970b496ba4086308c48e34652b, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4874934499113314, guid: 347040970b496ba4086308c48e34652b, type: 3}
       propertyPath: m_LocalScale.x
@@ -668,7 +668,7 @@ PrefabInstance:
     - target: {fileID: 7079750522121181896, guid: 40ee3500a280ee54ca4fab98b004e7ab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7079750522121181896, guid: 40ee3500a280ee54ca4fab98b004e7ab,
         type: 3}
@@ -783,7 +783,7 @@ PrefabInstance:
     - target: {fileID: 5656088222850609528, guid: 1f6f91f08322a234ba1901f4d8ad3fca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5656088222850609528, guid: 1f6f91f08322a234ba1901f4d8ad3fca,
         type: 3}
@@ -868,7 +868,7 @@ PrefabInstance:
     - target: {fileID: 6097597555631854420, guid: d3e62b3ba8272e74992368802768977b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6097597555631854420, guid: d3e62b3ba8272e74992368802768977b,
         type: 3}
@@ -968,6 +968,70 @@ MonoBehaviour:
   startPoint: {fileID: 179385260}
   endPoint: {fileID: 996233295}
   moveSpeed: 4
+--- !u!1 &615583548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 615583550}
+  - component: {fileID: 615583549}
+  - component: {fileID: 615583551}
+  m_Layer: 0
+  m_Name: ShipMover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &615583549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615583548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3841c4a6ba400044f8c9ecd58de0f501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  satelite: {fileID: 354261118}
+  ship1: {fileID: 1797216557}
+  ship2: {fileID: 538765575}
+  rotationSpeed: 10
+--- !u!4 &615583550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615583548}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4858522, y: 1.9368076, z: -7.7528477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615583551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615583548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f65e799584f654bb09111ff291f1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawns:
+  - {fileID: 2020522189}
+  - {fileID: 1371988228}
 --- !u!1 &680828032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,7 +1164,7 @@ Transform:
   - {fileID: 758575280}
   - {fileID: 21533452}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &996233294
 GameObject:
@@ -1173,7 +1237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1225694299}
-  - component: {fileID: 1225694298}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1181,22 +1244,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1225694298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225694297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3841c4a6ba400044f8c9ecd58de0f501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  satelite: {fileID: 354261118}
-  ship1: {fileID: 1797216557}
-  ship2: {fileID: 538765575}
-  rotationSpeed: 10
 --- !u!4 &1225694299
 Transform:
   m_ObjectHideFlags: 0
@@ -1210,7 +1257,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308337191
 GameObject:
@@ -1289,7 +1336,7 @@ PrefabInstance:
     - target: {fileID: 6385306879579663522, guid: 9d9d9d55fbce97f4bae6f379501d5170,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6385306879579663522, guid: 9d9d9d55fbce97f4bae6f379501d5170,
         type: 3}
@@ -1374,7 +1421,7 @@ PrefabInstance:
     - target: {fileID: 107452909152262657, guid: 9067aae3590f8684cb120ff0143691d5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 107452909152262657, guid: 9067aae3590f8684cb120ff0143691d5,
         type: 3}

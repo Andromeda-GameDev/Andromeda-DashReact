@@ -26,7 +26,6 @@ public class SpaceShipMovement : MonoBehaviour
 
         if(control == 0)
         {
-            //transform.rotation = Quaternion.Euler(0f, 270f, 0f);
             transform.position = Vector3.MoveTowards(transform.position, endPoint.position, step);
             if(transform.position == endPoint.position)
             {
@@ -36,7 +35,6 @@ public class SpaceShipMovement : MonoBehaviour
         }
         if(control == 1)
         {
-            //transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             transform.position = Vector3.MoveTowards(transform.position, startPoint.position, step);
             if(transform.position == startPoint.position)
             {
