@@ -3,18 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SolidOfRevolution : MonoBehaviour
 {
     public float radius = 1f;
     public int numDisks = 20;
     public float height = 2f;
-    public float lineSlope = 1f;
-    public float lineIntercept = 0f;
+    public int starPoint = 0;
+    // public float lineSlope = 1f;
+    // public float lineIntercept = 0f;
     public bool isOuter = false;
+    public bool rotateXY = false;
     public string test = "x ^ 2";
+
+
+    public static string AddSpacesBetweenCharacters(string input)
+    {
+        string output = string.Empty;
+        
+        for (int i = 0; i < input.Length; i++)
+        {
+            char c = input[i];
+            output += c;
+            
+            if (c != ' ' && i < input.Length - 1 && input[i + 1] != ' ')
+            {
+                output += ' ';
+            }
+        }
+        
+        return output;
+    }
 
     void Start()
     {
+
+        // splitted test result
+        string testToParse = AddSpacesBetweenCharacters(test);
+
         // Get the MeshFilter component attached to the GameObject, and if it doesn't exist, add it.
         MeshFilter meshFilter = GetComponent<MeshFilter>();
         if (meshFilter == null)
@@ -42,11 +68,12 @@ public class SolidOfRevolution : MonoBehaviour
         to the List of vertices. This generates the set of vertices that define the surface of the cone.
         */
         // Loop through each disk, and then through each point on the disk.
-        for (int i = 0; i < numDisks + 1; i++)
+        for (int i = starPoint; i < numDisks + 1; i++)
         {
             // Calculate the y value of the current disk.
             // float y = i * diskHeight;
-            float y = Parser.Parse(test, i * diskHeight);
+            // (2^2)-((x^2)/(2^2))
+            float y = Parser.Parse(testToParse, i * diskHeight) ;
 
             for (int j = 0; j < numDisks; j++)
             {   
@@ -59,9 +86,14 @@ public class SolidOfRevolution : MonoBehaviour
                 //float z = (y - lineIntercept) / lineSlope * Mathf.Sin(Mathf.Deg2Rad * theta);
                 // float z = radius * Mathf.Sqrt(y) * Mathf.Sin(Mathf.Deg2Rad * theta);
                 float z = radius * (i * diskHeight) * Mathf.Sin(Mathf.Deg2Rad * theta);
+                Debug.Log("x: " + x + " y: " + y + " z: " + z);
 
                 // Add the vertex to the List of vertices.
-                vertices.Add(new Vector3(x, y, z));
+                if(rotateXY){
+                    vertices.Add(new Vector3(y, x, z));
+                }else{
+                    vertices.Add(new Vector3(x, y, z));
+                }
             }
         }
 

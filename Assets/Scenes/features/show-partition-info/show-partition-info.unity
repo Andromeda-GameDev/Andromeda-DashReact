@@ -175,9 +175,9 @@ MonoBehaviour:
   radius: 1
   numDisks: 20
   height: 2
-  lineSlope: 1
-  lineIntercept: 0
+  starPoint: 0
   isOuter: 0
+  rotateXY: 0
   test: x^2
 --- !u!23 &68663948
 MeshRenderer:
@@ -457,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &226831123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,10 +700,10 @@ MonoBehaviour:
   radius: 1
   numDisks: 50
   height: 5
-  lineSlope: 1
-  lineIntercept: 0
+  starPoint: -20
   isOuter: 1
-  test: ( 2 ^ 2 ) - ( x ^ 2 / 2 ^ 2 )
+  rotateXY: 1
+  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
 --- !u!1 &975530191
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,10 +957,10 @@ MonoBehaviour:
   radius: 1
   numDisks: 50
   height: 5
-  lineSlope: 1
-  lineIntercept: 0
+  starPoint: -20
   isOuter: 0
-  test: ( 2 ^ 2 ) - ( x ^ 2 / 2 ^ 2 )
+  rotateXY: 1
+  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
 --- !u!1 &1713875657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1745777931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1333,9 +1333,9 @@ MonoBehaviour:
   radius: 1
   numDisks: 20
   height: 2
-  lineSlope: 1
-  lineIntercept: 0
+  starPoint: 0
   isOuter: 0
+  rotateXY: 0
   test: x^2
 --- !u!23 &2096937175
 MeshRenderer:
