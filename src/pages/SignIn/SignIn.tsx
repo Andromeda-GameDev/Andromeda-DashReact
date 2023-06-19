@@ -13,7 +13,7 @@ const Signin: FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const { login, role } = useAuth();
+    const { login, role} = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [recoverEmail, setRecoverEmail] = useState('');
@@ -73,10 +73,12 @@ const Signin: FC = () => {
     }
 
     useEffect(() => {
-        if (role === 'professor') {
+        if (localStorage.role === 'professor') {
             navigate('/professor');
-        } else if (role === 'student') {
+        } else if (localStorage.role === 'student') {
             navigate('/student');
+        } else if (localStorage.role === 'admin') {
+            navigate('/admin');
         }
     }, [role, navigate]);
 

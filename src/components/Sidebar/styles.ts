@@ -23,9 +23,13 @@ export const LogoImage = styled.img`
   //margin-left: 1.3rem;
 `;
 
-export const LogoText = styled.h1`
+interface LogoTextProps {
+    role?: string
+}
+
+export const LogoText = styled.h1<LogoTextProps>`
   font-size: 1.3rem;
-  color: #4f46e5;
+  color: ${props => (props.role === 'admin' ? 'green' : '#4f46e5')};
 `;
 
 export const SidebarList = styled.ul`
@@ -37,14 +41,14 @@ export const SidebarList = styled.ul`
   padding-top: 1rem;
 `;
 
-export const SidebarLink = styled(NavLink)<{ isactive: string }>`
+export const SidebarLink = styled(NavLink)<{ isactive: string, role: string}>`
   display: flex;
   align-items: center;
   height: 2.5rem;
   padding: 0.5rem;
   transition: transform 0.2s ease-in;
   color: ${(props) => (props.isactive === "true" ? "#000000" : "#687d9d")};
-  background-color: ${(props) => (props.isactive === "true" ? "#E0E7FF" : "transparent")};
+  background-color: ${(props) => (props.isactive === "true" ? (props.role === 'admin' ? "#d5e6da" : "#E0E7FF") : "transparent")};
   text-decoration: none;
   cursor: pointer;
 
@@ -71,10 +75,10 @@ export const SidebarLabel = styled.span`
   padding-left: 5px;
 `;
 
-export const SidebarActiveIndicator = styled.span<{ isactive: string }>`
+export const SidebarActiveIndicator = styled.span<{ isactive: string, role: string}>`
   height: 90%;
   width: 0.3rem;
-  background-color: ${(props) => (props.isactive === "true" ? "#4f46e5" : "transparent")};
+  background-color: ${(props) => (props.isactive === "true" ? (props.role === 'admin' ? "#2fd661" : "#4f46e5") : "transparent")};
 `;
 
 export const LogoutButton = styled.button`

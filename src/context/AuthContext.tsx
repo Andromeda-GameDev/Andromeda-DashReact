@@ -35,7 +35,7 @@ const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<FirebaseUser | null>(null);
-    const [role, setRole] = useState<string | null>(null);
+    const [role, setRole] = useState<string | null>(localStorage.getItem('role') || null);
 
     const createUser = async (user: User) => {
         const { email, password, name, last_name, group } = user;
@@ -64,26 +64,42 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({ childre
         const db = getDatabase();
         const { uid } = creds.user;
 
-        const professorReference = ref(db, `professors/${uid}`);
-        const professorSnap = await get(professorReference);
+        const roles = [
+            { path: `professors/${uid}`, name: 'professor' },
+            { path: `users/${uid}`, name: 'student' },
+            { path: `admin/${uid}`, name: 'admin' },
+        ]
 
-        if (professorSnap.exists()) {
-            setRole('professor');
-        } else {
-            const studentReference = ref(db, `users/${uid}`);
-            const studentSnap = await get(studentReference);
-            if (studentSnap.exists()) {
-                setRole('student');
-            } else {
-                setRole(null);
-                console.log('No role found');
+        let userRole = null;
+
+        for (let i = 0; i < roles.length; i++) {
+            const refPath = roles[i].path;
+            const roleName = roles[i].name;
+
+            const roleRef = ref(db, refPath);
+            const roleSnap = await get(roleRef);
+
+            if (roleSnap.exists()) {
+                localStorage.setItem('role', roleName);
+                setRole(roleName);
+                userRole = roleName;
+                break;
             }
         }
-        return { creds, role };
+
+        if (!userRole) {
+            setRole(null);
+            console.log('No role found');
+        }
+
+        return { creds, role: userRole };
     };
 
 
+
+
     const logout = () => {
+        localStorage.removeItem('role');
         return signOut(auth);
     };
 

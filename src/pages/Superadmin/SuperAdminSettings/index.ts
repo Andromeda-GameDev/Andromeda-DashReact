@@ -1,0 +1,1 @@
+export { default as SuperAdminSettings } from './SuperAdminSettings';

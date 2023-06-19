@@ -11,17 +11,13 @@ const StudentRouter = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        setRole(auth.role as string);
-    }, [auth.role]);
 
-    React.useEffect(() => {
-
-        if(role === null){
-            //navigate("/")
+        if(localStorage.role === null){
+            navigate("/")
         }
 
-        if (role !== "student") {
-            //navigate(-1);
+        if (localStorage.role !== "student") {
+            navigate("/unauthorized");
         }
     }, [role, navigate]);
 

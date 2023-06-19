@@ -13,7 +13,7 @@ import {
     StudentHome,
     StudentStatistics,
     StudentSettings,
-    Register
+    Register, Unauthorized, SuperAdminHome, SuperAdminStudents, SuperAdminProfessors, SuperAdminSettings
 } from "../pages";
 
 
@@ -23,6 +23,7 @@ const routes: RouteObject[] = [
         children: [
             { index: true, element: <SignIn/>},
             { path: "register", element: <Register/> },
+            { path: "unauthorized", element: <Unauthorized/> },
         ]
     },
     {
@@ -45,7 +46,11 @@ const routes: RouteObject[] = [
     {
         path: ROUTES.ADMIN, element: <AdminRouter/>,
         children: [
-            { index: true, element: <div> Admin Home </div> },
+            { index: true, element: <SuperAdminHome/> },
+            { path: "professors", element: <SuperAdminProfessors/>},
+            { path: "students", element:  <SuperAdminStudents/>},
+            { path: "settings", element:  <SuperAdminSettings/>},
+
         ]
     }
 ]

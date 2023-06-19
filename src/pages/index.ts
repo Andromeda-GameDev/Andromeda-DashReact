@@ -1,5 +1,6 @@
 export { default as SignIn } from './SignIn/SignIn';
 export { default as Register } from './Register/Register';
+export { default as Unauthorized } from './Unauthorized/Unauthorized';
 
 // professor
 export { default as ProfessorHome } from './Professor/ProfessorHome/ProfessorHome';
@@ -11,3 +12,9 @@ export { default as ProfessorSettings } from './Professor/ProfessorSettings/Prof
 export { default as StudentHome } from './Student/StudentHome/StudentHome';
 export { default as StudentStatistics } from './Student/StudentStatistics/StudentStatistics';
 export { default as StudentSettings } from './Student/StudentSettings/StudentSettings';
+
+// SuperAdmin
+export { default as SuperAdminHome } from './Superadmin/SuperAdminDash/SuperAdminHome';
+export { default as SuperAdminStudents } from './Superadmin/SuperAdminStudents/SuperAdminStudents';
+export { default as SuperAdminProfessors } from './Superadmin/SuperAdminProfessors/SuperAdminProfessors';
+export { default as SuperAdminSettings } from './Superadmin/SuperAdminSettings/SuperAdminSettings';

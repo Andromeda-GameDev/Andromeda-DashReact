@@ -6,20 +6,16 @@ import * as Styled from "./styles";
 import {HeaderPanel} from "../components/Header";
 const ProfessorRouter = () => {
     const [role, setRole] = React.useState<string | null>(null);
-    const auth = useAuth();
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        setRole(auth.role as string);
-    }, [auth.role]);
 
     React.useEffect(() => {
-        if(role === null){
-            //navigate("/")
+        if(localStorage.role === null){
+            navigate("/")
         }
 
-        if (role !== "professor") {
-            //navigate(-1);
+        if (localStorage.role !== "professor") {
+            navigate("/unauthorized");
         }
     }, [role, navigate]);
 

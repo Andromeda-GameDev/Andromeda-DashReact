@@ -3,16 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Home, ViewList, BarChart, Settings, ExitToApp } from "@mui/icons-material";
+import GroupIcon from '@mui/icons-material/Group';
+import SchoolIcon from '@mui/icons-material/School';
 import logo from "../../resources/planet_andromeda_logo.png";
 import * as Styled from "./styles";
 
 interface SidebarLinkProps {
     to: string,
     label: string,
-    icon: React.ReactNode
+    icon: React.ReactNode,
+    role: string
 }
 
-function SidebarLink({ to, label}: SidebarLinkProps) {
+function SidebarLink({ to, label, role}: SidebarLinkProps) {
     const location = useLocation();
     const isactive = location.pathname === to;
 
@@ -30,14 +33,20 @@ function SidebarLink({ to, label}: SidebarLinkProps) {
         case "Ajustes":
             icon = <Settings />;
             break;
+        case "Estudiantes":
+            icon = <GroupIcon />;
+            break;
+        case "Profesores":
+            icon = <SchoolIcon />;
+            break;
         default:
             icon = null;
     }
 
     return (
         <li>
-            <Styled.SidebarLink to={to} isactive={isactive.toString()}>
-                {isactive && <Styled.SidebarActiveIndicator isactive={isactive.toString()} />}
+            <Styled.SidebarLink to={to} isactive={isactive.toString()} role={role}>
+                {isactive && <Styled.SidebarActiveIndicator isactive={isactive.toString()} role={role} />}
                 <Styled.SidebarIcon>{icon}</Styled.SidebarIcon>
                 <Styled.SidebarLabel>{label}</Styled.SidebarLabel>
             </Styled.SidebarLink>
@@ -53,6 +62,7 @@ interface SidebarProps {
 export default function Sidebar({ iconLabels }: SidebarProps) {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const role = localStorage.getItem("role") || "";
 
     const handleLogout = async () => {
         try {
@@ -68,7 +78,7 @@ export default function Sidebar({ iconLabels }: SidebarProps) {
         <Styled.SidebarContainer>
             <Styled.LogoContainer>
                 <Styled.LogoImage src={logo} alt="Andromeda-logo" />
-                <Styled.LogoText>Andromeda</Styled.LogoText>
+                <Styled.LogoText role={role}>Andromeda</Styled.LogoText>
             </Styled.LogoContainer>
             <Styled.SidebarList>
                 {iconLabels.map((iconLabel, index) => {
@@ -95,6 +105,7 @@ export default function Sidebar({ iconLabels }: SidebarProps) {
                             to={iconLabel.to}
                             label={iconLabel.label}
                             icon={icon}
+                            role={role}
                         />
                     );
                 })}
