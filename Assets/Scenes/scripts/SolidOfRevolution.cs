@@ -15,7 +15,31 @@ public class SolidOfRevolution : MonoBehaviour
     public bool isOuter = false;
     public bool rotateXY = false;
     public string test = "x ^ 2";
+    
+    // Animate Printer effect
+    public float yOffsetSpeed = 1.0f; // Speed of the y offset animation
+    public Renderer renderer;
+    public Material ShellMaterial;
+    public Material OutlineMatarial;
+    public Vector3 ShellPlanePosition;
+    public Vector3 OutlinePoisition;
 
+    /*
+     * This functions takes of changing the Current Cross section
+     * plane, to generate a 3d printing like animation.
+     * */
+    public void AnimatePrintEffect()
+    {
+
+      float yOffset = Mathf.Sin(Time.time * yOffsetSpeed) * 2.0f;
+
+      ShellPlanePosition.y = yOffset;
+      OutlinePoisition.y = yOffset;
+
+      ShellMaterial.SetVector("_PlanePosition", ShellPlanePosition);
+      OutlineMatarial.SetVector("_PlanePosition", OutlinePoisition);
+        
+    }
 
     public static string AddSpacesBetweenCharacters(string input)
     {
@@ -37,6 +61,14 @@ public class SolidOfRevolution : MonoBehaviour
 
     void Start()
     {
+        
+        // Set variables for animating the Printer
+        renderer = GetComponent<Renderer>();
+        Material[] materials = renderer.materials; 
+        ShellMaterial = materials[0];
+        OutlineMatarial = materials[1];
+        ShellPlanePosition = ShellMaterial.GetVector("_PlanePosition");
+        OutlinePoisition = OutlineMatarial.GetVector("_PlanePosition");
 
         // splitted test result
         string testToParse = AddSpacesBetweenCharacters(test);
@@ -160,5 +192,10 @@ public class SolidOfRevolution : MonoBehaviour
         mesh.uv = uvs;
 
 
+    }
+
+    void Update()
+    {
+      AnimatePrintEffect(); 
     }
 }
