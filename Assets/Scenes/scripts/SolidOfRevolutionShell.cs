@@ -5,18 +5,18 @@ using UnityEngine;
 public class SolidOfRevolutionShell : MonoBehaviour
 {
     public float radius = 1f;
-    public int numDisks = 20;
+    public int numShells = 20;
     public float height = 2f;
-    public float cylinderHeight = 0.1f;
     public float solidLength = 2f; // length of the solid
     public string test = "sin ( x ) + cos ( x )";
     public Material selectedMaterial;
+    public bool isOuter = false;
 
     public int startPoint = -20;
     public bool rotateXY = false;
 
     /*
-     * This function takes care of changing the Current Cross section
+     * This function takes care of changing the current cross-section
      * plane to generate a 3D printing-like animation.
      */
     public static string AddSpacesBetweenCharacters(string input)
@@ -41,7 +41,10 @@ public class SolidOfRevolutionShell : MonoBehaviour
     {
         string testToParse = AddSpacesBetweenCharacters(test);
 
-        for (int i = startPoint; i < numDisks; i++)
+        // Calculate the thickness of each shell
+        float shellThickness = solidLength / numShells;
+
+        for (int i = startPoint; i < numShells; i++)
         {
             GameObject cylinder = new GameObject("Cylinder" + i);
             cylinder.transform.parent = transform;
@@ -55,33 +58,35 @@ public class SolidOfRevolutionShell : MonoBehaviour
             List<Vector3> vertices = new List<Vector3>();
             List<int> triangles = new List<int>();
 
-            float shellHeight = (i + 0.5f) * solidLength / numDisks;
-            Debug.Log("shellHeight: " + shellHeight);
-            float angle = 360f / numDisks;
+            // Calculate the height for each shell
+            float diskHeight = (i + 0.5f) * shellThickness;
+            float angle = 360f / numShells;
 
-            float y = Parser.Parse(testToParse, shellHeight);
+            // Parsing the input formula
+            // Calculates the y value of the current shell
+            float y = Parser.Parse(testToParse, diskHeight);
 
-            for (int j = 0; j < numDisks; j++)
+            for (int j = 0; j < numShells; j++)
             {
                 float theta = j * angle;
-                float x = radius * Mathf.Cos(Mathf.Deg2Rad * theta);
-                float z = radius * Mathf.Sin(Mathf.Deg2Rad * theta);
+                float x = radius * diskHeight * Mathf.Cos(Mathf.Deg2Rad * theta);
+                float z = radius * diskHeight * Mathf.Sin(Mathf.Deg2Rad * theta);
 
                 if (rotateXY)
                 {
-                    vertices.Add(new Vector3(y - cylinderHeight / 2f, x, z));
-                    vertices.Add(new Vector3(y + cylinderHeight / 2f, x, z));
+                    vertices.Add(new Vector3(y - shellThickness / 2f, x, z));
+                    vertices.Add(new Vector3(y + shellThickness / 2f, x, z));
                 }
                 else
                 {
-                    vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
-                    vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
+                    vertices.Add(new Vector3(x, z, y - shellThickness / 2f));
+                    vertices.Add(new Vector3(x, z, y + shellThickness / 2f));
                 }
 
                 int v1 = j * 2;
                 int v2 = j * 2 + 1;
-                int v3 = ((j + 1) % numDisks) * 2;
-                int v4 = ((j + 1) % numDisks) * 2 + 1;
+                int v3 = ((j + 1) % numShells) * 2;
+                int v4 = ((j + 1) % numShells) * 2 + 1;
 
                 triangles.Add(v1);
                 triangles.Add(v2);
@@ -90,17 +95,13 @@ public class SolidOfRevolutionShell : MonoBehaviour
                 triangles.Add(v2);
                 triangles.Add(v4);
                 triangles.Add(v3);
-
-                // Add triangles for the bottom and top faces
-                triangles.Add(0);
-                triangles.Add(v1);
-                triangles.Add(v3);
-
-                triangles.Add(1);
-                triangles.Add(v4);
-                triangles.Add(v2);
             }
 
+            if(isOuter)
+            {
+
+              triangles.Reverse();
+            }
             mesh.vertices = vertices.ToArray();
             mesh.triangles = triangles.ToArray();
 
@@ -110,7 +111,7 @@ public class SolidOfRevolutionShell : MonoBehaviour
 
             for (int j = 0; j < vertices.Count; j++)
             {
-                uvs[j] = new Vector2(vertices[j].x / radius + 0.5f, vertices[j].y / solidLength);
+                uvs[j] = new Vector2(vertices[j].x / radius + 0.5f, vertices[j].z / height);
             }
 
             mesh.uv = uvs;

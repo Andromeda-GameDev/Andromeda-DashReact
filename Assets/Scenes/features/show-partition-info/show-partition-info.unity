@@ -844,6 +844,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &785273180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785273182}
+  - component: {fileID: 785273181}
+  m_Layer: 0
+  m_Name: Shells
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &785273181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785273180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750e2cabc8d0e44f8a4fd3b299d324f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  numDisks: 50
+  height: 5
+  cylinderHeight: 0.1
+  solidLength: 2
+  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
+  startPoint: -20
+  rotateXY: 1
+--- !u!4 &785273182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785273180}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850659669
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &850659670
 Transform:
   m_ObjectHideFlags: 0
@@ -1345,7 +1398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1348488517
 Transform:
   m_ObjectHideFlags: 0
@@ -1525,7 +1578,6 @@ MonoBehaviour:
   height: 5
   cylinderHeight: 0.2
   solidLength: 2
-  lineColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   startPoint: -20
@@ -1907,3 +1959,4 @@ MonoBehaviour:
   test_t: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   numDisks_t: 50
   height_t: 5
+  cylinderHeight_t: 0.2
