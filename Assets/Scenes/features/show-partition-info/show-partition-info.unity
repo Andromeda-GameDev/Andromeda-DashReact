@@ -1615,7 +1615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1745777931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,6 +2015,12 @@ MonoBehaviour:
   rotateXY_t: 1
   test_t: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   numDisks_t: 50
-  numShells_t: 100
-  height_t: 3
+  numShells_t: 50
+  height_t: 4
   cylinderHeight_t: 0.2
+  shellThicknessFactor_t: 2
+  enableOuterShell: 1
+  enableInnerShell: 1
+  enableDisks: 0
+  enableOuterShellsMethod: 1
+  enableInnerShellsMethod: 1
