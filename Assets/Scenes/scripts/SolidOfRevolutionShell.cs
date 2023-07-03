@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class SolidOfRevolutionShell : MonoBehaviour
 {
-    public float radius = 1f;
-    public int numShells = 20;
-    public float height = 2f;
-    public float solidLength = 2f; // length of the solid
-    public string test = "sin ( x ) + cos ( x )";
+    public float radius               = 1f;
+    public int numShells              = 20;
+    public float height               = 2f;
+    public float solidLength          = 2f; // length of the solid
+    public string test                = "sin ( x ) + cos ( x )";
     public Material selectedMaterial;
-    public bool isOuter = false;
+    public bool isOuter               = false;
+    public float shellThicknessFactor = 2f;
 
-    public int startPoint = -20;
-    public bool rotateXY = false;
+    public int startPoint             = -20;
+    public bool rotateXY              = false;
 
     /*
      * This function takes care of changing the current cross-section
@@ -39,28 +40,29 @@ public class SolidOfRevolutionShell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string testToParse = AddSpacesBetweenCharacters(test);
+        string testToParse              = AddSpacesBetweenCharacters(test);
 
         // Calculate the thickness of each shell
-        float shellThickness = solidLength / numShells;
+        float shellThickness            = shellThicknessFactor * solidLength / numShells;
 
         for (int i = startPoint; i < numShells; i++)
         {
-            GameObject cylinder = new GameObject("Cylinder" + i);
-            cylinder.transform.parent = transform;
+            GameObject cylinder         = new GameObject("Cylinder" + i);
+            cylinder.transform.parent   = transform;
 
-            MeshFilter meshFilter = cylinder.AddComponent<MeshFilter>();
-            MeshRenderer meshRenderer = cylinder.AddComponent<MeshRenderer>();
+            MeshFilter meshFilter       = cylinder.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer   = cylinder.AddComponent<MeshRenderer>();
 
-            Mesh mesh = new Mesh();
-            meshFilter.mesh = mesh;
+            Mesh mesh                   = new Mesh();
+            meshFilter.mesh             = mesh;
 
-            List<Vector3> vertices = new List<Vector3>();
-            List<int> triangles = new List<int>();
+            List<Vector3> vertices      = new List<Vector3>();
+            List<int> triangles         = new List<int>();
 
             // Calculate the height for each shell
-            float diskHeight = (i + 0.5f) * shellThickness;
-            float angle = 360f / numShells;
+            // float diskHeight            = (i + 0.5f) * shellThickness;
+            float diskHeight = (i + 0.5f) * solidLength / numShells;
+            float angle                 = 360f / numShells;
 
             // Parsing the input formula
             // Calculates the y value of the current shell
@@ -102,12 +104,12 @@ public class SolidOfRevolutionShell : MonoBehaviour
 
               triangles.Reverse();
             }
-            mesh.vertices = vertices.ToArray();
-            mesh.triangles = triangles.ToArray();
+            mesh.vertices   = vertices.ToArray();
+            mesh.triangles  = triangles.ToArray();
 
             mesh.RecalculateNormals();
 
-            Vector2[] uvs = new Vector2[vertices.Count];
+            Vector2[] uvs   = new Vector2[vertices.Count];
 
             for (int j = 0; j < vertices.Count; j++)
             {

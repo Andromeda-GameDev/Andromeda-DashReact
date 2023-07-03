@@ -1000,12 +1000,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  numShells: 100
+  numShells: 30
   height: 5
   solidLength: 5
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   isOuter: 1
+  shellThicknessFactor: 2
   startPoint: -20
   rotateXY: 1
 --- !u!1 &899578222
@@ -1272,12 +1273,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  numShells: 100
+  numShells: 30
   height: 5
   solidLength: 5
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   isOuter: 0
+  shellThicknessFactor: 2
   startPoint: -20
   rotateXY: 1
 --- !u!1 &975530191
@@ -2014,5 +2016,5 @@ MonoBehaviour:
   test_t: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   numDisks_t: 50
   numShells_t: 100
-  height_t: 5
+  height_t: 3
   cylinderHeight_t: 0.2
