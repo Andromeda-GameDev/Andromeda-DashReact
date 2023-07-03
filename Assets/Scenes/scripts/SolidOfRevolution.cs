@@ -144,7 +144,11 @@ public class SolidOfRevolution : MonoBehaviour
         triangles to improve the accuracy of the model.
         */
         // Loop through each disk, and then through each point on the disk.
-        for (int i = 0; i < numDisks; i++)
+        int sumToIterateIfNegativeStartPoint = 0;
+        if(startPoint < 0){
+          sumToIterateIfNegativeStartPoint = startPoint*-1;
+        }
+        for (int i = 0; i < numDisks + sumToIterateIfNegativeStartPoint; i++)
         {
             for (int j = 0; j < numDisks; j++)
             {

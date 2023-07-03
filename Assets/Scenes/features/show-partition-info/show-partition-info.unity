@@ -272,7 +272,7 @@ MonoBehaviour:
   radius: 1
   numDisks: 20
   height: 2
-  starPoint: 0
+  startPoint: -20
   isOuter: 0
   rotateXY: 0
   test: x^2
@@ -738,7 +738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -369.75, y: -157.5}
+  m_AnchoredPosition: {x: -329.5, y: -129.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416700270
@@ -945,7 +945,7 @@ MonoBehaviour:
   radius: 1
   numDisks: 50
   height: 5
-  starPoint: -20
+  startPoint: -20
   isOuter: 1
   rotateXY: 1
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   radius: 1
   numDisks: 50
   height: 5
-  starPoint: -20
+  startPoint: -20
   isOuter: 0
   rotateXY: 1
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
@@ -1507,7 +1507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1745777931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,11 +1523,13 @@ MonoBehaviour:
   radius: 1
   numDisks: 50
   height: 5
-  cylinderHeight: 0.1
+  cylinderHeight: 0.2
   solidLength: 2
   lineColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
-  test: ( 2 ^ 2 ) - ( x ^ 2 / 2 ^ 2 )
+  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
+  startPoint: -20
+  rotateXY: 1
 --- !u!4 &1745777932
 Transform:
   m_ObjectHideFlags: 0
@@ -1536,7 +1538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745777930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24080849, y: -4.4122686, z: 0.6655679}
+  m_LocalPosition: {x: 0, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1844,7 +1846,7 @@ MonoBehaviour:
   radius: 1
   numDisks: 20
   height: 2
-  starPoint: 0
+  startPoint: -20
   isOuter: 0
   rotateXY: 0
   test: x^2

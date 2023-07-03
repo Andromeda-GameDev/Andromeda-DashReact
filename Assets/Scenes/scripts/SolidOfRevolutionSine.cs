@@ -42,7 +42,6 @@ public class SolidOfRevolutionSine : MonoBehaviour
     {
         string testToParse = AddSpacesBetweenCharacters(test);
 
-        // Adding spaces to the formula
         for (int i = startPoint; i < numDisks; i++)
         {
             GameObject cylinder = new GameObject("Cylinder" + i);
@@ -58,6 +57,7 @@ public class SolidOfRevolutionSine : MonoBehaviour
             List<int> triangles = new List<int>();
 
             float diskHeight = (i + 0.5f) * height / numDisks;
+            Debug.Log("diskHeight: " + diskHeight);
             float angle = 360f / numDisks;
 
             float y = Parser.Parse(testToParse, diskHeight);
