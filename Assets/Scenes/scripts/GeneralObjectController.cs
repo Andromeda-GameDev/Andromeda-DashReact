@@ -11,12 +11,15 @@ public class GeneralObjectController : MonoBehaviour
     public bool rotateXY_t        = true;
     public string test_t          = "x ^ 2";
     public int numDisks_t         = 50;
+    public int numShells_t        = 100;
     public float height_t         = 5f;
     public float cylinderHeight_t = 0.2f;
 
     private SolidOfRevolution       child1;
     private SolidOfRevolution       child2;
     private SolidOfRevolutionDisks  child3;
+    private SolidOfRevolutionShell  child4;
+    private SolidOfRevolutionShell  child5;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,8 @@ public class GeneralObjectController : MonoBehaviour
       Transform child1Transform = transform.Find("OuterShell");
       Transform child2Transform = transform.Find("InnerShell");
       Transform child3Transform = transform.Find("Disks");
+      Transform child4Transform = transform.Find("OuterShellsMethod");
+      Transform child5Transform = transform.Find("InnerShellsMethod");
 
       /*
        * Getting the Outer shell object script
@@ -72,6 +77,38 @@ public class GeneralObjectController : MonoBehaviour
               child3.height         = height_t;
               child3.cylinderHeight = cylinderHeight_t;
           }
+      }
+
+      /*
+       * Getting the Shells object script - Outer shell
+       * */
+      if(child4Transform != null)
+      {
+        child4 = child4Transform.GetComponent<SolidOfRevolutionShell>();
+        if(child4 != null)
+        {
+              child4.startPoint     = startPoint_t;
+              child4.rotateXY       = rotateXY_t;
+              child4.test           = test_t;
+              child4.numShells      = numShells_t;
+              child4.solidLength    = height_t;
+        }
+      }
+
+      /*
+       * Getting the Shells object script - InnerShell
+       * */
+      if(child5Transform != null)
+      {
+        child5 = child5Transform.GetComponent<SolidOfRevolutionShell>();
+        if(child5 != null)
+        {
+              child5.startPoint     = startPoint_t;
+              child5.rotateXY       = rotateXY_t;
+              child5.test           = test_t;
+              child5.numShells      = numShells_t;
+              child5.solidLength    = height_t;
+        }
       }
         
     }

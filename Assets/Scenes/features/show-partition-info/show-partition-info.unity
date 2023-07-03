@@ -844,61 +844,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &785273180
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 785273182}
-  - component: {fileID: 785273181}
-  m_Layer: 0
-  m_Name: Shells
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &785273181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785273180}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 750e2cabc8d0e44f8a4fd3b299d324f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  numShells: 50
-  height: 5
-  solidLength: 5
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
-  selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
-  isOuter: 1
-  startPoint: -20
-  rotateXY: 1
---- !u!4 &785273182
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785273180}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 898988278}
-  - {fileID: 969322327}
-  m_Father: {fileID: 2096937176}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850659669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +966,7 @@ GameObject:
   - component: {fileID: 898988278}
   - component: {fileID: 898988279}
   m_Layer: 0
-  m_Name: OuterShells
+  m_Name: OuterShellsMethod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1035,12 +980,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898988277}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 785273182}
-  m_RootOrder: 0
+  m_Father: {fileID: 2096937176}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &898988279
 MonoBehaviour:
@@ -1055,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  numShells: 50
+  numShells: 100
   height: 5
   solidLength: 5
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
@@ -1293,7 +1238,7 @@ GameObject:
   - component: {fileID: 969322327}
   - component: {fileID: 969322328}
   m_Layer: 0
-  m_Name: InnerShells
+  m_Name: InnerShellsMethod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,12 +1252,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969322326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 785273182}
-  m_RootOrder: 1
+  m_Father: {fileID: 2096937176}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &969322328
 MonoBehaviour:
@@ -1327,7 +1272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  numShells: 50
+  numShells: 100
   height: 5
   solidLength: 5
   test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
@@ -1703,7 +1648,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2096937176}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893116576
 GameObject:
@@ -2046,7 +1991,8 @@ Transform:
   m_Children:
   - {fileID: 850659670}
   - {fileID: 1348488517}
-  - {fileID: 785273182}
+  - {fileID: 898988278}
+  - {fileID: 969322327}
   - {fileID: 1745777932}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2067,5 +2013,6 @@ MonoBehaviour:
   rotateXY_t: 1
   test_t: (2^2)-(((x+(2^2)/2)^2)/(2^2))
   numDisks_t: 50
+  numShells_t: 100
   height_t: 5
   cylinderHeight_t: 0.2
