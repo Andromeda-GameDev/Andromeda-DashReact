@@ -2,39 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SolidOfRevolutionSine : MonoBehaviour
+public class SolidOfRevolutionShell : MonoBehaviour
 {
     public float radius = 1f;
     public int numDisks = 20;
     public float height = 2f;
     public float cylinderHeight = 0.1f;
     public float solidLength = 2f; // length of the solid
-    public Color lineColor = Color.red; // color of the line
     public string test = "sin ( x ) + cos ( x )";
     public Material selectedMaterial;
 
     public int startPoint = -20;
-    public bool rotateXY  = false;
+    public bool rotateXY = false;
 
     /*
-     * This functions takes of changing the Current Cross section
-     * plane, to generate a 3d printing like animation.
-     * */
+     * This function takes care of changing the Current Cross section
+     * plane to generate a 3D printing-like animation.
+     */
     public static string AddSpacesBetweenCharacters(string input)
     {
-      string output   = string.Empty;
-      for (int i = 0; i < input.Length; i++)
-      {
-        char c  = input[i];
-        output  += c;
-
-        if (c != ' ' && i < input.Length - 1 && input[i + 1] != ' ')
+        string output = string.Empty;
+        for (int i = 0; i < input.Length; i++)
         {
-          output += ' ';
-        }
-      }
+            char c = input[i];
+            output += c;
 
-      return output;
+            if (c != ' ' && i < input.Length - 1 && input[i + 1] != ' ')
+            {
+                output += ' ';
+            }
+        }
+
+        return output;
     }
 
     // Start is called before the first frame update
@@ -56,27 +55,27 @@ public class SolidOfRevolutionSine : MonoBehaviour
             List<Vector3> vertices = new List<Vector3>();
             List<int> triangles = new List<int>();
 
-            float diskHeight = (i + 0.5f) * height / numDisks;
-            Debug.Log("diskHeight: " + diskHeight);
+            float shellHeight = (i + 0.5f) * solidLength / numDisks;
+            Debug.Log("shellHeight: " + shellHeight);
             float angle = 360f / numDisks;
 
-            float y = Parser.Parse(testToParse, diskHeight);
+            float y = Parser.Parse(testToParse, shellHeight);
 
             for (int j = 0; j < numDisks; j++)
             {
                 float theta = j * angle;
-                float x = radius * diskHeight * Mathf.Cos(Mathf.Deg2Rad * theta);
-                float z = radius * diskHeight * Mathf.Sin(Mathf.Deg2Rad * theta);
+                float x = radius * Mathf.Cos(Mathf.Deg2Rad * theta);
+                float z = radius * Mathf.Sin(Mathf.Deg2Rad * theta);
 
-                // vertices.Add(new Vector3(x, y - cylinderHeight / 2f, z));
-                // vertices.Add(new Vector3(x, y + cylinderHeight / 2f, z));
                 if (rotateXY)
                 {
-                  vertices.Add(new Vector3(y - cylinderHeight / 2f, x, z));
-                  vertices.Add(new Vector3(y + cylinderHeight / 2f, x, z));
-                }else{
-                  vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
-                  vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
+                    vertices.Add(new Vector3(y - cylinderHeight / 2f, x, z));
+                    vertices.Add(new Vector3(y + cylinderHeight / 2f, x, z));
+                }
+                else
+                {
+                    vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
+                    vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
                 }
 
                 int v1 = j * 2;
@@ -93,13 +92,13 @@ public class SolidOfRevolutionSine : MonoBehaviour
                 triangles.Add(v3);
 
                 // Add triangles for the bottom and top faces
-                    triangles.Add(0);
-                    triangles.Add(v1);
-                    triangles.Add(v3);
+                triangles.Add(0);
+                triangles.Add(v1);
+                triangles.Add(v3);
 
-                    triangles.Add(1);
-                    triangles.Add(v4);
-                    triangles.Add(v2);
+                triangles.Add(1);
+                triangles.Add(v4);
+                triangles.Add(v2);
             }
 
             mesh.vertices = vertices.ToArray();
@@ -111,7 +110,7 @@ public class SolidOfRevolutionSine : MonoBehaviour
 
             for (int j = 0; j < vertices.Count; j++)
             {
-                uvs[j] = new Vector2(vertices[j].x / radius + 0.5f, vertices[j].z / height);
+                uvs[j] = new Vector2(vertices[j].x / radius + 0.5f, vertices[j].y / solidLength);
             }
 
             mesh.uv = uvs;
@@ -123,14 +122,11 @@ public class SolidOfRevolutionSine : MonoBehaviour
             cylinder.transform.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward);
         }
 
-    
-
         // Rotate the whole object if necessary
         if (rotateXY)
         {
             transform.Rotate(Vector3.up, 180f);
         }
-    
     }
 
     // Update is called once per frame
@@ -139,3 +135,4 @@ public class SolidOfRevolutionSine : MonoBehaviour
 
     }
 }
+

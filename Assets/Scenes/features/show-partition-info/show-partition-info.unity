@@ -218,7 +218,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68663945
 GameObject:
@@ -339,7 +339,7 @@ Transform:
   - {fileID: 117721172}
   - {fileID: 975530192}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &117721171
 GameObject:
@@ -842,7 +842,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850659669
 GameObject:
@@ -1041,7 +1041,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -1071,7 +1071,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &943910111
 GameObject:
@@ -1167,7 +1167,7 @@ RectTransform:
   m_Children:
   - {fileID: 416700269}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1468,7 +1468,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1713875660
 MonoBehaviour:
@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 1745777932}
   - component: {fileID: 1745777931}
   m_Layer: 0
-  m_Name: sine
+  m_Name: Disks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1537,13 +1537,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745777930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 2096937176}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893116576
 GameObject:
@@ -1692,7 +1692,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038607315
 GameObject:
@@ -1822,7 +1822,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2096937176}
   - component: {fileID: 2096937175}
-  - component: {fileID: 2096937174}
   - component: {fileID: 2096937177}
   m_Layer: 0
   m_Name: SolidOfRev
@@ -1831,31 +1830,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2096937174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096937173}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cace498eccf4853a548c78b238f688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  numDisks: 20
-  height: 2
-  startPoint: -20
-  isOuter: 0
-  rotateXY: 0
-  test: x^2
-  yOffsetSpeed: 1
-  renderer: {fileID: 0}
-  ShellMaterial: {fileID: 0}
-  OutlineMatarial: {fileID: 0}
-  ShellPlanePosition: {x: 0, y: 0, z: 0}
-  OutlinePoisition: {x: 0, y: 0, z: 0}
 --- !u!23 &2096937175
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1912,6 +1886,7 @@ Transform:
   m_Children:
   - {fileID: 850659670}
   - {fileID: 1348488517}
+  - {fileID: 1745777932}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1922,14 +1897,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096937173}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aba0c8e02f004725880aa820abf6caf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9875898020a45b5905acb189d3ed7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  numDisks: 20
-  height: 2
-  lineSlope: 1
-  lineIntercept: 0
-  cylinderHeight: 0.1
+  startPoint_t: -20
+  rotateXY_t: 1
+  test_t: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  numDisks_t: 50
+  height_t: 5
