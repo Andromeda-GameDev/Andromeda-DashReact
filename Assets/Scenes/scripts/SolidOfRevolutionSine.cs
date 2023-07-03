@@ -13,10 +13,37 @@ public class SolidOfRevolutionSine : MonoBehaviour
     public string test = "sin ( x ) + cos ( x )";
     public Material selectedMaterial;
 
+    public int startPoint = -20;
+    public bool rotateXY  = false;
+
+    /*
+     * This functions takes of changing the Current Cross section
+     * plane, to generate a 3d printing like animation.
+     * */
+    public static string AddSpacesBetweenCharacters(string input)
+    {
+      string output   = string.Empty;
+      for (int i = 0; i < input.Length; i++)
+      {
+        char c  = input[i];
+        output  += c;
+
+        if (c != ' ' && i < input.Length - 1 && input[i + 1] != ' ')
+        {
+          output += ' ';
+        }
+      }
+
+      return output;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < numDisks; i++)
+        string testToParse = AddSpacesBetweenCharacters(test);
+
+        // Adding spaces to the formula
+        for (int i = startPoint; i < numDisks; i++)
         {
             GameObject cylinder = new GameObject("Cylinder" + i);
             cylinder.transform.parent = transform;
@@ -33,7 +60,7 @@ public class SolidOfRevolutionSine : MonoBehaviour
             float diskHeight = (i + 0.5f) * height / numDisks;
             float angle = 360f / numDisks;
 
-            float y = Parser.Parse(test, diskHeight);
+            float y = Parser.Parse(testToParse, diskHeight);
 
             for (int j = 0; j < numDisks; j++)
             {
@@ -43,8 +70,14 @@ public class SolidOfRevolutionSine : MonoBehaviour
 
                 // vertices.Add(new Vector3(x, y - cylinderHeight / 2f, z));
                 // vertices.Add(new Vector3(x, y + cylinderHeight / 2f, z));
-                vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
-                vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
+                if (rotateXY)
+                {
+                  vertices.Add(new Vector3(y - cylinderHeight / 2f, x, z));
+                  vertices.Add(new Vector3(y + cylinderHeight / 2f, x, z));
+                }else{
+                  vertices.Add(new Vector3(x, z, y - cylinderHeight / 2f));
+                  vertices.Add(new Vector3(x, z, y + cylinderHeight / 2f));
+                }
 
                 int v1 = j * 2;
                 int v2 = j * 2 + 1;
@@ -92,19 +125,11 @@ public class SolidOfRevolutionSine : MonoBehaviour
 
     
 
-    // Create cube
-    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-    cube.transform.parent = transform;
-
-    // Scale and position cube
-    float cubeWidth = 2 * radius * Mathf.Sin(Mathf.PI / numDisks);
-    cube.transform.localScale = new Vector3(0.01f, 0.02f, height);
-    cube.transform.localPosition = new Vector3(5, height / 2f, 0f);
-
-    // Set cube material
-    // Material cubeMaterial = new Material(Shader.Find("NewOne"));
-    // cubeMaterial.color = Color.red;
-    cube.GetComponent<MeshRenderer>().material = selectedMaterial;
+        // Rotate the whole object if necessary
+        if (rotateXY)
+        {
+            transform.Rotate(Vector3.up, 180f);
+        }
     
     }
 

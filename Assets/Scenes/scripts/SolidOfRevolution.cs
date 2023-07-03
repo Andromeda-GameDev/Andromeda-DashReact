@@ -9,7 +9,7 @@ public class SolidOfRevolution : MonoBehaviour
     public float radius = 1f;
     public int numDisks = 20;
     public float height = 2f;
-    public int starPoint = 0;
+    public int startPoint = -20;
     // public float lineSlope = 1f;
     // public float lineIntercept = 0f;
     public bool isOuter = false;
@@ -80,7 +80,6 @@ public class SolidOfRevolution : MonoBehaviour
             meshFilter = gameObject.AddComponent<MeshFilter>();
         }
 
-
         // Create a new Mesh object.
         Mesh mesh = new Mesh();
         meshFilter.mesh = mesh;
@@ -100,7 +99,7 @@ public class SolidOfRevolution : MonoBehaviour
         to the List of vertices. This generates the set of vertices that define the surface of the cone.
         */
         // Loop through each disk, and then through each point on the disk.
-        for (int i = starPoint; i < numDisks + 1; i++)
+        for (int i = startPoint; i < numDisks + 1; i++)
         {
             // Calculate the y value of the current disk.
             // float y = i * diskHeight;
