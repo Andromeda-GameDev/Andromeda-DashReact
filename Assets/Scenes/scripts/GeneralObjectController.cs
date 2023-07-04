@@ -27,6 +27,7 @@ public class GeneralObjectController : MonoBehaviour
     private SolidOfRevolutionDisks  child3;
     private SolidOfRevolutionShell  child4;
     private SolidOfRevolutionShell  child5;
+    private TextFormulaToImage      child6;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +37,7 @@ public class GeneralObjectController : MonoBehaviour
       Transform child3Transform = transform.Find("Disks");
       Transform child4Transform = transform.Find("OuterShellsMethod");
       Transform child5Transform = transform.Find("InnerShellsMethod");
+      Transform child6Transform = transform.Find("latexrequest");
 
       /*
        * Getting the Outer shell object script
@@ -122,6 +124,18 @@ public class GeneralObjectController : MonoBehaviour
               child5.numShells              = numShells_t;
               child5.solidLength            = height_t;
               child5.shellThicknessFactor   = shellThicknessFactor_t;
+        }
+      }
+
+      /*
+       * Getting the latex request object
+       * */
+      if(child6Transform != null)
+      {
+        child6 = child6Transform.GetComponent<TextFormulaToImage>();
+        if(child6 != null)
+        {
+          child6.textFormula                 = "f(x)=" + test_t;
         }
       }
         
