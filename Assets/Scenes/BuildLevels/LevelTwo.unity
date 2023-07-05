@@ -1461,5 +1461,5 @@ MonoBehaviour:
   enableOuterShell: 1
   enableInnerShell: 1
   enableDisks: 0
-  enableOuterShellsMethod: 1
-  enableInnerShellsMethod: 1
+  enableOuterShellsMethod: 0
+  enableInnerShellsMethod: 0
