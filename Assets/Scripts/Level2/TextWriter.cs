@@ -20,6 +20,25 @@ public class TextWriter : MonoBehaviour
         textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
     }
 
+    public void DeleteOnImage(int type)
+    {
+        if(type == 1)
+        {
+            Ecuation.text = " ";
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+        }
+        else
+        {
+            string text = Ecuation.text;
+            if (!string.IsNullOrEmpty(text))
+            {
+                text = text.Substring(0, text.Length - 1);
+                Ecuation.text = text;
+            }
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,14 +134,17 @@ public class TextWriter : MonoBehaviour
     }
     public void divide()
     {
-        text = "/";
+        text = @"\frac";
         Write(text);
         
     }
     public void delete()
     {
-        text = " ";
-        Write(text);
+        DeleteOnImage(1);
+    }
+    public void deleteLast()
+    {
+        DeleteOnImage(2);
     }
     public void log()
     {
@@ -137,6 +159,31 @@ public class TextWriter : MonoBehaviour
     public void equal()
     {
         text = "=";
+        Write(text);
+    }
+    public void ex()
+    {
+        text ="x";
+        Write(text);
+    }
+    public void square()
+    {
+        text ="^{2}";
+        Write(text);
+    }
+    public void power()
+    {
+        text ="^{";
+        Write(text);
+    }
+    public void openKey()
+    {
+        text = "{";
+        Write(text);
+    }
+    public void closeKey()
+    {
+        text = "}";
         Write(text);
     }
 }
