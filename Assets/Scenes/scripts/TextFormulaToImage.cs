@@ -10,7 +10,7 @@ public class TextFormulaToImage : MonoBehaviour
 
     void Start()
     {
-       StartCoroutine(MakeRequest()); 
+        StartCoroutine(MakeRequest());
     }
 
     private IEnumerator MakeRequest()

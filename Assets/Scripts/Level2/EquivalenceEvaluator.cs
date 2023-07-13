@@ -1,5 +1,6 @@
 using UnityEngine;
 using MathNet.Symbolics;
+using AngouriMath;
 
 public class EquivalenceEvaluator : MonoBehaviour
 {
@@ -20,16 +21,30 @@ public class EquivalenceEvaluator : MonoBehaviour
     }
     private static bool s_IsEquivalent(string equation1, string equation2)
     {
-        SymbolicExpression expr1 = SymbolicExpression.Parse(equation1);
-        SymbolicExpression expr2 = SymbolicExpression.Parse(equation2);
+        // Test A
+        Entity expr1 = equation1;
+        Entity expr2 = equation2;
 
-        var simplified1 = expr1.TrigonometricSimplify();
-        var simplified2 = expr2.TrigonometricSimplify();
+        expr1 = expr1.Expand();
+        expr2 = expr2.Expand();
 
-        Debug.Log($"Ecuación 1: {simplified1.ToString()}");
-        Debug.Log($"Ecuación 2: {simplified2.ToString()}");
+        expr1 = expr1.Simplify();
+        expr2 = expr2.Simplify();
 
-        // Compare the equations.
-        return simplified1.ToString() == simplified2.ToString();
+        // Test B
+        SymbolicExpression symb_expr1 = SymbolicExpression.Parse(expr1.ToString());
+        SymbolicExpression symb_expr2 = SymbolicExpression.Parse(expr2.ToString());
+
+        var simplified1 = symb_expr1.TrigonometricSimplify();
+        var simplified2 = symb_expr2.TrigonometricSimplify();
+
+
+        Debug.Log($"Ecuación 1: {expr1.Latexise()}");
+        Debug.Log($"Ecuación 2: {expr2.Latexise()}");
+
+        // Compare the equations with Test A and Test B
+        return expr1 == expr2 || simplified1.ToString() == simplified2.ToString();
     }
+
+
 }
