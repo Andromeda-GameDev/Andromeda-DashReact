@@ -117,6 +117,11 @@ public class TextWriter : MonoBehaviour
         text = ")";
         Write(text);
     }
+    public void open()
+    {
+        text = "(";
+        Write(text);
+    }
     public void plus()
     {
         text = "+";
@@ -134,7 +139,7 @@ public class TextWriter : MonoBehaviour
     }
     public void divide()
     {
-        text = @"\frac";
+        text = "/";
         Write(text);
         
     }
@@ -184,6 +189,11 @@ public class TextWriter : MonoBehaviour
     public void closeKey()
     {
         text = "}";
+        Write(text);
+    }
+    public void frac()
+    {
+        text = @"\frac";
         Write(text);
     }
 }
