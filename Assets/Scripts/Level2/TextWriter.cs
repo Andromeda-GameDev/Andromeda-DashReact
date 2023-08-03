@@ -11,9 +11,14 @@ public class TextWriter : MonoBehaviour
     private string text;
     private string pureString;
 
+    private EquivalenceEvaluator equivalenceEvaluator;
+
+    private string equation = "x^2*cos(45)+45/2";
+
     private void Awake()
     {
         //textFormulaToImage = GetComponentInChildren<TextFormulaToImage>();
+        equivalenceEvaluator = new EquivalenceEvaluator();
     }
 
     public void Write(string text)
@@ -210,8 +215,7 @@ public class TextWriter : MonoBehaviour
     }
     public void equal()
     {
-        text = "=";
-        Write(text);
+        equivalenceEvaluator.IsEquivalent(JustString.text, equation);
     }
     public void ex()
     {

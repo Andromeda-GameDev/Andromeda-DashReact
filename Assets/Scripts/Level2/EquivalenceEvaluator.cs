@@ -8,17 +8,30 @@ public class EquivalenceEvaluator : MonoBehaviour
     public TMPro.TMP_InputField equation1;
     public TMPro.TMP_InputField equation2;
 
-    public void IsEquivalent()
+    // public void IsEquivalent()
+    // {
+    //     try
+    //     {
+    //         Debug.Log($"Las ecuaciones son: {(s_IsEquivalent(equation1.text, equation2.text) ? "equivalentes" : "NO equivalentes")}.");
+    //     }
+    //     catch (System.Exception err)
+    //     {
+    //         Debug.Log($"Error: {err.Message}");
+    //     }
+    // }
+
+    public void IsEquivalent(string eq1, string eq2)
     {
         try
         {
-            Debug.Log($"Las ecuaciones son: {(s_IsEquivalent(equation1.text, equation2.text) ? "equivalentes" : "NO equivalentes")}.");
+            Debug.Log($"Las ecuaciones son: {(s_IsEquivalent(eq1, eq2) ? "equivalentes" : "NO equivalentes")}.");
         }
         catch (System.Exception err)
         {
             Debug.Log($"Error: {err.Message}");
         }
     }
+
     private static bool s_IsEquivalent(string equation1, string equation2)
     {
         // Test A
