@@ -6,8 +6,10 @@ using UnityEngine;
 public class TextWriter : MonoBehaviour
 {
     public TextMeshProUGUI Ecuation;
+    public TextMeshProUGUI JustString;
     public textToImageAPI textFormulaToImage;
     private string text;
+    private string pureString;
 
     private void Awake()
     {
@@ -16,8 +18,44 @@ public class TextWriter : MonoBehaviour
 
     public void Write(string text)
     {
-        Ecuation.text += text;
-        textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+        if(text == "^{2}")
+        {
+            Ecuation.text += text;
+            JustString.text += "^2";
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "^{")
+        {
+            Ecuation.text += text;
+            JustString.text += "^";
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "{")
+        {
+            Ecuation.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "{")
+        {
+            Ecuation.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else
+        {
+            Ecuation.text += text;
+            JustString.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);
+        }
     }
 
     public void DeleteOnImage(int type)
