@@ -41,7 +41,7 @@ public class TextWriter : MonoBehaviour
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
             print(pureString);    
         }
-        else if(text == "{")
+        else if(text == "}")
         {
             Ecuation.text += text;
             pureString = JustString.text;
@@ -63,17 +63,26 @@ public class TextWriter : MonoBehaviour
         if(type == 1)
         {
             Ecuation.text = " ";
+            JustString.text = " ";
+            pureString = " ";
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
         }
         else
         {
             string text = Ecuation.text;
+            string text2 =JustString.text;
             if (!string.IsNullOrEmpty(text))
             {
                 text = text.Substring(0, text.Length - 1);
                 Ecuation.text = text;
             }
+            if (!string.IsNullOrEmpty(text2))
+            {
+                text2 = text2.Substring(0, text2.Length - 1);
+                JustString.text = text2;
+            }
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+
         }
     }
 
