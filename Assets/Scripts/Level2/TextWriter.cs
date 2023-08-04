@@ -6,18 +6,90 @@ using UnityEngine;
 public class TextWriter : MonoBehaviour
 {
     public TextMeshProUGUI Ecuation;
+    public TextMeshProUGUI JustString;
     public textToImageAPI textFormulaToImage;
     private string text;
+    private string pureString;
+
+    private EquivalenceEvaluator equivalenceEvaluator;
+
+    //private string equation = "x^2*cos(45)+45/2";
+    private string equation = "x*x";
 
     private void Awake()
     {
         //textFormulaToImage = GetComponentInChildren<TextFormulaToImage>();
+        equivalenceEvaluator = new EquivalenceEvaluator();
     }
 
     public void Write(string text)
     {
-        Ecuation.text += text;
-        textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+        if(text == "^{2}")
+        {
+            Ecuation.text += text;
+            JustString.text += "^2";
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "^{")
+        {
+            Ecuation.text += text;
+            JustString.text += "^";
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "{")
+        {
+            Ecuation.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else if(text == "}")
+        {
+            Ecuation.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);    
+        }
+        else
+        {
+            Ecuation.text += text;
+            JustString.text += text;
+            pureString = JustString.text;
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+            print(pureString);
+        }
+    }
+
+    public void DeleteOnImage(int type)
+    {
+        if(type == 1)
+        {
+            Ecuation.text = " ";
+            JustString.text = " ";
+            pureString = " ";
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+        }
+        else
+        {
+            string text = Ecuation.text;
+            string text2 =JustString.text;
+            if (!string.IsNullOrEmpty(text))
+            {
+                text = text.Substring(0, text.Length - 1);
+                Ecuation.text = text;
+            }
+            if (!string.IsNullOrEmpty(text2))
+            {
+                text2 = text2.Substring(0, text2.Length - 1);
+                JustString.text = text2;
+            }
+            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+
+        }
     }
 
     // Start is called before the first frame update
@@ -98,6 +170,11 @@ public class TextWriter : MonoBehaviour
         text = ")";
         Write(text);
     }
+    public void open()
+    {
+        text = "(";
+        Write(text);
+    }
     public void plus()
     {
         text = "+";
@@ -121,8 +198,11 @@ public class TextWriter : MonoBehaviour
     }
     public void delete()
     {
-        text = " ";
-        Write(text);
+        DeleteOnImage(1);
+    }
+    public void deleteLast()
+    {
+        DeleteOnImage(2);
     }
     public void log()
     {
@@ -136,7 +216,36 @@ public class TextWriter : MonoBehaviour
     }
     public void equal()
     {
-        text = "=";
+        equivalenceEvaluator.IsEquivalent(JustString.text, equation);
+    }
+    public void ex()
+    {
+        text ="x";
+        Write(text);
+    }
+    public void square()
+    {
+        text ="^{2}";
+        Write(text);
+    }
+    public void power()
+    {
+        text ="^{";
+        Write(text);
+    }
+    public void openKey()
+    {
+        text = "{";
+        Write(text);
+    }
+    public void closeKey()
+    {
+        text = "}";
+        Write(text);
+    }
+    public void y()
+    {
+        text = "y";
         Write(text);
     }
 }
