@@ -243,9 +243,9 @@ public class TextWriter : MonoBehaviour
         text = "}";
         Write(text);
     }
-    public void frac()
+    public void y()
     {
-        text = @"\frac";
+        text = "y";
         Write(text);
     }
 }
