@@ -13,7 +13,8 @@ public class TextWriter : MonoBehaviour
 
     private EquivalenceEvaluator equivalenceEvaluator;
 
-    private string equation = "x^2*cos(45)+45/2";
+    //private string equation = "x^2*cos(45)+45/2";
+    private string equation = "x*x";
 
     private void Awake()
     {
