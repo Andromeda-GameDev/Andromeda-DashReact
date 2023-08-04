@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -691,7 +691,7 @@ MonoBehaviour:
   startPoint: -20
   isOuter: 1
   rotateXY: 1
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  test: x^2
   yOffsetSpeed: 1
   renderer: {fileID: 0}
   ShellMaterial: {fileID: 0}
@@ -746,7 +746,7 @@ MonoBehaviour:
   numShells: 30
   height: 5
   solidLength: 5
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  test: x^2
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   isOuter: 1
   shellThicknessFactor: 2
@@ -762,7 +762,6 @@ GameObject:
   m_Component:
   - component: {fileID: 899578226}
   - component: {fileID: 899578225}
-  - component: {fileID: 899578224}
   - component: {fileID: 899578223}
   m_Layer: 0
   m_Name: SubCamera
@@ -804,14 +803,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &899578224
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899578222}
-  m_Enabled: 1
 --- !u!20 &899578225
 Camera:
   m_ObjectHideFlags: 0
@@ -1020,11 +1011,66 @@ MonoBehaviour:
   numShells: 30
   height: 5
   solidLength: 5
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  test: x^2
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   isOuter: 0
   shellThicknessFactor: 2
   startPoint: -20
+  rotateXY: 1
+--- !u!1 &1119586996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119586997}
+  - component: {fileID: 1119586998}
+  m_Layer: 0
+  m_Name: Cylinders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119586997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119586996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2096937176}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119586998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119586996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc24bc0eb910bf24482252410bd1f088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  numDisks: 20
+  height: 2
+  cylinderHeight: 0.1
+  solidLength: 2
+  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  selectedMaterial: {fileID: 0}
+  cylinderPrefab: {fileID: 7171679363733397986, guid: ce2f8d294c614a04f9d40707e39c8033,
+    type: 3}
+  startPoint: 0
   rotateXY: 1
 --- !u!1 &1204810948
 GameObject:
@@ -1179,7 +1225,7 @@ MonoBehaviour:
   startPoint: -20
   isOuter: 0
   rotateXY: 1
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  test: x^2
   yOffsetSpeed: 1
   renderer: {fileID: 0}
   ShellMaterial: {fileID: 0}
@@ -1220,10 +1266,10 @@ MonoBehaviour:
   height: 5
   cylinderHeight: 0.2
   solidLength: 2
-  test: (2^2)-(((x+(2^2)/2)^2)/(2^2))
+  test: x^2
   selectedMaterial: {fileID: 2100000, guid: e219ba52493a07346b3ce106080274f4, type: 2}
   startPoint: -20
-  rotateXY: 1
+  rotateXY: 0
 --- !u!4 &1745777932
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,6 +1481,7 @@ Transform:
   - {fileID: 969322327}
   - {fileID: 1745777932}
   - {fileID: 317634948}
+  - {fileID: 1119586997}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
