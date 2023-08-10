@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Cube
+  - Prefab
+  - Astronaut2
+  - JumpTrigger
+  - DropTrigger
+  - Fail
+  - Astronaut1
+  - Astronaut1_W
+  - Astronaut1_F
+  - Partition
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Outlined objects
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: UI
+    uniqueID: 1917227445
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
