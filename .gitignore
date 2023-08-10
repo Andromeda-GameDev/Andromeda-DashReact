@@ -74,3 +74,7 @@ crashlytics-build.properties
 
 # MacOs DStore
 *.DS_Store
+
+
+# Adding Project Settings to gitignore
+ProjectSettings/*
