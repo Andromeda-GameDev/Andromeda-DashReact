@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/BuildLevels/LevelTwo.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/LoginScreen.unity
     guid: 1ace8db2649a14f03833637be2bfd4a3
   - enabled: 0
@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BuildLevels/LevelOne.unity
     guid: cbc081c3fddc71f47bae313fd6abf954
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BuildLevels/_LevelOne.unity
     guid: c2452b03f5f9a11409c56a3d8569b44f
+  - enabled: 1
+    path: Assets/Scenes/BuildLevels/LevelTwo.unity
+    guid: 019307e8919c44abb9b363edda70bbc0
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
