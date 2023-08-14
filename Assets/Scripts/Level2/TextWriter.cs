@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextWriter : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class TextWriter : MonoBehaviour
 
     private EquivalenceEvaluator equivalenceEvaluator;
 
+    // Variables for managing input on integration part
+    private IntegrationPartActive integrationPartActive;
+
     //private string equation = "x^2*cos(45)+45/2";
     private string equation = "x*x";
 
@@ -20,8 +24,8 @@ public class TextWriter : MonoBehaviour
     {
         //textFormulaToImage = GetComponentInChildren<TextFormulaToImage>();
         equivalenceEvaluator = new EquivalenceEvaluator();
+        integrationPartActive=GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
     }
-
     public void Write(string text)
     {
         if(text == "^{2}")
@@ -62,7 +66,23 @@ public class TextWriter : MonoBehaviour
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
             print(pureString);
         }
+
+        // Check if the integration part is active
+        if(integrationPartActive.IsThisPartOn())
+        {
+            if(integrationPartActive.IsFirstButtonClicked())
+            {
+              Debug.Log("First active"); 
+              integrationPartActive.AddCharSlText(text);
+            }
+            else if(integrationPartActive.IsSecondButtonClicked())
+            {
+              Debug.Log("Second active"); 
+              integrationPartActive.AddCharIlText(text);
+            }
+        }
     }
+
 
     public void DeleteOnImage(int type)
     {
