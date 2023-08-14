@@ -65,8 +65,6 @@ public class SolidOfRevolutionCylinders : MonoBehaviour
             // cylinder.transform.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward);
         }
 
-    
-
         // Rotate the whole object if necessary
         if (rotateXY)
         {

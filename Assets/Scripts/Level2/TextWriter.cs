@@ -8,13 +8,15 @@ public class TextWriter : MonoBehaviour
     public TextMeshProUGUI Ecuation;
     public TextMeshProUGUI JustString;
     public textToImageAPI textFormulaToImage;
+    public GameObject toClose;
+    public GameObject toOpen;
     private string text;
     private string pureString;
 
     private EquivalenceEvaluator equivalenceEvaluator;
 
     //private string equation = "x^2*cos(45)+45/2";
-    private string equation = "x*x";
+    public string equation = "x*x";
 
     private void Awake()
     {
@@ -90,6 +92,11 @@ public class TextWriter : MonoBehaviour
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
 
         }
+    }
+
+    public void setEquation(string equation)
+    {
+        this.equation = equation;
     }
 
     // Start is called before the first frame update
@@ -216,6 +223,14 @@ public class TextWriter : MonoBehaviour
     }
     public void equal()
     {
+        Debug.Log(JustString.text);
+        Debug.Log(equation);
+        Debug.Log(JustString.text == equation);
+        if(JustString.text == equation)
+        {
+            toClose.SetActive(false);
+            toOpen.SetActive(true);
+        }
         equivalenceEvaluator.IsEquivalent(JustString.text, equation);
     }
     public void ex()
