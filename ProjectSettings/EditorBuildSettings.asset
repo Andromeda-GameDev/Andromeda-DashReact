@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuildLevels/_LevelOne.unity
     guid: c2452b03f5f9a11409c56a3d8569b44f
+  - enabled: 1
+    path: Assets/Scenes/BuildLevels/LevelSelect.unity
+    guid: 4adb81299d7d1734a98278bfa44d5d61
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

@@ -90,7 +90,7 @@ public class FirebaseManager : MonoBehaviour
 
             // change to the next scene
             yield return new WaitForSeconds(2);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("_LevelOne"); 
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect"); 
 
         }
     }
