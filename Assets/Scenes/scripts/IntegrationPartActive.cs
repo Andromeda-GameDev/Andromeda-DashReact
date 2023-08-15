@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class IntegrationPartActive : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class IntegrationPartActive : MonoBehaviour
     public Button thirdButton;
     public Button fourthButton;
 
-    public Text slText;
-    public Text ilText;
-    public Text slTextTwo;
-    public Text ilTextTwo;
+    public TMP_Text slText;
+    public TMP_Text ilText;
+    public TMP_Text slTextTwo;
+    public TMP_Text ilTextTwo;
 
     private bool firstButtonClicked;
     private bool secondButtonClicked;

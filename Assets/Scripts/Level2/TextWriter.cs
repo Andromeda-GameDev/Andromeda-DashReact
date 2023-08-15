@@ -13,10 +13,10 @@ public class TextWriter : MonoBehaviour
     public GameObject toOpen;
     private string text;
     private string pureString;
-
     private EquivalenceEvaluator equivalenceEvaluator;
 
     // Variables for managing input on integration part
+    // TODO: Set to public 
     private IntegrationPartActive integrationPartActive;
 
     //private string equation = "x^2*cos(45)+45/2";
@@ -24,9 +24,9 @@ public class TextWriter : MonoBehaviour
 
     private void Awake()
     {
-        //textFormulaToImage = GetComponentInChildren<TextFormulaToImage>();
+        //textFormulaToImage = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();;
         equivalenceEvaluator = new EquivalenceEvaluator();
-        integrationPartActive=GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
+        integrationPartActive = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
     }
     public void Write(string text)
     {
