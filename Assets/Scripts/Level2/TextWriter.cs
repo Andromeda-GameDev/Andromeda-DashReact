@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class TextWriter : MonoBehaviour
 {
+    public bool skipWrite;
     public TextMeshProUGUI Ecuation;
     public TextMeshProUGUI JustString;
     public textToImageAPI textFormulaToImage;
+    public LvlTwoStageHandler lvlTwoStageHandler;
+    public bool hasLimits;
     public GameObject toClose;
     public GameObject toOpen;
     private string text;
@@ -20,57 +23,63 @@ public class TextWriter : MonoBehaviour
     private IntegrationPartActive integrationPartActive;
 
     //private string equation = "x^2*cos(45)+45/2";
-    public string equation = "x*x";
+    string equation;
 
     private void Awake()
     {
         //textFormulaToImage = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();;
         equivalenceEvaluator = new EquivalenceEvaluator();
-        integrationPartActive = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
+        if(hasLimits){
+            integrationPartActive = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
+        }
     }
     public void Write(string text)
     {
-        if(text == "^{2}")
+        if(!skipWrite)
         {
-            Ecuation.text += text;
-            JustString.text += "^2";
-            pureString = JustString.text;
-            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
-            print(pureString);    
+            if(text == "^{2}")
+            {
+                Ecuation.text += text;
+                JustString.text += "^2";
+                pureString = JustString.text;
+                textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+                print(pureString);    
+            }
+            else if(text == "^{")
+            {
+                Ecuation.text += text;
+                JustString.text += "^";
+                pureString = JustString.text;
+                textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+                print(pureString);    
+            }
+            else if(text == "{")
+            {
+                Ecuation.text += text;
+                pureString = JustString.text;
+                textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+                print(pureString);    
+            }
+            else if(text == "}")
+            {
+                Ecuation.text += text;
+                pureString = JustString.text;
+                textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+                print(pureString);
+            }
+            else
+            {
+                Ecuation.text += text;
+                JustString.text += text;
+                pureString = JustString.text;
+                textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
+                print(pureString);
+            }
         }
-        else if(text == "^{")
-        {
-            Ecuation.text += text;
-            JustString.text += "^";
-            pureString = JustString.text;
-            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
-            print(pureString);    
-        }
-        else if(text == "{")
-        {
-            Ecuation.text += text;
-            pureString = JustString.text;
-            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
-            print(pureString);    
-        }
-        else if(text == "}")
-        {
-            Ecuation.text += text;
-            pureString = JustString.text;
-            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
-            print(pureString);    
-        }
-        else
-        {
-            Ecuation.text += text;
-            JustString.text += text;
-            pureString = JustString.text;
-            textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
-            print(pureString);
-        }
+        
 
         // Check if the integration part is active
-        if(integrationPartActive.IsThisPartOn())
+        if(hasLimits)
         {
             if(integrationPartActive.IsFirstButtonClicked())
             {
@@ -90,9 +99,9 @@ public class TextWriter : MonoBehaviour
     {
         if(type == 1)
         {
-            Ecuation.text = " ";
-            JustString.text = " ";
-            pureString = " ";
+            Ecuation.text = "";
+            JustString.text = "";
+            pureString = "";
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
         }
         else
@@ -116,6 +125,7 @@ public class TextWriter : MonoBehaviour
 
     public void setEquation(string equation)
     {
+        Debug.Log($"Equation set to {equation}");
         this.equation = equation;
     }
 
@@ -246,12 +256,15 @@ public class TextWriter : MonoBehaviour
         Debug.Log(JustString.text);
         Debug.Log(equation);
         Debug.Log(JustString.text == equation);
-        if(JustString.text == equation)
+        
+        //equivalenceEvaluator.IsEquivalent(JustString.text, equation);
+        if(JustString.text == equation && !lvlTwoStageHandler.NextPart())
         {
-            toClose.SetActive(false);
+            delete();
             toOpen.SetActive(true);
+            toClose.SetActive(false);
         }
-        equivalenceEvaluator.IsEquivalent(JustString.text, equation);
+        
     }
     public void ex()
     {
