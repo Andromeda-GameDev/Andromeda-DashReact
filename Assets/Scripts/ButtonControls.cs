@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonControls : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class ButtonControls : MonoBehaviour
     {
         resume.SetActive(false);
         pause.SetActive(true);
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void Resume()
