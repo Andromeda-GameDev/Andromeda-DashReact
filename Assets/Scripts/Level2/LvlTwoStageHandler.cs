@@ -5,6 +5,8 @@ using UnityEngine;
 public class LvlTwoStageHandler : MonoBehaviour
 {
     public static LvlTwoStageHandler instance;
+    public float a;
+    private float weight;
     // 0 es cono, 1 es copa
     public int stage = 0;
     // 0 es introducir ecuacion(es), 1 limites, 2 peso y 3 impresion
@@ -17,7 +19,10 @@ public class LvlTwoStageHandler : MonoBehaviour
     public TextWriter textWriter;
     public GameObject[] disks;
     public GameObject[] cylinders;
-
+    public GameObject[] calcs;
+    public GameObject nextStageButton;
+    public GameObject simulatePrintingButton;
+    public GameObject selectMethodCanvas;
 
     private void Awake()
     {
@@ -25,6 +30,7 @@ public class LvlTwoStageHandler : MonoBehaviour
         {
             instance = this;
         }
+        ResetProblemValues();
     }
 
     // Start is called before the first frame update
@@ -39,10 +45,24 @@ public class LvlTwoStageHandler : MonoBehaviour
         
     }
 
+    public void ResetProblemValues()
+    {
+        a = Random.Range(1f, 3f);
+        weight = (a * Mathf.PI * 19.32f) / 3000f;
+        Debug.Log($"New values --- a = {a}, weight = {weight}");
+    }
+
+    public float GetWeight()
+    {
+        return weight;
+    }
+
     public void NextStage()
     {
         Debug.Log($"Next Stage on stage {stage}");
         stage++;
+        path = -1;
+        nextStageButton.SetActive(true);
     }
 
     public void SetStage(int stage)
@@ -59,7 +79,7 @@ public class LvlTwoStageHandler : MonoBehaviour
     public void NextSubstage()
     {
         Debug.Log($"Next Substage on substage {substage}");
-        if(substage > substageLimit){
+        if((substage+1) > substageLimit){
             substage = 0;
             NextStage();
         }
@@ -194,6 +214,11 @@ public class LvlTwoStageHandler : MonoBehaviour
         }
     };
 
+    public string[] GetCurrentLimits()
+    {
+        return new string[]{limits[stage, path, part, 0], limits[stage, path, part, 1]};
+    }
+
     /*
         ---PLAN MAESTRO---
         Stage 0 (cono)
@@ -233,5 +258,39 @@ public class LvlTwoStageHandler : MonoBehaviour
         Debug.Log($"stage = {stage}, path = {path}, part = {part}");
         Debug.Log($"Setting textWriter equation to = {equations[stage, path, part]}");
         textWriter.setEquation(equations[stage, path, part]);
+    }
+
+    public void ConfirmInstructions()
+    {
+        if(path == -1)
+        {
+            //Debug.Log("No path selected");
+            selectMethodCanvas.SetActive(true);
+            return;
+        }
+        else{
+            switch (substage)
+            {
+                case 0:
+                    //Activate equation calc
+                    calcs[0].SetActive(true);
+                    break;
+                case 1:
+                    //Activate limit calc
+                    calcs[1].SetActive(true);
+                    break;
+                case 2:
+                    //Activate equation calc
+                    calcs[0].SetActive(true);
+                    break;
+                case 3:
+                    //Activate printing
+                    simulatePrintingButton.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+        nextStageButton.SetActive(false);
     }
 }

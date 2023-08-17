@@ -12,6 +12,7 @@ public class TextWriter : MonoBehaviour
     public textToImageAPI textFormulaToImage;
     public LvlTwoStageHandler lvlTwoStageHandler;
     public bool hasLimits;
+    public GameObject nextButton;
     public GameObject toClose;
     public GameObject toOpen;
     private string text;
@@ -19,8 +20,7 @@ public class TextWriter : MonoBehaviour
     private EquivalenceEvaluator equivalenceEvaluator;
 
     // Variables for managing input on integration part
-    // TODO: Set to public 
-    private IntegrationPartActive integrationPartActive;
+    public IntegrationPartActive integrationPartActive;
 
     //private string equation = "x^2*cos(45)+45/2";
     string equation;
@@ -30,7 +30,7 @@ public class TextWriter : MonoBehaviour
         //textFormulaToImage = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();;
         equivalenceEvaluator = new EquivalenceEvaluator();
         if(hasLimits){
-            integrationPartActive = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
+            //integrationPartActive = GameObject.Find("Limits").GetComponent<IntegrationPartActive>();
         }
     }
     public void Write(string text)
@@ -97,6 +97,7 @@ public class TextWriter : MonoBehaviour
 
     public void DeleteOnImage(int type)
     {
+        Debug.Log("Deleting equation");
         if(type == 1)
         {
             Ecuation.text = "";
@@ -121,6 +122,7 @@ public class TextWriter : MonoBehaviour
             textFormulaToImage.UpdateFormula("f(x)=" + Ecuation.text);
 
         }
+        Debug.Log($"Equation is now {equation}");
     }
 
     public void setEquation(string equation)
@@ -253,18 +255,68 @@ public class TextWriter : MonoBehaviour
     }
     public void equal()
     {
-        Debug.Log(JustString.text);
-        Debug.Log(equation);
-        Debug.Log(JustString.text == equation);
-        
-        //equivalenceEvaluator.IsEquivalent(JustString.text, equation);
-        if(JustString.text == equation && !lvlTwoStageHandler.NextPart())
-        {
-            delete();
+        if(lvlTwoStageHandler.GetSubstage() != 2){
+            Debug.Log(JustString.text);
+            Debug.Log(equation);
+            Debug.Log(JustString.text == equation);
+            
+            //equivalenceEvaluator.IsEquivalent(JustString.text, equation);
+            if(JustString.text == equation)
+            {
+                delete();
+                if(!lvlTwoStageHandler.NextPart())
+                {
+                    toOpen.SetActive(true);
+                    toClose.SetActive(false);
+                }
+            }
+        }
+        else{
+            if(JustString.text == lvlTwoStageHandler.GetWeight().ToString()){
+                delete();
+                lvlTwoStageHandler.NextSubstage();
+                toOpen.SetActive(true);
+                toClose.SetActive(false);
+            }
+        }
+
+    }
+    public void submit()
+    {
+        //integrationPartActive.GetIlText()
+        string slText = integrationPartActive.GetSlText();
+        string ilText = integrationPartActive.GetIlText();
+        Debug.Log($"Given limits are {slText} and {ilText}");
+        string[] limits = lvlTwoStageHandler.GetCurrentLimits();
+        Debug.Log($"Limits are {limits[0]} and {limits[1]}");
+        bool isSlCorrect = slText == limits[1]; //equivalenceEvaluator.IsEquivalent(slText, limits[0]);
+        bool isIlCorrect = ilText == limits[0];
+        if(isSlCorrect){
+            // Change color to green
+        }
+        else{
+            // Change color to red
+        }
+        if(isIlCorrect){
+            // Change color to green
+        }
+        else{
+            // Change color to red
+        }
+        if(isSlCorrect && isIlCorrect){
+            // Change colors to green
+            nextButton.SetActive(true);
+        }
+    }
+    public void Next()
+    {
+        if(lvlTwoStageHandler.NextPart()){
+            integrationPartActive.CleanButtons();
+        }
+        else{
             toOpen.SetActive(true);
             toClose.SetActive(false);
         }
-        
     }
     public void ex()
     {

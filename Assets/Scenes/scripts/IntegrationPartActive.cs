@@ -93,6 +93,15 @@ public class IntegrationPartActive : MonoBehaviour
         }
         ilText.text += inputString;
     }
+    public void CleanButtons()
+    {
+        firstButton.GetComponent<Image>().color = defaultBackgroundColor;
+        secondButton.GetComponent<Image>().color = defaultBackgroundColor;
+        firstButtonClicked = false;
+        secondButtonClicked = false;
+        slText.text = "___";
+        ilText.text = "___";
+    }
     // public void Update()
     // {
     //   Debug.Log("fc?: " + IsSecondButtonClicked());
