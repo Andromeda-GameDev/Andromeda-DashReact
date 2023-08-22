@@ -52,6 +52,7 @@ public class LevelLife : MonoBehaviour
     public float time = 0.0f;
     bool ticking = false;
     public bool correct;
+    public bool skipUpload;
     public UnityEvent attemptsReduced = new UnityEvent();
     public UnityEvent newQuestion = new UnityEvent();
     private int scoreToGive;
@@ -116,7 +117,12 @@ public class LevelLife : MonoBehaviour
             currentQuestion.inputGameObject.SetActive(false);
 
             // Upload metrics to database
-            UploadMetrics();
+            if (!skipUpload)
+            {
+                UploadMetrics();
+            }
+
+            print("Metrics Uploaded");
 
             // Go to next question
             NextQuestion();
@@ -139,7 +145,10 @@ public class LevelLife : MonoBehaviour
                 currentQuestion.inputGameObject.SetActive(false);
 
                 // Upload metrics to database
+                if (!skipUpload)
+            {
                 UploadMetrics();
+            }
 
                 // Go to next question
                 NextQuestion();
