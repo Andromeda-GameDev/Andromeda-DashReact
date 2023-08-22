@@ -19,6 +19,7 @@ import ProfessorSettings from './components/professorSettings';
 import StudentSettings from './components/studentSettings';
 import AdminUsersCRUD from './components/AdminUsersCRUD';
 import AdminProfessorsCRUD from './components/AdminProfessorsCRUD';
+import LevelSolvers from "./components/levelSolvers";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
           <Route path='/admin/settings' element={ <ProtectedRoute> <Settings /> </ProtectedRoute>}/>
           <Route path='/professor/settings' element={ <ProtectedRoute> <ProfessorSettings /> </ProtectedRoute>}/>
           <Route path='/student/settings' element={ <ProtectedRoute> <StudentSettings /> </ProtectedRoute>}/>
+
+          <Route path='/professor/solvers' element={<ProtectedRoute><LevelSolvers /></ProtectedRoute>} />
         </Routes>
       </AuthContextProvider>
     </div>
