@@ -145,7 +145,10 @@ public class LevelLife : MonoBehaviour
                 currentQuestion.inputGameObject.SetActive(false);
 
                 // Upload metrics to database
+                if (!skipUpload)
+            {
                 UploadMetrics();
+            }
 
                 // Go to next question
                 NextQuestion();
