@@ -12,11 +12,10 @@ public class LvlOneInput : MonoBehaviour
     public GameObject pedalButton, redoButton, submitButton, canvas, astronaut, astronautTwo, energiesCanvas, rope;
     public LevelLife lvlLife;
     public bool forceRightAnswer; // for debugging 
-    float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20, answer;
-    bool firstTouch = true;
+     float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20, answer, intResult, result, randomAnswer = 0;
+    bool firstTouch = true, decimals = false;
     public int stage = -1; 
-    int lastInteger = 0; 
-
+    int lastInteger = 0, intPart, decPart;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +24,6 @@ public class LvlOneInput : MonoBehaviour
 
     void OnEnable()
     {
-        Redo();
         pedalSpeedInputText.color = Color.white;
         stage = 3 - lvlLife.questionsForm.Count;
         print($"Stage: {stage}");
@@ -47,6 +45,7 @@ public class LvlOneInput : MonoBehaviour
         {
             answer = 0;
         }
+        Redo();
     }
 
     // Update is called once per frame
@@ -61,15 +60,37 @@ public class LvlOneInput : MonoBehaviour
                 startingYAttitude = gsData.attitude.y;
                 startingZAttitude = gsData.attitude.z;
                 firstTouch = false;
+                                if(!decimals){
+                    randomAnswer = intPart;
+                }
+                else{
+                    randomAnswer = decPart;
+                }
+                /*
+                    don't
+                    if(!decimals){
+                        randomAnswer= (float)(intPart + Math.Round(UnityEngine.Random.Range(-0.1f, 0.1f), 2));
+                    }
+                    else{
+                        randomAnswer= (float)(decPart + Math.Round(UnityEngine.Random.Range(-0.1f, 0.1f), 2));
+                    }
+                */
             }
             else
             {
+                /*
                 float randomAnswer = (float)(answer + Math.Round(UnityEngine.Random.Range(-0.1f, 0.1f), 2));
                 n = ((startingYAttitude - gsData.attitude.y) / 4);
                 div = (float)(n / randomAnswer);
                 pow = (float)Math.Pow((double)(div - 1), 3.0);
                 pedalSpeedInput = (pow + 1) * randomAnswer;
+                */
+                n = ((startingYAttitude - gsData.attitude.y) / 4f);
+                div = (float)(n / randomAnswer);
+                pow = (float)Math.Pow((double)(div - 1), 3.0);
+                pedalSpeedInput = (float)Math.Round((pow + 1) * randomAnswer);
             }
+
             if(pedalSpeedInput < 0)
             {
                 pedalSpeedInputText.color = Color.red;
@@ -78,9 +99,19 @@ public class LvlOneInput : MonoBehaviour
             {
                 pedalSpeedInputText.color = Color.white;
             }
+
+            if(!decimals)
+            {
+                result = (float)Math.Round(pedalSpeedInput);
+            }
+            else
+            {
+                result = intResult + (float)Math.Round(pedalSpeedInput/100, 2);
+            }
+            pedalSpeedInputText.text = $"{result:#0.00}";
             pedalSpeedInputText.text = $"{pedalSpeedInput:#0.00}";
 
-            // We check if the divice will vibrate 
+            // We check if the device will vibrate 
             if(Math.Floor(pedalSpeedInput) > lastInteger || Math.Floor(pedalSpeedInput) < lastInteger)
             {
                 lastInteger = (int)Math.Floor(pedalSpeedInput);
@@ -94,11 +125,20 @@ public class LvlOneInput : MonoBehaviour
             // qué es más rápido, asignación o evaluación de un valor booleano?
             if(!firstTouch)
             {
-                pedalSpeedInputText.color = Color.yellow;
-                pedalButton.SetActive(false);
-                redoButton.SetActive(true);
-                submitButton.SetActive(true);
-                firstTouch = true;
+                if(!decimals)
+                {
+                    decimals = true;
+                    intResult = result;
+                    firstTouch = true;
+                }
+                else
+                {
+                    pedalSpeedInputText.color = Color.yellow;
+                    pedalButton.SetActive(false);
+                    redoButton.SetActive(true);
+                    submitButton.SetActive(true);
+                    firstTouch = true;
+                }
             }
         }
     }
@@ -108,18 +148,22 @@ public class LvlOneInput : MonoBehaviour
         pedalButton.SetActive(true);
         redoButton.SetActive(false);
         submitButton.SetActive(false);
+        // store the integer and the decimal parts of the answer
+        decimals = false;
+        intPart = (int)answer;
+        decPart = (int)((answer - intPart)*100);
     }
 
     public void CheckResults()
     {
         int input = -1;
         
-        if(pedalSpeedInput > (answer + 0.1f))
+        if(result > (answer + 0.1f))
         {
             input = 2;
             pedalSpeedInputText.color = Color.red;
         }
-        else if(pedalSpeedInput < (answer - 0.1f))
+        else if(result < (answer - 0.1f))
         {
             input = 1;
             pedalSpeedInputText.color = Color.red;
