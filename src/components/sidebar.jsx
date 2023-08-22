@@ -22,6 +22,9 @@ function SidebarLink({ to, label }) {
     case "Ajustes":
       iconClass = "bx bx-cog";
       break;
+    case "Solvers":
+      iconClass = "bx bx-cog";
+      break;
     default:
       iconClass = "bx bx-home";
   }
@@ -82,6 +85,7 @@ export default function Sidebar() {
             <SidebarLink to="/professor/groups" label="Grupos" />
             <SidebarLink to="/professor/statistics" label="Estadísticas" />
             <SidebarLink to="/professor/settings" label="Ajustes" />
+            <SidebarLink to="/professor/solvers" label="Solvers" />
             <li>
               <button
                 onClick={handleLogout}
