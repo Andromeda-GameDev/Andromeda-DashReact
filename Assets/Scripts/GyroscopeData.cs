@@ -30,4 +30,9 @@ public class GyroscopeData : MonoBehaviour
     {
         sign = sign * -1;
     }
+
+    public void SetSign(int sign)
+    {
+        this.sign = sign;
+    }
 }
