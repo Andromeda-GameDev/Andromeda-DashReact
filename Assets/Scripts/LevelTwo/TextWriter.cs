@@ -261,7 +261,7 @@ public class TextWriter : MonoBehaviour
             Debug.Log(JustString.text == equation);
             
             //equivalenceEvaluator.IsEquivalent(JustString.text, equation);
-            if(JustString.text == equation)
+            if(equivalenceEvaluator.IsEquivalent(JustString.text, equation))
             {
                 delete();
                 if(!lvlTwoStageHandler.NextPart())
