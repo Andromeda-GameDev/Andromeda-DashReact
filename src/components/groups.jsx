@@ -40,13 +40,25 @@ const Groups = () => {
     const handleSaveModal = (value) => {
         console.log('Input value:', value);
         const db = getDatabase();
-        const ref_prof_groups = push(ref(db, `professors/${user.uid}/groups/`));
-        set(ref_prof_groups, {
-            Id: generateRandomString(), 
-            name: value
+        
+        // getting the name keys of the current levels
+        const ref_levels = ref(db, "levels/");
+        get(ref_levels).then((snapshot) => {
+            const initialKeys = Object.keys(snapshot.val());
+            const initialObject = initialKeys.reduce((acc, key) => {
+              acc[key] = false;
+              return acc;
+            }, {});
+            const ref_prof_groups = push(ref(db, `professors/${user.uid}/groups/`));
+            set(ref_prof_groups, {
+                Id: generateRandomString(), 
+                name: value,
+                levels: initialObject
+            });
+            setDidAddedGroup(!didAddedGrouo);
+            setIsModalOpen(false);
         });
-        setDidAddedGroup(!didAddedGrouo);
-        setIsModalOpen(false);
+      
     };
 
     const handleInputChange = (event) => {

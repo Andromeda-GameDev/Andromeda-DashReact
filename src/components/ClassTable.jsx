@@ -19,6 +19,9 @@ import UserModalTable from "../components/moreUserInfoModal";
 // import DownloadGroupDataButton
 import DownloadGroupDataButton from "../components/DownloadGroupDataButton";
 
+// Import LevelMangementModal
+import ModalLevelManagement from "../components/ModalLevelManagement";
+
 export default function ClassTable(props){
 
     // UseStates
@@ -44,6 +47,15 @@ export default function ClassTable(props){
     const handleSaveModal = () => {
         setIsModalOpen(false);
     };
+
+  // handler is level management modal open
+  const [isLvlMOpen, setIsLvlMOpen] = useState(false);
+  const handleLvlMOpen = () => {
+      setIsLvlMOpen(true);
+  };
+  const handleLvlMClose = () => {
+      setIsLvlMOpen(false);
+  };
 
 
 
@@ -76,6 +88,7 @@ export default function ClassTable(props){
                 <p className="text-base font-bold pl-2">{props.nm}</p>
                 <p className="text-base font-medium pl-2"> {`ID: ${props.Id}`} </p>
                 <DownloadGroupDataButton dataArray_t={tableData}/>
+                <div><button onClick={() => handleLvlMOpen()} className="rounded-full bg-gray-800 text-white px-4 py-2">Levels</button></div>
                 <div className="pr-2"><button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400" onClick={handleDeleteGroupButton}>Delete</button></div>
             </div>
             <Table
@@ -107,6 +120,12 @@ export default function ClassTable(props){
                     onClose={handleCloseModal}
                     onSave={handleSaveModal}
                     userKey={keySelectedUser}
+                />
+            )}
+            {isLvlMOpen && (
+                <ModalLevelManagement
+                  onClose={handleLvlMClose}
+                  groupId={props.gKey}
                 />
             )}
         </div>
