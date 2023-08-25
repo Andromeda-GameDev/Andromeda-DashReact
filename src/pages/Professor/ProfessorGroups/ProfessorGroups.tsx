@@ -6,6 +6,7 @@ import { ContentContainer, GroupAdministrationTitle } from  "./styles";
 import {GroupCardInfo} from "../../../components/GroupCardInfo";
 import { Group } from "@mui/icons-material"
 import {GroupModal} from "./GroupModal";
+import { ModalLevelManagement } from "./ModalLevelManagement";
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 type Group = {
@@ -13,6 +14,9 @@ type Group = {
     name: string;
     key: string;
 }
+type InitialObject = {
+  [key: string]: boolean;
+};
 
 function generateRandomString() {
     let result = '';
@@ -33,6 +37,7 @@ const ProfessorGroups: React.FC = () => {
     const [didAddedGroup, setDidAddedGroup] = useState<boolean>(false);
     const [groupCounts, setGroupCounts] = useState<Record<string, number>>({});
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+    const [isLevelManageModalOpen, setIsLevelManageModalOpen] = useState<boolean>(false);
     const [editModalGroupId, setEditModalGroupId] = useState<string>('');
 
     const handleOpenModal = () => {
@@ -42,20 +47,43 @@ const ProfessorGroups: React.FC = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-
     const handleSaveModal = (value: string) => {
-        if(user){
-            console.log('Input value:', value);
-            const db = getDatabase();
-            const ref_prof_groups = push(ref(db, `professors/${user.uid}/groups/`));
+        console.log('Input value:', value);
+        const db = getDatabase();
+        
+        // getting the name keys of the current levels
+        const ref_levels = ref(db, "levels/");
+        get(ref_levels).then((snapshot) => {
+            const initialKeys = Object.keys(snapshot.val());
+            console.log(initialKeys);
+            const initialObject: InitialObject = initialKeys.reduce((acc, key) => {
+              acc[key] = false;
+              return acc;
+            }, {} as InitialObject);
+            const ref_prof_groups = push(ref(db, `professors/${user?.uid}/groups/`));
             set(ref_prof_groups, {
-                Id: generateRandomString(),
-                name: value
+                Id: generateRandomString(), 
+                name: value,
+                levels: initialObject
             });
             setDidAddedGroup(!didAddedGroup);
             setIsModalOpen(false);
-        }
+        });
+      
     };
+    // const handleSaveModal = (value: string) => {
+    //     if(user){
+    //         console.log('Input value:', value);
+    //         const db = getDatabase();
+    //         const ref_prof_groups = push(ref(db, `professors/${user.uid}/groups/`));
+    //         set(ref_prof_groups, {
+    //             Id: generateRandomString(),
+    //             name: value
+    //         });
+    //         setDidAddedGroup(!didAddedGroup);
+    //         setIsModalOpen(false);
+    //     }
+    // };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -140,6 +168,11 @@ const ProfessorGroups: React.FC = () => {
         setIsEditModalOpen(false);
     }
 
+    const handleLevelsManageButton = (groupKey: string) => {
+        setIsLevelManageModalOpen(true);
+        setEditModalGroupId(groupKey);
+    }
+
     return (
         <ContentContainer>
             <Box
@@ -192,10 +225,18 @@ const ProfessorGroups: React.FC = () => {
                             onDelete={handleDeleteGroupButton}
                             groupId={group.Id}
                             onEdit={handleEditGroupButton}
+                            onLevelsManage={handleLevelsManageButton}
+                            groupKey={group.key}
                         />
                     ))}
                 </Box>
                 <GroupModal groupId={editModalGroupId} onClose={handleEditModalClose} open={isEditModalOpen} />
+                {isLevelManageModalOpen && (
+                  <ModalLevelManagement
+                      onClose={() => setIsLevelManageModalOpen(false)}
+                      groupId={editModalGroupId}
+                  /> 
+                )}
             </Box>
             <Modal open={isModalOpen} onClose={handleCloseModal}>
                 <Box
