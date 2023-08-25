@@ -7,6 +7,7 @@ export { default as ProfessorHome } from './Professor/ProfessorHome/ProfessorHom
 export { default as ProfessorGroups } from './Professor/ProfessorGroups/ProfessorGroups';
 export { default as ProfessorStatistics } from './Professor/ProfessorStatistics/ProfessorStatistics';
 export { default as ProfessorSettings } from './Professor/ProfessorSettings/ProfessorSettings';
+export { default as LevelSolvers } from './Professor/ProfessorSolvers/LevelSolvers';
 
 // student
 export { default as StudentHome } from './Student/StudentHome/StudentHome';

@@ -10,10 +10,16 @@ import {
     ProfessorHome,
     ProfessorStatistics,
     ProfessorSettings,
+    LevelSolvers,
     StudentHome,
     StudentStatistics,
     StudentSettings,
-    Register, Unauthorized, SuperAdminHome, SuperAdminStudents, SuperAdminProfessors, SuperAdminSettings
+    Register, 
+    Unauthorized, 
+    SuperAdminHome, 
+    SuperAdminStudents, 
+    SuperAdminProfessors, 
+    SuperAdminSettings
 } from "../pages";
 
 
@@ -33,6 +39,7 @@ const routes: RouteObject[] = [
             { path: "groups", element: <ProfessorGroups/> },
             { path: "statistics", element: <ProfessorStatistics/>},
             { path: "settings", element: <ProfessorSettings/> },
+            { path: "solvers", element: <LevelSolvers/> },
         ]
     },
     {

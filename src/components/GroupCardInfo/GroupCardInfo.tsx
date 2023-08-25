@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 //import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 interface CustomCardProps {
     groupName: string;
@@ -13,9 +14,11 @@ interface CustomCardProps {
     onDelete: (groupId: string) => void;
     groupId: string;
     onEdit: (groupId: string) => void;
+    onLevelsManage: (groupId: string) => void;
+    groupKey: string;
 }
 
-const GroupCardInfo: React.FC<CustomCardProps> = ({ groupName , numberOfstudents, onDelete, groupId, onEdit}) => {
+const GroupCardInfo: React.FC<CustomCardProps> = ({ groupName , numberOfstudents, onDelete, groupId, onEdit, onLevelsManage, groupKey}) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -82,6 +85,23 @@ const GroupCardInfo: React.FC<CustomCardProps> = ({ groupName , numberOfstudents
                     </IconButton>
                     Ver más
                 </MenuItem>
+                <MenuItem onClick={
+                    () => {
+                        onLevelsManage(groupKey);
+                        handleClose();
+                    }
+                }
+
+                >
+                    <IconButton aria-label="levels"
+                        sx={{
+                            color: "#000000"
+                        }}
+                    >
+                        <LockPersonIcon />
+                    </IconButton>
+                    Levels 
+                </MenuItem>
                 {/*<MenuItem onClick={handleClose}>*/}
                 {/*    <IconButton aria-label="export" color="primary">*/}
                 {/*        <FileDownloadIcon />*/}
@@ -90,7 +110,7 @@ const GroupCardInfo: React.FC<CustomCardProps> = ({ groupName , numberOfstudents
                 {/*</MenuItem>*/}
                 <MenuItem
                     onClick={() => {
-                        onDelete(groupId);
+                        onDelete(groupKey);
                         handleClose();
                     }}
                 >

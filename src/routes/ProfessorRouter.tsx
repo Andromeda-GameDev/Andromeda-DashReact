@@ -25,6 +25,7 @@ const ProfessorRouter = () => {
         { to: "/professor/groups", label: "Grupos" },
         { to: "/professor/statistics", label: "Estadísticas" },
         { to: "/professor/settings", label: "Ajustes" },
+        { to: "/professor/solvers", label: "Solvers" },
     ];
 
     return (
