@@ -12,9 +12,9 @@ public class LvlOneInput : MonoBehaviour
     public GameObject pedalButton, redoButton, submitButton, canvas, astronaut, astronautTwo, energiesCanvas, rope;
     public LevelLife lvlLife;
     public bool forceRightAnswer; // for debugging 
-     float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20, answer, intResult, result, randomAnswer = 0;
+    float pedalSpeedInput, startingYAttitude, startingZAttitude, greatestAnswer = 20, answer, intResult, result, randomAnswer = 0;
     bool firstTouch = true, decimals = false;
-    public int stage = -1; 
+    public int stage = -1;
     int lastInteger = 0, intPart, decPart;
     // Start is called before the first frame update
     void Start()
