@@ -442,12 +442,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mision 1
-
-    El Rescate '
+  m_text: "Misi\xF3n 1\r\nEl Rescate"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19c08ae159025714eb0971eea40bb0e6, type: 2}
-  m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
+  m_fontAsset: {fileID: 11400000, guid: 0474d0ff64e9da44d9e6030bda69ec9f, type: 2}
+  m_sharedMaterial: {fileID: 3641254157358087985, guid: 0474d0ff64e9da44d9e6030bda69ec9f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -472,8 +470,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 74
+  m_fontSizeBase: 74
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1715,10 +1713,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Selecciona tu mision
+  m_text: "Selecciona tu misi\xF3n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19c08ae159025714eb0971eea40bb0e6, type: 2}
-  m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
+  m_fontAsset: {fileID: 11400000, guid: 0474d0ff64e9da44d9e6030bda69ec9f, type: 2}
+  m_sharedMaterial: {fileID: 3641254157358087985, guid: 0474d0ff64e9da44d9e6030bda69ec9f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1743,8 +1741,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 155.81
+  m_fontSizeBase: 155.81
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2302,8 +2300,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ayuda a Vencaris 374 a volver a restablecer sus comunicaciones.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19c08ae159025714eb0971eea40bb0e6, type: 2}
-  m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
+  m_fontAsset: {fileID: 11400000, guid: 0474d0ff64e9da44d9e6030bda69ec9f, type: 2}
+  m_sharedMaterial: {fileID: 3641254157358087985, guid: 0474d0ff64e9da44d9e6030bda69ec9f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2328,8 +2326,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 57.1
+  m_fontSizeBase: 57.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2415,8 +2413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.73}
   m_AnchorMax: {x: 0.5, y: 0.73}
-  m_AnchoredPosition: {x: 0, y: -395.00003}
-  m_SizeDelta: {x: 182.5, y: 14}
+  m_AnchoredPosition: {x: 0, y: -425.6}
+  m_SizeDelta: {x: 182.5, y: 18.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1188372974
 MonoBehaviour:
@@ -3851,7 +3849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.8, y: -366.8}
+  m_AnchoredPosition: {x: 10.8, y: -407.3}
   m_SizeDelta: {x: 439.06, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601907523
@@ -3874,10 +3872,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Salva a tu amigo de una muerte segura en el acido.
+  m_text: "Salva a tu amigo de una muerte segura en el \xE1cido."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19c08ae159025714eb0971eea40bb0e6, type: 2}
-  m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
+  m_fontAsset: {fileID: 11400000, guid: 0474d0ff64e9da44d9e6030bda69ec9f, type: 2}
+  m_sharedMaterial: {fileID: 3641254157358087985, guid: 0474d0ff64e9da44d9e6030bda69ec9f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3902,8 +3900,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 63.1
+  m_fontSizeBase: 63.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4125,12 +4123,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mision 2
-
-    Un planeta sin salida '
+  m_text: "Misi\xF3n 2\r\nUn planeta sin salida"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19c08ae159025714eb0971eea40bb0e6, type: 2}
-  m_sharedMaterial: {fileID: 2535068993380775646, guid: 19c08ae159025714eb0971eea40bb0e6,
+  m_fontAsset: {fileID: 11400000, guid: 0474d0ff64e9da44d9e6030bda69ec9f, type: 2}
+  m_sharedMaterial: {fileID: 3641254157358087985, guid: 0474d0ff64e9da44d9e6030bda69ec9f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4155,8 +4151,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 70.6
+  m_fontSizeBase: 70.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4396,8 +4392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.73}
   m_AnchorMax: {x: 0.5, y: 0.73}
-  m_AnchoredPosition: {x: 0, y: -395}
-  m_SizeDelta: {x: 182.5, y: 14}
+  m_AnchoredPosition: {x: 0, y: -425.6}
+  m_SizeDelta: {x: 182.5, y: 18.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037113414
 MonoBehaviour:
