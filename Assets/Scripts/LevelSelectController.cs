@@ -18,7 +18,7 @@ public class LevelSelectController : MonoBehaviour
 
     public void ToLevelOne()
     {
-        SceneManager.LoadScene("_LevelOne");
+        SceneManager.LoadScene("LevelOne");
     }
     public void ToLevelTwo()
     {
