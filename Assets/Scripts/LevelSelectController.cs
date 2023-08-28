@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectController : MonoBehaviour
 {
+    public static LevelSelectController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         SFXManager.instance.selectSFX(0);
@@ -18,7 +25,7 @@ public class LevelSelectController : MonoBehaviour
 
     public void ToLevelOne()
     {
-        SceneManager.LoadScene("_LevelOne");
+        SceneManager.LoadScene("LevelOne");
     }
     public void ToLevelTwo()
     {
