@@ -109,7 +109,7 @@ public class LvlOneInput : MonoBehaviour
                 result = intResult + (float)Math.Round(pedalSpeedInput/100, 2);
             }
             pedalSpeedInputText.text = $"{result:#0.00}";
-            pedalSpeedInputText.text = $"{pedalSpeedInput:#0.00}";
+            // pedalSpeedInputText.text = $"{pedalSpeedInput:#0.00}";
 
             // We check if the device will vibrate 
             if(Math.Floor(pedalSpeedInput) > lastInteger || Math.Floor(pedalSpeedInput) < lastInteger)
