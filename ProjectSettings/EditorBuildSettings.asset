@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoginScreen.unity
     guid: 1ace8db2649a14f03833637be2bfd4a3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/lvlGen.unity
     guid: f97b49058de585a4189325a5e0fe09e5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BuildLevels/_LevelOne.unity
     guid: cbc081c3fddc71f47bae313fd6abf954
   - enabled: 1
