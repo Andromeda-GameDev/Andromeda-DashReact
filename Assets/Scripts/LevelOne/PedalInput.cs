@@ -14,12 +14,13 @@ public class PedalInput : MonoBehaviour
     private int calibrationStage = 0, changeCounter = 0;
     public GameObject[] toDeactivate;
     public GameObject[] toActivate;
+    public GameObject[] toAnimate;
     public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(AnimateImages());
     }
 
     // Update is called once per frame
@@ -90,5 +91,18 @@ public class PedalInput : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         canvas.SetActive(false);
+    }
+
+    IEnumerator AnimateImages()
+    {
+        while(true)
+        {
+            toAnimate[0].SetActive(true);
+            toAnimate[1].SetActive(false);
+            yield return new WaitForSeconds(1f);
+            toAnimate[0].SetActive(false);
+            toAnimate[1].SetActive(true);
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
