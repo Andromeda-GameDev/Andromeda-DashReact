@@ -115,7 +115,7 @@ public class LevelLife : MonoBehaviour
 
             // Deactivate input
             currentQuestion.inputGameObject.SetActive(false);
-
+            
             // Upload metrics to database
             if (!skipUpload)
             {
@@ -166,6 +166,7 @@ public class LevelLife : MonoBehaviour
 
                 // Reactivate input
                 currentQuestion.inputGameObject.SetActive(true);
+                
 
                 // Print attempts left
                 print($"Attempts left: {attempts}");
@@ -237,9 +238,13 @@ public class LevelLife : MonoBehaviour
 
         // Get button of question UI
         Button btn = questionUI.GetComponentInChildren<Button>();
-
+        
         // Set button visible
-        btn.interactable = true;
+        if(questionsForm.Count == 4){
+          btn.interactable = false;
+        }else {
+          btn.interactable = true;
+        }
 
         // Remove all listeners from button
         btn.onClick.RemoveAllListeners();
@@ -282,5 +287,10 @@ public class LevelLife : MonoBehaviour
     void ActivateInput()
     {
         currentQuestion.inputGameObject.SetActive(true);
+        // Get button of question UI
+        Button btn = questionUI.GetComponentInChildren<Button>();
+
+        // Set button visible
+        btn.interactable = false;
     }
 }
