@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import loginImage from '../../resources/loginImage.jpg';
 import {Grid, Box, Typography, TextField, Button, Link, Container, Alert, Modal, AlertColor} from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+//import { Link as RouterLink } from "react-router-dom";
+import { Avatar } from '@mui/material';
 
 const Signin: FC = () => {
 
@@ -13,7 +14,7 @@ const Signin: FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const { login, role} = useAuth();
+    const { login, role, signInWithGoogle} = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [recoverEmail, setRecoverEmail] = useState('');
@@ -120,12 +121,12 @@ const Signin: FC = () => {
                         <Typography variant="h4" gutterBottom>
                             Iniciar sesión
                         </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            ¿No tienes una cuenta? 
-                            <Link to='/register' component={RouterLink}> Regístrate </Link>
-                        </Typography>
+                        {/*<Typography variant="body1" gutterBottom>*/}
+                        {/*    ¿No tienes una cuenta? */}
+                        {/*    <Link to='/register' component={RouterLink}> Regístrate </Link>*/}
+                        {/*</Typography>*/}
                     </Box>
-                    <Box component="form" onSubmit={handleSubmit}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{marginBottom: "2rem"}}>
                         <TextField 
                             label="Correo Electrónico"
                             variant="outlined"
@@ -146,7 +147,26 @@ const Signin: FC = () => {
                             <Button variant="contained" type="submit" onClick={handleSubmit} disabled={isLoading}>
                                 {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
                             </Button>
+                        </Box>
 
+                        <Box sx={{ textAlign: 'center', mt: 2 }}>
+                            <Typography variant="body1" gutterBottom>
+                                ó
+                            </Typography>
+                        </Box>
+
+
+                        <Box sx={{ textAlign: 'center', mt: 2 }}>
+                            <Button
+                                variant="outlined"
+                                startIcon={<Avatar
+                                    sx={{ width: 30, height: 30 }}
+                                    src={'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png'} />}
+                                sx={{ textTransform: "none", fontSize: "1rem", color: "black"}}
+                                onClick={signInWithGoogle}
+                            >
+                                {isLoading ? 'Cargando...' : 'Google'}
+                            </Button>
                         </Box>
                     </Box>
                     <Box mt={2} sx={{ textAlign: 'center' }}>

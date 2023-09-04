@@ -7,7 +7,7 @@ import {
     onAuthStateChanged,
     updateProfile,
     sendPasswordResetEmail,
-    UserCredential
+    UserCredential, GoogleAuthProvider, signInWithPopup
 } from "firebase/auth";
 import { auth } from "../firebase";
 import {getDatabase, set, ref, get} from "firebase/database";
@@ -19,6 +19,7 @@ interface User {
     name: string;
     last_name: string;
     group: string;
+    validated?: boolean;
 }
 
 interface UserContextValue {
@@ -29,6 +30,7 @@ interface UserContextValue {
     forgotPassword: (email: string) => Promise<void>;
     role?: string | null;
     setRole?: (role: string | null) => void;
+    signInWithGoogle: () => Promise<{creds: UserCredential, role: string | null}>;
 }
 
 const UserContext = createContext<UserContextValue | undefined>(undefined);
@@ -53,6 +55,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({ childre
                 group,
                 last_name,
                 name,
+                validated: false,
             });
         } catch (error) {
             console.log(error);
@@ -96,7 +99,60 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({ childre
     };
 
 
+    const signInWithGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        const creds = await signInWithPopup(auth, provider);
+        const db = getDatabase();
+        const { uid, displayName, email} = creds.user;
 
+        const usersReference = ref(db, `users/${uid}`);
+        const userSnap = await get(usersReference);
+
+
+        if(!userSnap.exists()){
+            const nameParts = displayName ? displayName.split(' ') : ['', ''];
+            const name = nameParts.slice(0, -1).join(' ');
+            const last_name = nameParts.slice(-1).join(' ');
+
+            await set(usersReference, {
+                email,
+                group: '',
+                last_name,
+                name,
+                validated: false,
+                });
+            }
+
+        const roles = [
+            { path: `professors/${uid}`, name: 'professor' },
+            { path: `users/${uid}`, name: 'student' },
+            { path: `admin/${uid}`, name: 'admin' },
+        ]
+
+        let userRole = null;
+
+        for (let i = 0; i < roles.length; i++) {
+            const refPath = roles[i].path;
+            const roleName = roles[i].name;
+
+            const roleRef = ref(db, refPath);
+            const roleSnap = await get(roleRef);
+
+            if (roleSnap.exists()) {
+                localStorage.setItem('role', roleName);
+                setRole(roleName);
+                userRole = roleName;
+                break;
+            }
+        }
+
+        if (!userRole) {
+            setRole('student');
+            console.log('New student registered -> role: student');
+        }
+
+        return { creds, role: userRole };
+    }
 
     const logout = () => {
         localStorage.removeItem('role');
@@ -120,7 +176,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     return (
         <UserContext.Provider
-            value={{ createUser, user, logout, login, forgotPassword, role, setRole}}
+            value={{ createUser, user, logout, login, forgotPassword, role, setRole, signInWithGoogle}}
         >
             {children}
         </UserContext.Provider>

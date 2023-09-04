@@ -39,6 +39,9 @@ function SidebarLink({ to, label, role}: SidebarLinkProps) {
         case "Profesores":
             icon = <SchoolIcon />;
             break;
+        case "Solvers":
+            icon = <SchoolIcon />;
+            break;
         default:
             icon = null;
     }

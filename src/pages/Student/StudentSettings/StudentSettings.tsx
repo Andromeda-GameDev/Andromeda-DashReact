@@ -91,33 +91,33 @@ const StudentSettings: React.FC = () => {
     return (
         <ContentContainer>
             <Typography sx={{fontSize: 20, fontWeight: 600, marginBottom: 2, marginTop: 4}}>Ajustes de cuenta</Typography>
-            <Card sx={{padding: 2, marginBottom: 2, width: '45%', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',}}>
-                <Typography sx={{fontSize: 16, fontWeight: 600, marginBottom: 2}}>Cambiar correo electrónico</Typography>
-                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Nuevo correo electrónico"
-                        variant="outlined"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        sx={{marginBottom: 2}}
-                    />
-                    <Button variant="contained"
-                            sx={{backgroundColor: '#3f51b5', color: 'white', marginBottom: 2, width: "40%"}}
-                            onClick={() => handleEmailChange()}>Cambiar correo</Button>
-                </Box>
-            </Card>
+            {/*<Card sx={{padding: 2, marginBottom: 2, width: '45%', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',}}>*/}
+            {/*    <Typography sx={{fontSize: 16, fontWeight: 600, marginBottom: 2}}>Cambiar correo electrónico</Typography>*/}
+            {/*    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>*/}
+            {/*        <TextField*/}
+            {/*            id="outlined-basic"*/}
+            {/*            label="Nuevo correo electrónico"*/}
+            {/*            variant="outlined"*/}
+            {/*            value={email}*/}
+            {/*            onChange={(e) => setEmail(e.target.value)}*/}
+            {/*            sx={{marginBottom: 2}}*/}
+            {/*        />*/}
+            {/*        <Button variant="contained"*/}
+            {/*                sx={{backgroundColor: '#3f51b5', color: 'white', marginBottom: 2, width: "40%"}}*/}
+            {/*                onClick={() => handleEmailChange()}>Cambiar correo</Button>*/}
+            {/*    </Box>*/}
+            {/*</Card>*/}
             <Card sx={{padding: 2, marginBottom: 2, width: '45%', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',}}>
                 <Typography sx={{fontSize: 16, fontWeight: 600, marginBottom: 2}}>Cambiar contraseña</Typography>
                 <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Contraseña actual"
-                        variant="outlined"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        sx={{marginBottom: 2}}
-                    />
+                    {/*<TextField*/}
+                    {/*    id="outlined-basic"*/}
+                    {/*    label="Contraseña actual"*/}
+                    {/*    variant="outlined"*/}
+                    {/*    value={password}*/}
+                    {/*    onChange={(e) => setPassword(e.target.value)}*/}
+                    {/*    sx={{marginBottom: 2}}*/}
+                    {/*/>*/}
                     <TextField
                         id="outlined-basic"
                         label="Nueva contraseña"
