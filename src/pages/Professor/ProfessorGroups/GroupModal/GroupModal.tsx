@@ -11,10 +11,11 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper
+    Paper, Typography
 } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Chip from '@mui/material/Chip';
+import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
 import * as XLSX from 'xlsx';
 
 interface GroupModalProps {
@@ -34,6 +35,16 @@ type User = {
 const GroupModal: React.FC<GroupModalProps> = ({groupId, onClose, open}) => {
 
     const [students, setStudents] = useState<User[]>([]);
+    const [copySuccess, setCopySuccess] = useState('');
+
+    const handleCopyToClipboard = () => {
+        navigator.clipboard.writeText(groupId)
+            .then(() => {
+                setCopySuccess('Copied!');
+                setTimeout(() => setCopySuccess(''), 3000);
+            })
+            .catch(err => console.error('Failed to copy text: ', err));
+    };
 
     const getStudentsInGroup = async (groupId: string) => {
         const db = getDatabase();
@@ -59,10 +70,6 @@ const GroupModal: React.FC<GroupModalProps> = ({groupId, onClose, open}) => {
 
         setStudents(students);
     };
-
-
-
-
 
 
     useEffect(() => {
@@ -215,6 +222,30 @@ const GroupModal: React.FC<GroupModalProps> = ({groupId, onClose, open}) => {
                 >
                     Exportar
                 </Button>
+
+                <Typography
+                    variant="body1"
+                    sx={{
+                        position: 'absolute',
+                        left: '20px',
+                        bottom: '20px'
+                    }}
+                >
+                    <strong>Grupo: </strong>: {groupId}
+                </Typography>
+
+                <IconButton
+                    onClick={handleCopyToClipboard}
+                    sx={{
+                        position: 'absolute',
+                        left: '155px',
+                        bottom: '15px'
+                    }}
+                    color={copySuccess ? 'success' : 'default'}
+                >
+                    <FileCopyOutlinedIcon />
+                </IconButton>
+
             </Box>
         </Modal>
     );
